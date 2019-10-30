@@ -1,36 +1,151 @@
+
 {% extends '@content/page.twig' %}
 
-{% block onload %}
-    $('#alert').on('click', function(){
-        bootbox.alert('Hello World')
-    })
-{% endblock onload %}
-
-{% block header %}
-    <section class="col-md-12 mt-5">
-        <h1 class="cntr">Header</h1>
-    </section>
-{% endblock header %}
+{% block css %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap">
+    <link rel="stylesheet" href="{{assets}}/css/main.css>
+    <link rel="stylesheet" href="{{assets}}/css/index.css>
+{% endblock css %}
 
 {% block main %}
     <section class="row">
-        <aside class="col">
-            <p>Left</p>
-        </aside>
-        <article class="col-md-8">
+        <article class="col-md-12">
             <div class="jumbotron">
-                Chester Lloyd
+                <h1>Note Sharing</h1>
+                <p>Text...</p>
             </div>
-            <button id="alert" class="btn btn-lg btn-info" type="button">Alert</button>
         </article>
-        <aside id="rightbar" class="col">
-            <p>Right</p>
-        </aside>
+    </section>
+    <section class="row">
+        <article class="col-md-12">
+            <div class="round-box">
+                <div class="round-box-heading">
+                    <h2>Browse by Subject</h2>
+                </div>
+                <div class="round-box-body">
+                    <div class="subjects">
+                        <a href="#">
+                            <div class="subject">
+                                <span class="subject-icon cs">
+                                    <i class="fas fa-laptop-code"></i>
+                                </span>
+                                <p>Computer<br> Science</p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="subject">
+                                <span class="subject-icon maths">
+                                    <i class="fas fa-square-root-alt"></i>
+                                </span>
+                                <p>Maths</p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="subject">
+                                <span class="subject-icon physics">
+                                    <i class="fas fa-ruler-vertical"></i>
+                                </span>
+                                <p>Physics</p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="subject">
+                                <span class="subject-icon chemistry">
+                                    <i class="fas fa-vial"></i>
+                                </span>
+                                <p>Chemistry</p>
+                            </div>
+                        </a>
+                        <a href="#">
+                            <div class="subject">
+                                <span class="subject-icon accounting">
+                                    <i class="fas fa-calculator"></i>
+                                </span>
+                                <p>Accounting</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article class="col-md-12">
+            <div class="round-box">
+                <div class="round-box-heading">
+                    <h2>Top Notes</h2>
+                </div>
+                <div class="round-box-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-2 note-icon ppt">
+                                        <i class="fas fa-file-powerpoint note-icon"></i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Experimental Design</h5>
+                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                            <a href="#" class="btn btn-primary">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-2 note-icon ppt">
+                                        <i class="fas fa-file-powerpoint note-icon"></i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Really big long title to see what that looks like</h5>
+                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 10 hours ago</small></p>
+                                            <a href="#" class="btn btn-primary">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-2 note-icon doc">
+                                        <i class="fas fa-file-word note-icon"></i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Experimental Design</h5>
+                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                            <a href="#" class="btn btn-primary">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-2 note-icon pdf">
+                                        <i class="fas fa-file-pdf note-icon"></i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Experimental Design</h5>
+                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                            <a href="#" class="btn btn-primary">View</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
     </section>
 {% endblock main %}
-
-{% block footer %}
-    <section class="col-md-12">
-        <p class="cntr">Footer</p>
-    </section>
-{% endblock footer %}

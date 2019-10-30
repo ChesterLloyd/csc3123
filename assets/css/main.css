@@ -1,0 +1,66 @@
+body {
+    background-color: #EEEEEE;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+
+/* Jumbotron */
+div.jumbotron {
+    color: #FFFFFF;
+    background-color: #4BAEA0;
+}
+div.jumbotron > h1 {
+    font-size: 38pt;
+}
+
+
+/* White boxes */
+div.round-box {
+    background-color: #ffffff;
+    margin-bottom: 2.143rem;
+    border-radius: 5px;
+}
+div.round-box-heading {
+    height: 60px;
+}
+div.round-box-heading > h2 {
+    color: #424242;
+    padding: 20px 30px;
+    margin: 0;
+    font-size: 2rem;
+    font-weight: 400;
+}
+div.round-box-body {
+    padding: 30px 30px 10px 30px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+
+/* Note box links */
+div.note-icon {
+    text-align: center;
+}
+div.note-icon > i {
+    color: #ffffff;
+    font-size: 3em;
+    padding-top: 50%;
+}
+div.pdf {
+    background-color: #f5adad;
+}
+div.doc {
+    background-color: #a2b7fb;
+}
+div.ppt {
+    background-color: #ffd669;
+}
+@media (max-width: 768px) {
+    div.note-icon {
+        height: 70px;
+        text-align: left;
+    }
+    div.note-icon > i {
+        padding: 10px 0px 0px 20px;
+    }
+}

@@ -1,0 +1,79 @@
+/* Top subjects */
+.subjects {
+    margin: 0 auto;
+    overflow: hidden;
+    padding: 0px 0px 10px calc(50% - 321.875px);
+}
+.subjects > a {
+    text-decoration: none;
+    color: #212529;
+}
+.subjects > a:hover {
+    font-weight: bold;
+}
+.subject {
+    float: left;
+    margin: 20px 20px 0px 20px;
+    position: relative;
+    display: block;
+    vertical-align: top;
+}
+.subject-icon {
+    font-size: 47px;
+    color: #ffffff;
+    padding: 15px;
+    border-radius: 50%;
+}
+.subject-icon.cs {
+    background-color: #03A9F4;
+}
+.subject-icon.maths {
+    background-color: #FF9800;
+    padding: 15px 17.93px;
+}
+.subject-icon.physics {
+    background-color: #FDD835;
+    padding: 15px 32.62px;
+}
+.subject-icon.accounting {
+    background-color: #AB47BC;
+    padding: 15px 23.81px;
+}
+.subject-icon.chemistry {
+    background-color: #FF7043;
+    padding: 15px 22.35px;
+}
+.subject > p {
+    text-align: center;
+    padding-top: 12px;
+}
+@media (max-width: 992px) {
+    .subjects {
+        padding-left: 0px;
+        text-align: center;
+    }
+    .subject {
+        float: none;
+        display: inline-block;
+    }
+}
+@media (max-width: 425px) {
+    .subject {
+        margin: 20px 20px 0px 20px;
+    }
+    .subject-icon {
+        font-size: 20px;
+    }
+    .subject-icon.maths {
+        padding: 15px 17.25px;
+    }
+    .subject-icon.physics {
+        padding: 15px 23.5px;
+    }
+    .subject-icon.accounting {
+        padding: 15px 19.76px;
+    }
+    .subject-icon.chemistry {
+        padding: 15px 19.14px;
+    }
+}
