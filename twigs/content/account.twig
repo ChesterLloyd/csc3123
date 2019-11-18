@@ -4,29 +4,23 @@
 
 {% extends '@content/page.twig' %}
 
-{# this brings in some useful macros for making forms
 {% import '@util/formmacro.twig' as f %}
-#}
 
 {# this brings in some useful macros for making bootstrap modals
 {% import '@util/modalmacro.twig' as f %}
 #}
 
-{# put a string in this block that will appear as the title of the page
 {% block title %}
+    My Account
 {% endblock title %}
-#}
-
-{% block links %}
-{# <link> for non-css and non-type things#}
-{% endblock links %}
 
 {% block type %}
-{# <link> for webfonts #}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap">
 {% endblock type %}
 
 {% block css %}
-{# <link> for any other CSS files you need #}
+    <link rel="stylesheet" href="{{assets}}/css/main.css">
+    <link rel="stylesheet" href="{{assets}}/css/index.css">
 {% endblock css %}
 
 {% block scripts %}
@@ -41,51 +35,210 @@
 {# Any javascript you need that MUST run on load goes in this block. NB you don't need <script></script> tags  here #}
 {% endblock onload %}
 
-{# If you include this, then the navigation bar in @util/page.twig will **NOT** appear
-{% block navigation %}
-{% endblock navigation %}
-#}
-
-{#
-    Edit the file navbar.twig to change the appearance of the
-    navigation bar. It is included by default from @util/page.twig
-#}
-
-{# uncomment this and delete header block to remove the <header> tag altogether
-{% block pageheader %}
-{% endblock pageheader %}
-#}
-
-{#
-    If you have a standard header for all (most) pages then put the
-    content in the file header.twig. It is included by @util/page.twig by
-    default. You then don't need to have a header block either.
-#}
-
-{% block header %}
-    <article class="col-md-12 mt-5">
-        <h1 class="cntr">ACCOUNT</h1>
-    </article>
-{% endblock header %}
-
 {% block main %}
     <section class="row">
-        <article class="ml-auto col-md-8 mr-auto">
-            <p>Coming soon</p>
+        <article class="col-md-12">
+            <div class="round-box">
+                <div class="round-box-heading">
+                    <div class="right">
+                        <p>Latest Upload: 22/06/2019</p>
+                        <p>User's Name</p>
+                    </div>
+                    <h1>Your Dashboard</h1>
+                </div>
+                <br>
+            </div>
+        </article>
+        <article class="col-md-12">
+            <div class="round-box">
+                <div class="round-box-heading">
+                    <h2>Recently Uploaded</h2>
+                </div>
+                <div class="round-box-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-2 note-icon ppt">
+                                        <i class="fas fa-file-powerpoint note-icon"></i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Experimental Design</h5>
+                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                            <a href="#" class="btn btn-primary">View</a>
+                                            <a href="#" class="btn btn-warning">Manage</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-2 note-icon ppt">
+                                        <i class="fas fa-file-powerpoint note-icon"></i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Really big long title to see what that looks like</h5>
+                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 10 hours ago</small></p>
+                                            <a href="#" class="btn btn-primary">View</a>
+                                            <a href="#" class="btn btn-warning">Manage</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-2 note-icon doc">
+                                        <i class="fas fa-file-word note-icon"></i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Experimental Design</h5>
+                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                            <a href="#" class="btn btn-primary">View</a>
+                                            <a href="#" class="btn btn-warning">Manage</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+        <article class="col-md-12">
+            <div class="round-box">
+                <div class="round-box-heading">
+                    <h2>Favourites</h2>
+                </div>
+                <div class="round-box-body">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-2 note-icon ppt">
+                                        <i class="fas fa-file-powerpoint note-icon"></i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Experimental Design</h5>
+                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                            <a href="#" class="btn btn-primary">View</a>
+                                            <a href="#" class="btn btn-danger">Unfavourite</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-2 note-icon ppt">
+                                        <i class="fas fa-file-powerpoint note-icon"></i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Really big long title to see what that looks like</h5>
+                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 10 hours ago</small></p>
+                                            <a href="#" class="btn btn-primary">View</a>
+                                            <a href="#" class="btn btn-danger">Unfavourite</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-12 col-lg-4">
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                    <div class="col-md-2 note-icon doc">
+                                        <i class="fas fa-file-word note-icon"></i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Experimental Design</h5>
+                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
+                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                            <a href="#" class="btn btn-primary">View</a>
+                                            <a href="#" class="btn btn-danger">Unfavourite</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <article class="col-md-12">
+            <div class="round-box">
+                <div class="round-box-heading">
+                    <h2>My Notes</h2>
+                </div>
+                <div class="round-box-body">
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Course</th>
+                            <th>Module</th>
+                            <th>Date</th>
+                            <th>Active</th>
+                            <th>Actions</th>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Lecture 6 - Prototyping</a></td>
+                            <td>Computer Science</td>
+                            <td>CSC3095</td>
+                            <td>18/11/2019</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td><a href="#">Lecture 6 - Prototyping</a></td>
+                            <td>Computer Science</td>
+                            <td>CSC3095</td>
+                            <td>18/11/2019</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <a href="#" class="btn btn-success">Upload Notes</a>
+                </div>
+            </div>
+        </article>
+        <article class="col-md-12">
+            <div class="round-box">
+                <div class="round-box-heading">
+                    <h2>Account Info</h2>
+                </div>
+                <div class="round-box-body">
+                    <table class="stats">
+                        <tr>
+                            <th>Username</th>
+                            <td>student_user</td>
+                        </tr>
+                        <tr>
+                            <th>Favourites</th>
+                            <td>5</td>
+                        </tr>
+                        <tr>
+                            <th>Last Upload</th>
+                            <td>12/11/2019</td>
+                        </tr>
+                    </table>
+                    <a href="#" class="btn btn-warning">Manage Account</a>
+                </div>
+            </div>
         </article>
     </section>
 {% endblock main %}
-
-{# uncomment this  and delete footer block to remove the <footer> tag altogether
-{% block pagefooter %}
-{% endblock pagefooter %}
-#}
-
-{#
-    If you have a standard footer for all (most) pages then put the
-    content in the file footer.twig. It is included by @util/page.twig by
-    default. You then don't need to have a footer block either.
-#}
-
-{% block footer %}
-{% endblock footer %}
