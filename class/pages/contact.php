@@ -34,7 +34,20 @@
                 $mail->addAddress(Config::SYSADMIN);
 
                 $mail->Subject = $fd->post('subject', 'No Subject');
-                $mail->Body= $msg;
+                $message = "Name: ".$fd->post('name', '')."<br>";
+                $message .= "Email: ".$fd->post('sender', '')."<br>";
+                $message .= "Subject: ".$fd->post('subject', '')."<br>";
+
+                if (($link = $fd->post('link', '')) !== '')
+                {
+                    $message .= "Link: <a href='".$link."'>".$link."</a><br>";
+                }
+                else
+                {
+                    $message .= "Link: ".$link."<br>";
+                }
+                $message .= $msg;
+                $mail->Body= $message;
                 $mail->send();
 
                 //mail(Config::SYSADMIN, $fd->post('subject', 'No Subject'), $fd->post('sender', 'No Sender').PHP_EOL.PHP_EOL.$msg);
