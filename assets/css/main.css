@@ -8,6 +8,7 @@ div.container {
     margin-top: 30px;
 }
 
+
 /* Jumbotron */
 div.jumbotron {
     color: #FFFFFF;
@@ -15,6 +16,12 @@ div.jumbotron {
 }
 div.jumbotron > h1 {
     font-size: 38pt;
+}
+
+
+/* Breadcrumb */
+ol.breadcrumb {
+    margin-bottom: 30px;
 }
 
 
@@ -27,6 +34,16 @@ div.round-box {
 div.round-box-heading {
     height: 60px;
 }
+div.round-box-heading > div.right {
+    float: right;
+    margin-top:15px;
+    margin-right: 30px;
+}
+div.round-box-heading > div.right > p {
+    margin-bottom: 5px;
+    text-align: right;
+}
+div.round-box-heading > h1,
 div.round-box-heading > h2 {
     color: #424242;
     padding: 20px 30px;
@@ -67,4 +84,27 @@ div.ppt {
     div.note-icon > i {
         padding: 10px 0px 0px 20px;
     }
+}
+
+
+/* Table styles */
+table {
+    width: 100%;
+    margin-bottom: 20px;
+}
+table.stats > tbody > tr > th {
+    width: 300px;
+}
+
+
+/* Rating styles */
+div.stars {
+    text-align: center;
+    margin-bottom: 40px;
+}
+span.fa-star {
+    font-size: 30px;
+}
+span.fa-star.checked {
+    color: orange;
 }
