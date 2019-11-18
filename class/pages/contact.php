@@ -34,17 +34,12 @@
                 $mail->addAddress(Config::SYSADMIN);
 
                 $mail->Subject = $fd->post('subject', 'No Subject');
-                $message = "Name: ".$fd->post('name', '')."<br>";
-                $message .= "Email: ".$fd->post('sender', '')."<br>";
-                $message .= "Subject: ".$fd->post('subject', '')."<br>";
-
+                $message = "Name: ".$fd->post('name', 'No Name')."\n";
+                $message .= "Email: ".$fd->post('sender', '')."\n";
+                $message .= "Subject: ".$fd->post('subject', 'No Subject')."\n";
                 if (($link = $fd->post('link', '')) !== '')
                 {
-                    $message .= "Link: <a href='".$link."'>".$link."</a><br>";
-                }
-                else
-                {
-                    $message .= "Link: ".$link."<br>";
+                    $message .= "Link: ".$link."\n";
                 }
                 $message .= $msg;
                 $mail->Body= $message;
