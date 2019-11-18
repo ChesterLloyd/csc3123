@@ -58,13 +58,15 @@
             {% if context.hasuser %}
                 <ul class="nav navbar-nav navbar-right">
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" id="dduser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user{% if context.hasadmin %} text-danger{% endif %}"></i><b class="caret"></b></a>
+                        <a href="#" class="nav-link dropdown-toggle" id="dduser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">My Account<b class="caret"></b></a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dduser">
+                            <a class="dropdown-item" href="{{base}}/account/">Dashboard</a>
                             <a class="dropdown-item" href="{{base}}/logout/">Logout</a>
-                            <a class="dropdown-item" href="{{base}}/profile/">Profile</a>
                         </div>
                     </li>
-                </ul>
+                </ul
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{{base}}/login/">My Account</a></li>
             {% endif %}
             <form class="form-inline my-2 my-lg-0" action="{{base}}/search/" method="get">
                 <input class="form-control mr-sm-2" type="text" name="search" placeholder="Search" aria-label="Search">
