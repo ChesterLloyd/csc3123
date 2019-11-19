@@ -20,9 +20,10 @@
  */
         public function name()
         {
-            $user = R::load('person', $_SESSION['user']);
+            // $user = R::load('person', $_SESSION['user']);
 
-            return $this->bean->name . " / " . $user->login . " / " . $_SESSION['user'];
+            // return $this->bean->name . " / " . $user->login . " / " . $_SESSION['user'];
+            return "TEST";
         }
 
 
