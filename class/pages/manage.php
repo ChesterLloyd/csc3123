@@ -12,15 +12,12 @@
  */
     class Manage extends \Framework\Siteaction
     {
+
 /**
- * Handle manage operations
+ * Return username
  *
- * @param object	$context	The context object for the site
- *
- * @return string	A template name
+ * @return string
  */
-
-
         public function name()
         {
             $user = R::load('person', $_SESSION['user']);
@@ -29,20 +26,18 @@
         }
 
 
+/**
+ * Handle manage operations
+ *
+ * @param object	$context	The context object for the site
+ *
+ * @return string	A template name
+ */
         public function handle(Context $context)
         {
-
-
-
             // $user = R::findOne('person', 'name=?', [$fdata->mustget('name')]);
             // $user = R::load('person', $_SESSION['user']);
             // $user->login;
-
-
-
-
-
-
 
             // $msg = $fd->post('message', '');
             $fd = $context->formdata();
