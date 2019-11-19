@@ -14,20 +14,6 @@
     {
 
 /**
- * Return username
- *
- * @return string
- */
-        public function name()
-        {
-            // $user = R::load('person', $_SESSION['user']);
-
-            // return $this->bean->name . " / " . $user->login . " / " . $_SESSION['user'];
-            return "TEST";
-        }
-
-
-/**
  * Handle manage operations
  *
  * @param object	$context	The context object for the site
@@ -36,6 +22,14 @@
  */
         public function handle(Context $context)
         {
+
+
+            $test = "TEST";
+            $context->local()->addval('username', $test);
+
+
+
+
             // $user = R::findOne('person', 'name=?', [$fdata->mustget('name')]);
             // $user = R::load('person', $_SESSION['user']);
             // $user->login;
