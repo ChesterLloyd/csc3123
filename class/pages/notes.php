@@ -21,7 +21,7 @@
  */
         public function handle(Context $context)
         {
-            $notes = R::loadAll('note');
+            $notes = R::find('note');
             $context->local()->addval('notes', $notes);
             return '@content/notes.twig';
         }
