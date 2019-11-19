@@ -17,7 +17,7 @@
     $note->module = "CSC3123";
     $note->privacy = 1;
     $note->comment = "Comment";
-    $note->xcontainsFile[] = $file;     // Attach this file to the note (cascade delete)
+    $note->xownFile[] = $file;     // Attach this file to the note (cascade delete)
     $nid = R::store($note);
 
 
