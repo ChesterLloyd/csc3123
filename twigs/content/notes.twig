@@ -70,47 +70,25 @@
 
 
                         {% for note in fnotes %}
-                        <p>{{note.name}} # {{note.course}} # {{note.module}} </p>
+                            <div class="col-sm-12 col-md-12 col-lg-6">
+                                <div class="card mb-3">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-2 note-icon doc">
+                                            <i class="fas fa-file-word note-icon"></i>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{note.name}}</h5>
+                                                <p class="card-text"><b>{{note.module}}</b> - {{note.description}}.</p>
+                                                <p class="card-text"><small class="text-muted">Uploaded {{note.upload}}</small></p>
+                                                <a href="#" class="btn btn-primary">View</a>
+                                                <a href="#" class="btn btn-danger">Unfavourite</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         {% endfor %}
-
-
-
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon doc">
-                                        <i class="fas fa-file-word note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">My favourite notes</h5>
-                                            <p class="card-text"><b>CSC3123</b> - This is a document.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 13 mins ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                            <a href="#" class="btn btn-danger">Unfavourite</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon ppt">
-                                        <i class="fas fa-file-powerpoint note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Acounting notes</h5>
-                                            <p class="card-text"><b>ACC1010</b> - Introduction to Financial Accounting<p>
-                                            <p class="card-text"><small class="text-muted">Last updated 5 days ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                            <a href="#" class="btn btn-danger">Unfavourite</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

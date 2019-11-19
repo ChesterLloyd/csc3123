@@ -21,6 +21,9 @@
     $note->course = "Computer Science";
     $note->module = "CSC3123";
     $note->privacy = 1;
+    $note->downloads = 0;
+    $note->upload = $context->utcnow();
+    $note->description = "This is a document for L01";
     $note->comment = "Comment";
     $note->xownFile[] = $file;     // Attach this file to the note (cascade delete)
     $nid = R::store($note);

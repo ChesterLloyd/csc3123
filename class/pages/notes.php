@@ -30,9 +30,6 @@
 
 
             // Get user's favourite notes
-            // $luser = R::load('user', $user->id);
-            # get review where favourite=1 and user_id = user,
-            # get notes from user_id in there
             $userid = $user->id;
             $sql = 'SELECT N.* FROM note N
                 JOIN review R ON N.id = R.note_id
@@ -41,14 +38,6 @@
             $rows = R::getAll($sql);
             $fnotes = R::convertToBeans('note', $rows );
             $context->local()->addval('fnotes', $fnotes);
-
-
-
-
-            // foreach (R::findAll('note', 'order by name') as $pr)
-            // {
-            //     // process each person
-            // }
 
 
             return '@content/notes.twig';
