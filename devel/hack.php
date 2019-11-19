@@ -18,10 +18,10 @@
     $file->name = "Lecture 1";
     $file->type = "PDF";
     $file->size = "2.1MB"
-    $bid = R::store($file);
+    $fid = R::store($file);
 
     // Attach this file to the note (cascade delete)
-    $file = R::load('file', $bid));
+    $file = R::load('file', $fid);
     $note->xcontainsFile[] = $file;
     R::store($note);
 
