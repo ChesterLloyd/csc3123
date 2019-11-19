@@ -4,9 +4,9 @@
  */
 
     // Remove all current beans
-    R::wipe('file');
-    R::wipe('note');
     R::wipe('review');
+    R::wipe('note');
+    R::wipe('file');
 
     // Make a test file
     $file = R::dispense('file');
