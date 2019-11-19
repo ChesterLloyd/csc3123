@@ -34,7 +34,7 @@
             # get review where favourite=1 and user_id = user,
             # get notes from user_id in there
 
-            $fnotes = R::exec('SELECT N.* FROM notes N
+            $fnotes = R::exec('SELECT N.* FROM note N
                 JOIN review R ON N.id = R.note_id
                 JOIN user U ON R.user_id = U.id
                 WHERE U.id = ' . $user->id . ' AND R.favourite = 1');
