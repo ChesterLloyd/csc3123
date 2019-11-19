@@ -69,6 +69,12 @@
                         <p>{{user.id}}</p>
 
 
+                        {% for note in fnotes %}
+                        <p>{{note.name}} # {{note.course}} # {{note.module}} </p>
+                        {% endfor %}
+
+
+
                         <div class="col-sm-12 col-md-12 col-lg-6">
                             <div class="card mb-3">
                                 <div class="row no-gutters">
