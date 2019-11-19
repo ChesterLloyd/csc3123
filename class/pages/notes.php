@@ -33,11 +33,11 @@
             // $luser = R::load('user', $user->id);
             # get review where favourite=1 and user_id = user,
             # get notes from user_id in there
-
+            $userid = $user->id;
             $fnotes = R::exec('SELECT N.* FROM note N
                 JOIN review R ON N.id = R.note_id
                 JOIN user U ON R.user_id = U.id
-                WHERE U.id = ' . $user->id . ' AND R.favourite = 1');
+                WHERE U.id = "'.$userid.'" AND R.favourite = 1');
 
             $context->local()->addval('fnotes', $fnotes);
 
