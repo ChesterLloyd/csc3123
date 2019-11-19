@@ -17,7 +17,7 @@
     $file = R::dispense('file');
     $file->name = "Lecture 1";
     $file->type = "PDF";
-    $file->size = "2.1MB"
+    $file->size = "2.1MB";
     $fid = R::store($file);
 
     // Attach this file to the note (cascade delete)
