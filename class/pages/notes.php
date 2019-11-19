@@ -23,6 +23,20 @@
         {
             $notes = R::find('note');
             $context->local()->addval('notes', $notes);
+
+
+            $user = $context->user();
+            $context->local()->addval('user', $user);
+
+
+
+
+            // foreach (R::findAll('note', 'order by name') as $pr)
+            // {
+            //     // process each person
+            // }
+
+
             return '@content/notes.twig';
         }
     }

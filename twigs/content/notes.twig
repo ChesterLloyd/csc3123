@@ -61,6 +61,12 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
+                        {% for note in notes %}
+                        <p>{{note.name}}</p>
+                        {% endfor %}
+
+                        <p>{{user.login}}</p>
+
                         <div class="col-sm-12 col-md-12 col-lg-6">
                             <div class="card mb-3">
                                 <div class="row no-gutters">
@@ -70,9 +76,6 @@
                                     <div class="col-md-10">
                                         <div class="card-body">
                                             <h5 class="card-title">My favourite notes</h5>
-                                            {% for note in notes %}
-                                                <p>{{note.name}}</p>
-                                            {% endfor %}
                                             <p class="card-text"><b>CSC3123</b> - This is a document.</p>
                                             <p class="card-text"><small class="text-muted">Last updated 13 mins ago</small></p>
                                             <a href="#" class="btn btn-primary">View</a>
