@@ -45,7 +45,7 @@
             // $msg = $fd->post('message', '');
             $fd = $context->formdata();
 
-            $username = $fdt->post('username', '');
+            $username = $fd->post('username', '');
 
             if ($username !== '')
             {
