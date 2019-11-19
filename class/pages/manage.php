@@ -27,7 +27,7 @@
 
 
             $test = "TEST";
-            $context->local()->addval('username', $user->login);
+            $context->local()->addval('username', $_SESSION['user']);
 
 
 
