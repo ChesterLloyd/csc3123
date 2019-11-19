@@ -21,7 +21,7 @@
     $bid = R::store($file);
 
     // Attach this file to the note (cascade delete)
-    $book = R::load('note', $bid));
+    $file = R::load('file', $bid));
     $note->xcontainsFile[] = $file;
     R::store($note);
 
