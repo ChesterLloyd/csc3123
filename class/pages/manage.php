@@ -23,7 +23,9 @@
 
         public function name()
         {
-            return $this->bean->name;
+            $user = R::load('person', $_SESSION['user']);
+
+            return $this->bean->name . " / " . $user->login . " / " . $_SESSION['user'];
         }
 
 
