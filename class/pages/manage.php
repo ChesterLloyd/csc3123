@@ -22,17 +22,17 @@
  */
         public function handle(Context $context)
         {
+            $user = R::load('person', $_SESSION['user']);
+            // $user->login;
 
 
             $test = "TEST";
-            $context->local()->addval('username', $test);
+            $context->local()->addval('username', $user->login);
 
 
 
 
             // $user = R::findOne('person', 'name=?', [$fdata->mustget('name')]);
-            // $user = R::load('person', $_SESSION['user']);
-            // $user->login;
 
             // $msg = $fd->post('message', '');
             $fd = $context->formdata();
