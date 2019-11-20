@@ -61,8 +61,9 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
-                        {% for note in notes %}
-                        <p>{{note.name}}</p>
+                        {% for file in ffiles %}
+                        <p>{{loop.index}}</p>
+                        <p>{{file.name}}</p>
                         {% endfor %}
 
                         <p>{{user.login}}</p>
@@ -70,7 +71,6 @@
 
 
                         {% for note in fnotes %}
-                            <p>{{loop.index0}}</p>
                             <p>{{loop.index}}</p>
                             {{ffiles[loop.index].name}}
                             {{ffiles[loop.index].icon}}
