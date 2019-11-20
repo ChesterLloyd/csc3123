@@ -47,7 +47,7 @@
                 JOIN user U ON R.user_id = U.id
                 JOIN file F ON N.id = F.note_id
                 WHERE U.id = '.$userid.' AND R.favourite = 1
-                GROUP BY N.id ORDER BY F.id ASC';
+                GROUP BY N.id ORDER BY N.upload ASC, F.id ASC';
             $rows = R::getAll($sql);
             $ffiles = R::convertToBeans('file', $rows);
             $context->local()->addval('ffiles', $ffiles);
