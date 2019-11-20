@@ -61,11 +61,13 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
-                        {% for file in ffiles %}
+                        {% for key, file in ffiles %}
                         <p>Loop index: {{loop.index}}<br>
+                        <p>Key: {{key}}<br>
                         FILE: {{file.name}}<br>
                         ICON: {{file.icon}}<br>
-                        ICON2: {{ffiles[loop.index0].icon}}</p>
+                        ICON2: {{ffiles[loop.index].icon}}</p>
+                        ICON3: {{ffiles[key].icon}}</p>
 
 
                         {% endfor %}
@@ -97,7 +99,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>`
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
