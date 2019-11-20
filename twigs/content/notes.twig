@@ -64,7 +64,12 @@
                         {% for file in ffiles %}
                         <p>{{loop.index}}</p>
                         <p>{{file.name}}</p>
+                        <p>{{file.icon}}</p>
+                        <p>ffiles[loop.index].icon</p>
+
+
                         {% endfor %}
+                        <br><br>
 
                         <p>{{user.login}}</p>
                         <p>{{user.id}}</p>
