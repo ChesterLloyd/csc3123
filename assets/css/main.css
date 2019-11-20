@@ -76,6 +76,9 @@ div.word {
 div.powerpoint {
     background-color: #ffd669;
 }
+div.archive {
+    background-color: #ffcc80;
+}
 @media (max-width: 768px) {
     div.note-icon {
         height: 70px;
