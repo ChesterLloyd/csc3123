@@ -12,6 +12,7 @@
     $file = R::dispense('file');
     $file->name = "Lecture 1";
     $file->type = "PDF";
+    $file->icon = "pdf";
     $file->size = "2.1MB";
     $fid = R::store($file);
 

@@ -31,13 +31,26 @@
 
             // Get user's favourite notes
             $userid = $user->id;
+
+            // Get notes as beans
             $sql = 'SELECT N.* FROM note N
                 JOIN review R ON N.id = R.note_id
                 JOIN user U ON R.user_id = U.id
                 WHERE U.id = '.$userid.' AND R.favourite = 1';
             $rows = R::getAll($sql);
-            $fnotes = R::convertToBeans('note', $rows );
+            $fnotes = R::convertToBeans('note', $rows);
             $context->local()->addval('fnotes', $fnotes);
+
+            // Get file icons (first file type in set is the icon)
+            $sql = 'SELECT F.* FROM note N
+                JOIN review R ON N.id = R.note_id
+                JOIN user U ON R.user_id = U.id
+                JOIN file F ON N.id = F.note_id
+                WHERE U.id = '.$userid.' AND R.favourite = 1
+                GROUP BY N.id ORDER BY F.id ASC';
+            $rows = R::getAll($sql);
+            $ffiles = R::convertToBeans('file', $rows);
+            $context->local()->addval('ffiles', $ffiles);
 
 
             return '@content/notes.twig';
