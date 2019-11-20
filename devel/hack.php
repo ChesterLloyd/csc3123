@@ -13,19 +13,19 @@
     $file->name = "Lecture 1";
     $file->type = "PDF";
     $file->icon = "pdf";
-    $file->size = "2.1MB";
+    $file->size = "890 KB";
     $fid = R::store($file);
 
     // Make a test note
     $note = R::dispense('note');
     $note->name = "Lecture 1";
     $note->course = "Computer Science";
-    $note->module = "CSC3123";
+    $note->module = "CSC721";
     $note->privacy = 1;
     $note->downloads = 0;
     $note->upload = $context->utcnow();
-    $note->description = "This is a document for L01";
-    $note->comment = "Comment";
+    $note->description = "Introduction to HCI";
+    $note->comment = "Lecture slides for L1";
     $note->xownFile[] = $file;     // Attach this file to the note (cascade delete)
     $nid = R::store($note);
 
@@ -45,6 +45,7 @@
     $userid = $context->user()->id;
     $user = R::load('user', $userid);
     $user->xownReview[] = $review;      // Attach this review to student also
+    $user->xownNote[] = $note;          // This student is the author of this note
     R::store($user);
 
 

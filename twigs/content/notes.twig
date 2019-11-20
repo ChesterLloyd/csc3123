@@ -92,74 +92,26 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon ppt">
-                                        <i class="fas fa-file-powerpoint note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Experimental Design</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
+                        {% for key, file in tfiles %}
+                            <div class="col-sm-12 col-md-12 col-lg-6">
+                                <div class="card mb-3">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-2 note-icon {{file.icon}}">
+                                            <i class="fas fa-file-{{file.icon}} note-icon"></i>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{tnotes[file.note_id].name}}</h5>
+                                                <p class="card-text"><b>{{tnotes[file.note_id].module}}</b> - {{tnotes[file.note_id].description}}</p>
+                                                <p class="card-text"><small class="text-muted">Uploaded {{tnotes[file.note_id].upload}}</small></p>
+                                                <a href="#" class="btn btn-primary">View</a>
+                                                <a href="#" class="btn btn-danger">Unfavourite</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon ppt">
-                                        <i class="fas fa-file-powerpoint note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Really big long title to see what that looks like</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 10 hours ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon doc">
-                                        <i class="fas fa-file-word note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Experimental Design</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon pdf">
-                                        <i class="fas fa-file-pdf note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Experimental Design</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>

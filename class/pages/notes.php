@@ -53,6 +53,29 @@
             $context->local()->addval('ffiles', $ffiles);
 
 
+            // Get 4 top rated notes
+            // Get notes as beans
+            $sql = 'SELECT N.* FROM note N
+                JOIN review R ON N.id = R.note_id
+                ORDER BY R.rating DESC , N.upload DESC
+                LIMIT 4';
+            $rows = R::getAll($sql);
+            $tnotes = R::convertToBeans('note', $rows);
+            $context->local()->addval('tnotes', $tnotes);
+
+            // Get file icons (first file type in set is the icon)
+            $sql = 'SELECT F.* FROM note N
+                JOIN review R ON N.id = R.note_id
+                JOIN file F ON N.id = F.note_id
+                GROUP BY N.id ORDER BY R.rating DESC,
+                N.upload DESC, F.id ASC LIMIT 4';
+            $rows = R::getAll($sql);
+            $tfiles = R::convertToBeans('file', $rows);
+            $context->local()->addval('tfiles', $tfiles);
+
+
+
+
             return '@content/notes.twig';
         }
     }
