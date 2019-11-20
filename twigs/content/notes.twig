@@ -61,39 +61,12 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
-                        {% for key, file in ffiles %}
-                        <p>Loop index: {{loop.index}}<br>
-                        <p>Key: {{key}}<br>
-                        FILE: {{file.name}}<br>
-                        ICON: {{file.icon}}<br>
-                        ICON2: {{ffiles[loop.index].icon}}</p>
-                        ICON3: {{ffiles[key].icon}}</p>
-                        {% endfor %}
-                        <br><br>
-
                         {% for key, note in fnotes %}
-                        <p>Loop index: {{loop.index}}<br>
-                        <p>Key: {{key}}<br>
-                        NOTE: {{note.name}}<br>
-                        ID: {{note.id}}<br>
-                        ID3: {{fnotes[key].id}}</p>
-                        {% endfor %}
-                        <br><br>
-
-                        <p>{{user.login}}</p>
-                        <p>{{user.id}}</p>
-
-
-                        {% for note in fnotes %}
-                            <p>{{loop.index}}</p>
-                            {{ffiles[loop.index].name}}
-                            {{ffiles[loop.index].icon}}
-
                             <div class="col-sm-12 col-md-12 col-lg-6">
                                 <div class="card mb-3">
                                     <div class="row no-gutters">
-                                        <div class="col-md-2 note-icon {{ffiles[loop.index].icon}}">
-                                            <i class="fas fa-file-{{ffiles[loop.index].icon}} note-icon"></i>
+                                        <div class="col-md-2 note-icon {{ffiles[key].icon}}">
+                                            <i class="fas fa-file-{{ffiles[key].icon}} note-icon"></i>
                                         </div>
                                         <div class="col-md-10">
                                             <div class="card-body">
