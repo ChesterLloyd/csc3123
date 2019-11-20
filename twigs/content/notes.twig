@@ -61,7 +61,30 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
+
+
+
+                        {% for key, file in ffiles %}
+                        <p>Loop index: {{loop.index}}<br>
+                        <p>Key: {{key}}<br>
+                        FILE: {{file.name}}<br>
+                        ICON: {{file.icon}}<br>
+                        ICON2: {{ffiles[loop.index].icon}}</p>
+                        ICON3: {{ffiles[key].icon}}</p>
+                        NOTE: {{fnotes[ffiles.note_id].name}}
+                        {% endfor %}
+                        <br><br>
+
+
+
+
+
+
+                        <p>{{user.login}}</p>
+                        <p>{{user.id}}</p>
+
                         {% for key, note in fnotes %}
+
                             <div class="col-sm-12 col-md-12 col-lg-6">
                                 <div class="card mb-3">
                                     <div class="row no-gutters">
