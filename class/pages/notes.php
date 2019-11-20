@@ -57,8 +57,9 @@
             // Get notes as beans
             $sql = 'SELECT N.* FROM note N
                 JOIN review R ON N.id = R.note_id
-                ORDER BY R.rating DESC , N.upload DESC
-                LIMIT 4';
+                GROUP BY N.id
+                ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
+                N.upload DESC LIMIT 4';
             $rows = R::getAll($sql);
             $tnotes = R::convertToBeans('note', $rows);
             $context->local()->addval('tnotes', $tnotes);
@@ -67,7 +68,8 @@
             $sql = 'SELECT F.* FROM note N
                 JOIN review R ON N.id = R.note_id
                 JOIN file F ON N.id = F.note_id
-                GROUP BY N.id ORDER BY R.rating DESC,
+                GROUP BY N.id
+                ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
                 N.upload DESC, F.id ASC LIMIT 4';
             $rows = R::getAll($sql);
             $tfiles = R::convertToBeans('file', $rows);
