@@ -70,10 +70,10 @@ div.note-icon > i {
 div.pdf {
     background-color: #f5adad;
 }
-div.doc {
+div.word {
     background-color: #a2b7fb;
 }
-div.ppt {
+div.powerpoint {
     background-color: #ffd669;
 }
 @media (max-width: 768px) {
