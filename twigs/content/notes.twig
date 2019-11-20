@@ -79,8 +79,8 @@
                                         <div class="col-md-10">
                                             <div class="card-body">
                                                 <h5 class="card-title">{{note.name}}</h5>
-                                                <p class="card-text"><b>{{note.module}}</b> - {{note.description}}.</p>
-                                                <p class="card-text"><small class="text-muted">Uploaded {{note.upload}}</small></p>
+                                                <p class="card-text"><b>{{note.module}}</b> - {{note.description}}</p>
+                                                <p class="card-text"><small class="text-muted">Uploaded {{note.upload|format_datetime('short', 'none', locale='gb')}}</small></p>
                                                 <a href="#" class="btn btn-primary">View</a>
                                                 <a href="#" class="btn btn-danger">Unfavourite</a>
                                             </div>
