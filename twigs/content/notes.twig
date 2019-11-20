@@ -68,8 +68,15 @@
                         ICON: {{file.icon}}<br>
                         ICON2: {{ffiles[loop.index].icon}}</p>
                         ICON3: {{ffiles[key].icon}}</p>
+                        {% endfor %}
+                        <br><br>
 
-
+                        {% for key, note in fnotes %}
+                        <p>Loop index: {{loop.index}}<br>
+                        <p>Key: {{key}}<br>
+                        NOTE: {{note.name}}<br>
+                        ID: {{note.id}}<br>
+                        ID3: {{fnotes[key].id}}</p>
                         {% endfor %}
                         <br><br>
 
