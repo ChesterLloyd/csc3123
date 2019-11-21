@@ -45,8 +45,7 @@
             $sql = 'SELECT (SUM(R.rating) / COUNT(R.rating)) AS rating
                 FROM note N
                 JOIN review R ON N.id = R.note_id
-                GROUP BY N.id
-                WHERE N.id = '.$noteid;
+                WHERE N.id = '.$noteid.' GROUP BY N.id';
             $rating = R::getCell($sql);
             $rating = round($rating);
             $context->local()->addval('rating', $rating);
