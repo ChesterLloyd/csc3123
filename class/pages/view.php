@@ -31,7 +31,12 @@
 
             // Put user bean in context
             $user = $context->user();
+            $userid = $user->id;
             $context->local()->addval('user', $user);
+
+            // Put author's bean in context
+            $author = R::load('user', $note->user_id);
+            $context->local()->addval('author', $author);
 
             // Put file beans for current note in context
             $sql = 'SELECT F.* FROM file F
@@ -57,6 +62,14 @@
                 WHERE N.id = '.$noteid.' AND R.favourite = 1';
             $favourites = R::getCell($sql);
             $context->local()->addval('favourites', $favourites);
+
+            // Is this note in the user's favourites
+            $sql = 'SELECT R.favourite, R.*, N.*
+                FROM review R
+                JOIN note N ON R.note_id = N.id
+                WHERE R.user_id = '.$userid.' AND N.id = '.$noteid;
+            $favourite = R::getCell($sql);
+            $context->local()->addval('favourite', $favourite);
 
             return '@content/view.twig';
         }
