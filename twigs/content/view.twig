@@ -41,7 +41,7 @@
             <div class="round-box">
                 <div class="round-box-heading">
                     <div class="right">
-                        <p>22/06/2019</p>
+                        <p>{{note.upload}}</p>
                         <p>Author's Name</p>
                     </div>
                     <h1>Note Name...</h1>
@@ -52,8 +52,8 @@
                             <nav aria-label="breadcrumb">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/projects/csc3123/">Home</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Course</a></li>
-                                    <li class="breadcrumb-item"><a href="#">Module Code</a></li>
+                                    <li class="breadcrumb-item"><a href="#">{{note.course}}</a></li>
+                                    <li class="breadcrumb-item"><a href="#">{{note.module}}</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">Notes</li>
                                 </ol>
                             </nav>
@@ -63,17 +63,7 @@
                         <div class="col-12">
                             <h2>Author's Comments</h2>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                labore et dolore magna aliqua. Magna fringilla urna porttitor rhoncus dolor purus non enim.
-                                Ultricies tristique nulla aliquet enim tortor at. Non arcu risus quis varius quam quisque id diam.
-                                <br><br>
-                                Varius sit amet mattis vulputate enim nulla aliquet. Lectus urna duis convallis convallis tellus.
-                                Posuere sollicitudin aliquam ultrices sagittis orci a scelerisque purus. At urna condimentum mattis
-                                pellentesque id nibh tortor. Quam lacus suspendisse faucibus interdum posuere. Est sit amet
-                                facilisis magna. Urna molestie at elementum eu facilisis sed. Ipsum suspendisse ultrices gravida
-                                dictum.
-                                <br><br>
-                                Aliquet risus feugiat in ante metus dictum at tempor. Egestas purus viverra accumsan in nisl.
+                                {{note.comment}}
                             </p>
                         </div>
                     </div>
@@ -94,16 +84,13 @@
                                     <th>Type</th>
                                     <th>Size</th>
                                 </tr>
-                                <tr>
-                                    <td><a href="#">Lecture 6 - Prototyping</a></td>
-                                    <td>PDF</td>
-                                    <td>467 KB</td>
-                                </tr>
-                                <tr>
-                                    <td><a href="#">Practical 6 - Prototyping</a></td>
-                                    <td>DOCX</td>
-                                    <td>23 KB</td>
-                                </tr>
+                                {% for key, file in files %}
+                                    <tr>
+                                        <td><a href="#">{{file.name}}</a></td>
+                                        <td>{{file.type}}</td>
+                                        <td>{{file.size}}</td>
+                                    </tr>
+                                {% endfor %}
                             </table>
                         </div>
                     </div>
@@ -119,24 +106,26 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="stars">
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star checked"></span>
-                                <span class="fa fa-star"></span>
-                                <span class="fa fa-star"></span>
+                                {% for star in range(1, 5) %}
+                                    {% if star <= {{rating}} %}
+                                        <span class="fa fa-star checked"></span>
+                                    {% else %}
+                                        <span class="fa fa-star"></span>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                             <table class="stats">
                                 <tr>
                                     <th>Rating</th>
-                                    <td>3</td>
+                                    <td>{{rating}}</td>
                                 </tr>
                                 <tr>
                                     <th>Favourites</th>
-                                    <td>5</td>
+                                    <td>{{favourites}}</td>
                                 </tr>
                                 <tr>
                                     <th>Number of downloads</th>
-                                    <td>12</td>
+                                    <td>{{note.downloads}}</td>
                                 </tr>
                             </table>
                         </div>
