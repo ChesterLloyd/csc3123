@@ -136,10 +136,10 @@
                             </table>
                         </div>
                     </div>
-                    {% if favourite !== 1 %}
+                    {% if favourite is same as(0) %}
                         <a href="#" class="btn btn-success">Add Favourite</a>
                     {% endif %}
-                    {% if user.id === author.id %}
+                    {% if user.id is same as(author.id) %}
                         <a href="#" class="btn btn-warning">Modify Note</a>
                     {% endif %}
                 </div>
