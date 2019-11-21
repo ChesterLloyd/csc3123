@@ -36,7 +36,7 @@
             // Put file beans for current note in context
             $sql = 'SELECT F.* FROM File F
                 JOIN note N ON F.note_id = N.id
-                WHERE N.id = '.$noteid;
+                WHERE N.id = '.$noteid.'';
             $rows = R::getAll($sql);
             $files = R::convertToBeans('file', $rows);
             $context->local()->addval('files', $files);
@@ -46,7 +46,7 @@
                 FROM note N
                 JOIN review R ON N.id = R.note_id
                 GROUP BY N.id
-                WHERE N.id = '.$noteid;
+                WHERE N.id = '.$noteid.'';
             $rating = R::getCell($sql);
             $rating = round($rating);
             $context->local()->addval('rating', $rating);
