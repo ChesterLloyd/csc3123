@@ -44,7 +44,7 @@
                         <p>{{note.upload}}</p>
                         <p>Author's Name</p>
                     </div>
-                    <h1>Note Name...</h1>
+                    <h1>{{note.name}}</h1>
                 </div>
                 <div class="round-box-body">
                     <div class="row">
@@ -61,6 +61,10 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
+                            <h2>Description</h2>
+                            <p>
+                                {{note.description}}
+                            </p>
                             <h2>Author's Comments</h2>
                             <p>
                                 {{note.comment}}
