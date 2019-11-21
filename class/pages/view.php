@@ -35,7 +35,8 @@
             $context->local()->addval('user', $user);
 
             // Put author's bean in context
-            $author = R::load('user', $note->user_id);
+            // $author = R::load('user', $note->user_id);
+            $author = R::findOne('user', 'id=?', [$note->user_id]);
             $context->local()->addval('author', $author);
 
             // Put file beans for current note in context
@@ -64,7 +65,7 @@
             $context->local()->addval('favourites', $favourites);
 
             // Is this note in the user's favourites
-            $sql = 'SELECT R.favourite, R.*, N.*
+            $sql = 'SELECT R.favourite
                 FROM review R
                 JOIN note N ON R.note_id = N.id
                 WHERE R.user_id = '.$userid.' AND N.id = '.$noteid;
