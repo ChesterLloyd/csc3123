@@ -42,7 +42,7 @@
                 <div class="round-box-heading">
                     <div class="right">
                         <p>{{note.upload}}</p>
-                        <p>{{author.login}}</p>
+                        <p>By: {{author.login}}</p>
                     </div>
                     <h1>{{note.name}}</h1>
                 </div>
@@ -136,7 +136,7 @@
                             </table>
                         </div>
                     </div>
-                    {% if favourite is same as(0) %}
+                    {% if favourite is same as("0") %}
                         <a href="#" class="btn btn-success">Add Favourite</a>
                     {% endif %}
                     {% if user.id is same as(author.id) %}
