@@ -23,7 +23,7 @@
         {
 
             // Get note ID from query string
-            $noteid = filter_var($_GET['note'], FILTER_VALIDATE_INT);
+            $noteid = filter_var($_GET['note'], FILTER_SANITIZE_STRING);
 
             // Put current note bean in context
             $note = R::load('note', $noteid);
