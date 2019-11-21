@@ -136,8 +136,13 @@
                             </table>
                         </div>
                     </div>
+                    {% if reviewed is same as("0") and not user.id is same as(author.id) %}
+                        <a href="#" class="btn btn-primary">Add Review</a>
+                    {% endif %}
                     {% if favourite is same as("0") %}
                         <a href="#" class="btn btn-success">Add Favourite</a>
+                    {% else %}
+                        <a href="#" class="btn btn-danger">Unfavourite</a>
                     {% endif %}
                     {% if user.id is same as(author.id) %}
                         <a href="#" class="btn btn-warning">Modify Note</a>

@@ -72,6 +72,14 @@
             $favourite = R::getCell($sql);
             $context->local()->addval('favourite', $favourite);
 
+            // Has this user reviewed this note
+            $sql = 'SELECT COUNT(R.id)
+                FROM review R
+                JOIN note N ON R.note_id = N.id
+                WHERE R.user_id = '.$userid.' AND N.id = '.$noteid;
+            $reviewed = R::getCell($sql);
+            $context->local()->addval('reviewed', $reviewed);
+
             return '@content/view.twig';
         }
     }
