@@ -26,7 +26,7 @@
             $noteid = filter_var($_GET['note'], FILTER_SANITIZE_STRING);
 
             // Put current note bean in context
-            $note = R::load('note', $noteid);
+            $note = $context->load('note', $noteid);
             $context->local()->addval('note', $note);
 
             // Put user bean in context
