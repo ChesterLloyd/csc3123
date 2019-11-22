@@ -24,17 +24,11 @@
         {
             $rest = $context->rest();
             $nid = $rest[1];
+            $note = R::findOne('note', 'id=?', [$nid]);
 
-            $userid = $context->user()->id;
-            $note = R::load('note', $nid);
-
+            $uid = $context->user()->id;
             // Has this user reviewed this note (favourite flag stored in reviews)
-            $sql = 'SELECT R.*
-                FROM review R
-                JOIN note N ON R.note_id = N.id
-                WHERE R.user_id = '.$userid.' AND N.id = '.$nid;
-            $rows = R::getAll($sql);
-            $review = R::convertToBeans('review', $rows);
+            $review = R::findOne('review', 'note_id=? AND user_id=?', [$nid, $uid]);
 
             if (!$review->id)
             {
