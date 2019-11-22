@@ -160,7 +160,9 @@
                     {% if reviewed is same as("0") and not user.id is same as(author.id) %}
                         <a href="#" class="btn btn-primary">Add Review</a>
                     {% endif %}
-                    {% if favourite is same as("0") %}
+                    {% if favourite is same as("1") %}
+                        <a href="#" class="btn btn-danger">Unfavourite</a>
+                    {% else %}
                         <a href="#" class="btn btn-success" id="addFavourite">Add Favourite</a>
 
                         <button class="btn btn-success" data-toggle="modal" data-target="#modald" type="button">Modal Pop-up</button>
@@ -173,9 +175,6 @@
                         <!-- <button type="button" class="btn btn-primary" id="nopu">None</button> -->
                         <!-- {{m.close({action: 'None', id: 'nopu'})}} -->
 
-
-                    {% else %}
-                        <a href="#" class="btn btn-danger">Unfavourite</a>
                     {% endif %}
                     {% if user.id is same as(author.id) %}
                         <a href="#" class="btn btn-warning">Modify Note</a>
