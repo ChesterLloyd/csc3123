@@ -76,7 +76,7 @@
                                                 <h5 class="card-title">{{fnotes[file.note_id].name}}</h5>
                                                 <p class="card-text"><b>{{fnotes[file.note_id].module}}</b> - {{fnotes[file.note_id].description}}</p>
                                                 <p class="card-text"><small class="text-muted">Uploaded {{fnotes[file.note_id].upload}}</small></p>
-                                                <a href="../view?note={{file.note_id}}" class="btn btn-primary">View</a>
+                                                <a href="{{base}}/view?note={{file.note_id}}" class="btn btn-primary">View</a>
                                                 <a href="#" class="btn btn-danger unfavourite" data-note="{{fnotes[file.note_id].id}} ">Unfavourite</a>
                                             </div>
                                         </div>
@@ -107,7 +107,7 @@
                                                 <h5 class="card-title">{{tnotes[file.note_id].name}}</h5>
                                                 <p class="card-text"><b>{{tnotes[file.note_id].module}}</b> - {{tnotes[file.note_id].description}}</p>
                                                 <p class="card-text"><small class="text-muted">Uploaded {{tnotes[file.note_id].upload}}</small></p>
-                                                <a href="../view?note={{file.note_id}}" class="btn btn-primary">View</a>
+                                                <a href="{{base}}/view?note={{file.note_id}}" class="btn btn-primary">View</a>
                                             </div>
                                         </div>
                                     </div>
