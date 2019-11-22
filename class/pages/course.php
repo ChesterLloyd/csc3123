@@ -28,15 +28,17 @@
 
 
             $sql = 'SELECT N.* FROM note N
-                WHERE N.course = "'.$course.'" AND N.privacy = 1';
+                WHERE N.course = "'.$course.'" AND N.privacy = 1
+                ORDER BY N.upload ASC';
             $rows = R::getAll($sql);
             $anotes = R::convertToBeans('note', $rows);
             $context->local()->addval('anotes', $anotes);
 
             // Get file icons (first file type in set is the icon)
-            $sql = 'SELECT F.* FROM note
+            $sql = 'SELECT F.* FROM note N
                 JOIN file F ON N.id = F.note_id
                 WHERE N.course = "'.$course.'" AND N.privacy = 1
+                GROUP BY N.id
                 ORDER BY N.upload ASC, F.id ASC';
             $rows = R::getAll($sql);
             $afiles = R::convertToBeans('file', $rows);

@@ -83,15 +83,14 @@
                 </div>
             </div>
         </article>
-    </section>
-    <article class="col-md-12">
-        <div class="round-box">
-            <div class="round-box-heading">
-                <h2>All Notes</h2>
-            </div>
-            <div class="round-box-body">
-                <div class="row">
-                    {% for key, file in afiles %}
+        <article class="col-md-12">
+            <div class="round-box">
+                <div class="round-box-heading">
+                    <h2>All Notes</h2>
+                </div>
+                <div class="round-box-body">
+                    <div class="row">
+                        {% for key, file in afiles %}
                         <div class="col-sm-12 col-md-12 col-lg-6">
                             <div class="card mb-3">
                                 <div class="row no-gutters">
@@ -109,9 +108,10 @@
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
-        </div>
-    </article>
+        </article>
+    </section>
 {% endblock main %}
