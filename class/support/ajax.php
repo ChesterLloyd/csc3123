@@ -30,7 +30,7 @@
             // Has this user reviewed this note (favourite flag stored in reviews)
             $review = R::findOne('review', 'note_id=? AND user_id=?', [$nid, $uid]);
 
-            if (!$review->id)
+            if (!$review)
             {
                 // No bean has been loaded (no review, so make one)
                 $review = R::dispense('review');
