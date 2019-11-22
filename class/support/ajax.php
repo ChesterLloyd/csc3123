@@ -44,7 +44,7 @@
                 R::store($note);
 
                 // Give rating to user
-                $user = R::load('user', $userid);
+                $user = R::load('user', $uid);
                 $user->xownReview[] = $review;
                 R::store($user);
 
