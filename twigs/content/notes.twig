@@ -32,7 +32,15 @@
 {% endblock setup %}
 
 {% block onload %}
-{# Any javascript you need that MUST run on load goes in this block. NB you don't need <script></script> tags  here #}
+    $('.unfavourite').click(function() {
+        var nid = $(this).data('note');
+        $.post('{{base}}/ajax/removeFavourite/'+nid+'/', {
+        }).done(function(data){
+            $('#fn-'+bid).hide();
+        }).fail(function(jqXHR, textStatus, errorThrown){
+            bootbox.alert('<h3>Error</h3><br>'+jqXHR.responseText);
+        });
+    });
 {% endblock onload %}
 
 {% block main %}
@@ -62,7 +70,7 @@
                 <div class="round-box-body">
                     <div class="row">
                         {% for key, file in ffiles %}
-                            <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="col-sm-12 col-md-12 col-lg-6" id="fn-{{fnotes[file.note_id].id}}">
                                 <div class="card mb-3">
                                     <div class="row no-gutters">
                                         <div class="col-md-2 note-icon {{file.icon}}">
@@ -74,7 +82,7 @@
                                                 <p class="card-text"><b>{{fnotes[file.note_id].module}}</b> - {{fnotes[file.note_id].description}}</p>
                                                 <p class="card-text"><small class="text-muted">Uploaded {{fnotes[file.note_id].upload}}</small></p>
                                                 <a href="../view?note={{file.note_id}}" class="btn btn-primary">View</a>
-                                                <a href="#" class="btn btn-danger">Unfavourite</a>
+                                                <a href="#" class="btn btn-danger unfavourite" data-note="{{fnotes[file.note_id].id}} ">Unfavourite</a>
                                             </div>
                                         </div>
                                     </div>
@@ -105,7 +113,6 @@
                                                 <p class="card-text"><b>{{tnotes[file.note_id].module}}</b> - {{tnotes[file.note_id].description}}</p>
                                                 <p class="card-text"><small class="text-muted">Uploaded {{tnotes[file.note_id].upload}}</small></p>
                                                 <a href="../view?note={{file.note_id}}" class="btn btn-primary">View</a>
-                                                <a href="#" class="btn btn-danger">Unfavourite</a>
                                             </div>
                                         </div>
                                     </div>
