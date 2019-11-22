@@ -159,7 +159,7 @@
         public function handle(Context $context) : void
         {
             //$this->operation(['yourop', ...], [TRUE, [['ContextName', 'RoleName'],...]]);
-            $this->operation(['addFavourite'], [TRUE, [['Site', 'Student']]]);
+            $this->operation(['addFavourite', 'removeFavourite'], [TRUE, [['Site', 'Student']]]);
             // TRUE if login needed, then an array of roles required in form [['context name', 'role name']...] (can be empty)
             $this->pageOrHint(self::$allowPaging, self::$allowHints);
             $this->beanAccess(self::$allowBean, self::$allowToggle, self::$allowTable, self::$audit);
