@@ -28,7 +28,7 @@
 
 
             $sql = 'SELECT N.* FROM note N
-                WHERE N.course = '.$course.' AND N.privacy = 1';
+                WHERE N.course = "'.$course.'" AND N.privacy = 1';
             $rows = R::getAll($sql);
             $anotes = R::convertToBeans('note', $rows);
             $context->local()->addval('anotes', $anotes);
@@ -36,7 +36,7 @@
             // Get file icons (first file type in set is the icon)
             $sql = 'SELECT F.* FROM note
                 JOIN file F ON N.id = F.note_id
-                WHERE N.course = '.$course.' AND N.privacy = 1
+                WHERE N.course = "'.$course.'" AND N.privacy = 1
                 ORDER BY N.upload ASC, F.id ASC';
             $rows = R::getAll($sql);
             $afiles = R::convertToBeans('file', $rows);
@@ -47,7 +47,7 @@
             // Get notes as beans
             $sql = 'SELECT N.* FROM note N
                 JOIN review R ON N.id = R.note_id
-                WHERE N.course = '.$course.' AND N.privacy = 1
+                WHERE N.course = "'.$course.'" AND N.privacy = 1
                 GROUP BY N.id
                 ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
                 N.upload DESC LIMIT 4';
@@ -59,7 +59,7 @@
             $sql = 'SELECT F.* FROM note N
                 JOIN review R ON N.id = R.note_id
                 JOIN file F ON N.id = F.note_id
-                WHERE N.course = '.$course.' AND N.privacy = 1
+                WHERE N.course = "'.$course.'" AND N.privacy = 1
                 GROUP BY N.id
                 ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
                 N.upload DESC, F.id ASC LIMIT 4';
