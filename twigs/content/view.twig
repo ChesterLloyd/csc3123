@@ -27,11 +27,17 @@
 {% endblock setup %}
 
 {% block onload %}
+    {% if favourite is same as("1") %}
+        $('#addFavourite').hide();
+    {% else %}
+        $('#unFavourite').hide();
+    {% endif %}
+
     $('#addFavourite').click(function() {
         $.post('{{base}}/ajax/addFavourite/{{note.id}}/', {
         }).done(function(data){
-            $('#addFavourite').remove();
-            $('#favouriteButtons').append($('<a href="#" class="btn btn-danger">Unfavourite</a>'));
+            $('#addFavourite').hide();
+            $('#unFavourite').show();
             bootbox.alert('<h3>Success</h3><br>'+data);
         }).fail(function(jqXHR, textStatus, errorThrown){
             bootbox.alert('<h3>Error</h3><br>'+jqXHR.responseText);
@@ -40,8 +46,8 @@
     $('#unFavourite').click(function() {
         $.post('{{base}}/ajax/removeFavourite/{{note.id}}/', {
         }).done(function(data){
-            $('#unFavourite').remove();
-            $('#favouriteButtons').append($('<a href="#" class="btn btn-success">Add Favourite</a>'));
+            $('#addFavourite').show();
+            $('#unFavourite').hide();
             bootbox.alert('<h3>Success</h3><br>'+data);
         }).fail(function(jqXHR, textStatus, errorThrown){
             bootbox.alert('<h3>Error</h3><br>'+jqXHR.responseText);
@@ -153,13 +159,8 @@
                     {% if reviewed is same as("0") and not user.id is same as(author.id) %}
                         <a href="#" class="btn btn-primary">Add Review</a>
                     {% endif %}
-                    <div id="favouriteButtons" class="button-row">
-                        {% if favourite is same as("1") %}
-                            <a href="#" class="btn btn-danger" id="unFavourite">Unfavourite</a>
-                        {% else %}
-                            <a href="#" class="btn btn-success" id="addFavourite">Add Favourite</a>
-                        {% endif %}
-                    </div>
+                    <a href="#" class="btn btn-danger" id="unFavourite">Unfavourite</a>
+                    <a href="#" class="btn btn-success" id="addFavourite">Add Favourite</a>
                     {% if user.id is same as(author.id) %}
                         <a href="#" class="btn btn-warning">Modify Note</a>
                     {% endif %}
