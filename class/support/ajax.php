@@ -20,8 +20,11 @@
  * in the handle method below.
  */
 
-        public function addFavourite(Context $context, int $nid)
+        public function addFavourite(Context $context)
         {
+            $rest = $context->rest();
+            $nid = $rest[1];
+
             $userid = $context->user()->id;
             $note = R::load('note', $nid);
 
@@ -50,12 +53,16 @@
                 $user = R::load('user', $userid);
                 $user->xownReview[] = $review;
                 R::store($user);
+
+                echo $rid;
             }
             else
             {
                 // Update review bean
                 $review->favourite = 1;
                 R::store($review);
+
+                echo $review->id;
             }
         }
 
