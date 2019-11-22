@@ -111,3 +111,11 @@ span.fa-star {
 span.fa-star.checked {
     color: orange;
 }
+
+
+
+/* Button rows */
+div.button-row {
+    float: left;
+    margin-right: 4px;
+}

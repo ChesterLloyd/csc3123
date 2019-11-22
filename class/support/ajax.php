@@ -20,9 +20,9 @@
  * in the handle method below.
  */
 
- /**
-  * Adds a note to the user's favourites
-  */
+/**
+ * Adds a note to the user's favourites
+ */
         public function addFavourite(Context $context)
         {
             $rest = $context->rest();
@@ -72,6 +72,40 @@
                 }
             }
         }
+
+/**
+ * Removes a note to the user's favourites
+ */
+       public function removeFavourite(Context $context)
+       {
+           $rest = $context->rest();
+           $nid = $rest[1];
+           $note = R::findOne('note', 'id=?', [$nid]);
+           $uid = $context->user()->id;
+           // Find review for this user and this note (favourite flag stored in reviews)
+           $review = R::findOne('review', 'note_id=? AND user_id=?', [$nid, $uid]);
+
+           if (!$review)
+           {
+               // No bean has been loaded (no review, nothing to do)
+               echo "This note has already been removed from your favourites.";
+           }
+           else
+           {
+               if ($review->favourite == 1)
+               {
+                   // Update review bean
+                   $review->favourite = 0;
+                   R::store($review);
+                   echo "This note has been removed from your favourites.";
+               }
+               else
+               {
+                   // Review exists, but not as a favourite
+                   echo "This note has already been removed from your favourites.";
+               }
+           }
+       }
 
 /**
  * If you are using the pagination or search hinting features of the framework then you need to

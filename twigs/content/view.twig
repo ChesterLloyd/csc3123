@@ -32,9 +32,19 @@
         }).done(function(data){
             $('#addFavourite').remove();
             $('#favouriteButtons').append($('<a href="#" class="btn btn-danger">Unfavourite</a>'));
-            bootbox.alert('<h3>h3Success</h3>'+data);
+            bootbox.alert('<h3>Success</h3><br>'+data);
         }).fail(function(jqXHR, textStatus, errorThrown){
-            bootbox.alert('<h3>Error</h3>'+jqXHR.responseText);
+            bootbox.alert('<h3>Error</h3><br>'+jqXHR.responseText);
+        });
+    });
+    $('#unFavourite').click(function() {
+        $.post('{{base}}/ajax/removeFavourite/{{note.id}}/', {
+        }).done(function(data){
+            $('#unFavourite').remove();
+            $('#favouriteButtons').append($('<a href="#" class="btn btn-success">Add Favourite</a>'));
+            bootbox.alert('<h3>Success</h3><br>'+data);
+        }).fail(function(jqXHR, textStatus, errorThrown){
+            bootbox.alert('<h3>Error</h3><br>'+jqXHR.responseText);
         });
     });
 {% endblock onload %}
@@ -143,22 +153,11 @@
                     {% if reviewed is same as("0") and not user.id is same as(author.id) %}
                         <a href="#" class="btn btn-primary">Add Review</a>
                     {% endif %}
-                    <div id="favouriteButtons">
+                    <div id="favouriteButtons" class="button-row">
                         {% if favourite is same as("1") %}
-                            <a href="#" class="btn btn-danger">Unfavourite</a>
+                            <a href="#" class="btn btn-danger" id="unFavourite">Unfavourite</a>
                         {% else %}
                             <a href="#" class="btn btn-success" id="addFavourite">Add Favourite</a>
-
-                            <button class="btn btn-success" data-toggle="modal" data-target="#modald" type="button">Modal Pop-up</button>
-                            <!-- {{m.invoke('modald', 'Modal Pop-up')}} -->
-
-                            {{m.open({id: 'modald', title: 'Added to Favourites'})}}
-                            <div class="modal-body">
-                                <h2>This note has been added to your favourites</h2>
-                            </div>
-                            <!-- <button type="button" class="btn btn-primary" id="nopu">None</button> -->
-                            <!-- {{m.close({action: 'None', id: 'nopu'})}} -->
-
                         {% endif %}
                     </div>
                     {% if user.id is same as(author.id) %}
