@@ -1,14 +1,9 @@
-{# Uncomment this if your page uses AJAX
 {% set ajax = TRUE %}
-#}
 
 {% extends '@content/page.twig' %}
 
 {% import '@util/formmacro.twig' as f %}
-
-{# this brings in some useful macros for making bootstrap modals
-{% import '@util/modalmacro.twig' as f %}
-#}
+{% import '@util/modalmacro.twig' as m %}
 
 {% block title %}
     All Notes
