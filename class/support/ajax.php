@@ -20,14 +20,16 @@
  * in the handle method below.
  */
 
+ /**
+  * Adds a note to the user's favourites
+  */
         public function addFavourite(Context $context)
         {
             $rest = $context->rest();
             $nid = $rest[1];
             $note = R::findOne('note', 'id=?', [$nid]);
-
             $uid = $context->user()->id;
-            // Has this user reviewed this note (favourite flag stored in reviews)
+            // Find review for this user and this note (favourite flag stored in reviews)
             $review = R::findOne('review', 'note_id=? AND user_id=?', [$nid, $uid]);
 
             if (!$review)
@@ -43,20 +45,31 @@
                 $note->xownReview[] = $review;
                 R::store($note);
 
-                // Give rating to user
+                // Give review to user
                 $user = R::load('user', $uid);
                 $user->xownReview[] = $review;
                 R::store($user);
 
-                echo $rid;
+                // Check if the review bean has been added
+                if ($rid > 0)
+                {
+                    echo "This note has been added to your favourites.";
+                }
             }
             else
             {
-                // Update review bean
-                $review->favourite = 1;
-                R::store($review);
-
-                echo $review->id;
+                if ($review->favourite == 1)
+                {
+                    // Already a favourite
+                    echo "This note is already saved in your favourites.";
+                }
+                else
+                {
+                    // Update review bean
+                    $review->favourite = 1;
+                    R::store($review);
+                    echo "This note has been added to your favourites.";
+                }
             }
         }
 
