@@ -1,7 +1,3 @@
-{# Uncomment this if your page uses AJAX
-{% set ajax = TRUE %}
-#}
-
 {% extends '@content/page.twig' %}
 
 {% import '@util/formmacro.twig' as f %}
@@ -19,17 +15,6 @@
     <link rel="stylesheet" href="{{assets}}/css/main.css">
     <link rel="stylesheet" href="{{assets}}/css/index.css">
 {% endblock css %}
-
-{% block scripts %}
-{# <script src=""></script> for any other JS files you need #}
-{% endblock scripts %}
-
-{% block setup %}
-{# Any javascript you need that is NOT run on load goes in this block. NB you don't need <script></script> tags  here #}
-{% endblock setup %}
-
-{% block onload %}
-{% endblock onload %}
 
 {% block main %}
     <section class="row">
