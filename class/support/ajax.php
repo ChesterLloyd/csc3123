@@ -9,6 +9,7 @@
     namespace Support;
 
     use Support\Context as Context;
+    use \R as R;
 /**
  * Handles Ajax Calls.
  */
@@ -18,12 +19,46 @@
  * Add functions that implement your AJAX operations here and register them
  * in the handle method below.
  */
-/*
-        public function yourop(Context $context)
+
+        public function addFavourite(Context $context, int $nid)
         {
-            // your code
+            $userid = $context->user()->id;
+            $note = R::load('note', $nid);
+
+            // Has this user reviewed this note (favourite flag stored in reviews)
+            $sql = 'SELECT R.*
+                FROM review R
+                JOIN note N ON R.note_id = N.id
+                WHERE R.user_id = '.$userid.' AND N.id = '.$nid;
+            $rows = R::getAll($sql);
+            $review = R::convertToBeans('review', $rows);
+
+            if (!$review->id)
+            {
+                // No bean has been loaded (no review, so make one)
+                $review = R::dispense('review');
+                $review->favourite = 1;
+                $review->rating = NULL;
+                $review->comment = NULL;
+                $rid = R::store($review);
+
+                // Give review to note
+                $note->xownReview[] = $review;
+                R::store($note);
+
+                // Give rating to user
+                $user = R::load('user', $userid);
+                $user->xownReview[] = $review;
+                R::store($user);
+            }
+            else
+            {
+                // Update review bean
+                $review->favourite = 1;
+                R::store($review);
+            }
         }
- */
+
 /**
  * If you are using the pagination or search hinting features of the framework then you need to
  * add some appropriate vaues into these arrays.
@@ -76,6 +111,7 @@
         public function handle(Context $context) : void
         {
             //$this->operation(['yourop', ...], [TRUE, [['ContextName', 'RoleName'],...]]);
+            $this->operation(['addFavourite'], [TRUE, [['Site', 'Student']]]);
             // TRUE if login needed, then an array of roles required in form [['context name', 'role name']...] (can be empty)
             $this->pageOrHint(self::$allowPaging, self::$allowHints);
             $this->beanAccess(self::$allowBean, self::$allowToggle, self::$allowTable, self::$audit);

@@ -1,6 +1,4 @@
-{# Uncomment this if your page uses AJAX
 {% set ajax = TRUE %}
-#}
 
 {% extends '@content/page.twig' %}
 
@@ -29,7 +27,33 @@
 {% endblock setup %}
 
 {% block onload %}
-{# Any javascript you need that MUST run on load goes in this block. NB you don't need <script></script> tags  here #}
+    $('#addFavourite').click(function() {
+        //$.ajax({
+        //    type: "POST",
+        //    url: "{{base}}/framework/support/ajax",
+        //    data: { name: "John" }
+        //    }).done(function( msg ) {
+        //    alert( "Data Saved: " + msg );
+        //});
+
+
+        $.post('{{base}}/ajax/addFavourite/{{note.id}}/', {
+            //note : pn,
+        }).done(function(data){
+            alert("Data: " + data);
+        }).fail(function(jqXHR, textStatus, errorThrown){
+            console.log("jqXHR: " + jqXHR);
+            console.log("textStatus: " + textStatus);
+            console.log("errorThrown: " + errorThrown);
+            bootbox.alert('<h3>h3 tag text</h3>'+jqXHR.responseText);
+        }).always(function(e){
+            alert("always");
+            //$('#addb').attr('disabled', false);
+        });
+
+
+
+    });
 {% endblock onload %}
 
 {% block main %}
@@ -137,16 +161,17 @@
                         <a href="#" class="btn btn-primary">Add Review</a>
                     {% endif %}
                     {% if favourite is same as("0") %}
-                        <a href="#" class="btn btn-success">Add Favourite</a>
+                        <a href="#" class="btn btn-success" id="addFavourite">Add Favourite</a>
 
+                        <button class="btn btn-success" data-toggle="modal" data-target="#modald" type="button">Modal Pop-up</button>
+                        <!-- {{m.invoke('modald', 'Modal Pop-up')}} -->
 
-                        <p>{{m.invoke('modald', 'Modal Pop-up')}}</p>
-
-                        {{m.open({id: 'modald', title: 'Modal Pop-up'})}}
+                        {{m.open({id: 'modald', title: 'Added to Favourites'})}}
                         <div class="modal-body">
-                            <h2>This is a modal</h2>
+                            <h2>This note has been added to your favourites</h2>
                         </div>
-                        {{m.close({action: 'None', id: 'nopu'})}}
+                        <!-- <button type="button" class="btn btn-primary" id="nopu">None</button> -->
+                        <!-- {{m.close({action: 'None', id: 'nopu'})}} -->
 
 
                     {% else %}
