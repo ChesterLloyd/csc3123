@@ -20,6 +20,14 @@
  */
         public function handle(Context $context)
         {
+            $file = \Framework\Pages\Getfile::handle($context);
+
+
+            $web = $context->web();
+
+            // $web->sendfile($this->file, $file->filename);
+
+
             return '@content/download.twig';
         }
     }
