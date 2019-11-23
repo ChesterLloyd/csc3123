@@ -22,7 +22,10 @@
         {
             // $file = \Framework\Pages\Getfile::handle($context);
 
-            $file = \Framework\Pages\Getfile::getinstance();
+            // $file = \Framework\Pages\Getfile::getinstance();
+
+            $getfile = new \Framework\Pages\Getfile;
+            $getfile->handle($context);
 
 
             $web = $context->web();
