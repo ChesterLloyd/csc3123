@@ -43,7 +43,7 @@
             $sql = 'SELECT F.* FROM note N
                 JOIN user U ON N.user_id = U.id
                 JOIN file F ON N.id = F.note_id
-                WHERE U.id = '.$userid.'
+                WHERE U.id = '.$user->id.'
                 GROUP BY N.id
                 ORDER BY N.upload ASC, F.id ASC
                 LIMIT 4';
@@ -67,7 +67,7 @@
                 JOIN review R ON N.id = R.note_id
                 JOIN user U ON R.user_id = U.id
                 JOIN file F ON N.id = F.note_id
-                WHERE U.id = '.$userid.' AND R.favourite = 1
+                WHERE U.id = '.$user->id.' AND R.favourite = 1
                 AND N.public = 1 GROUP BY N.id
                 ORDER BY N.upload ASC, F.id ASC';
             $rows = R::getAll($sql);
