@@ -34,7 +34,7 @@
             $sql = 'SELECT N.* FROM note N
                 JOIN user U ON N.user_id = U.id
                 WHERE U.id = '.$user->id.'
-                ORDER BY N.upload ASC LIMIT 4';
+                ORDER BY N.upload DESC LIMIT 4';
             $rows = R::getAll($sql);
             $rnotes = R::convertToBeans('note', $rows);
             $context->local()->addval('rnotes', $rnotes);
@@ -45,7 +45,7 @@
                 JOIN file F ON N.id = F.note_id
                 WHERE U.id = '.$user->id.'
                 GROUP BY N.id
-                ORDER BY N.upload ASC, F.id ASC
+                ORDER BY N.upload DESC, F.id ASC
                 LIMIT 4';
             $rows = R::getAll($sql);
             $rfiles = R::convertToBeans('file', $rows);
@@ -57,7 +57,7 @@
                 JOIN review R ON N.id = R.note_id
                 JOIN user U ON R.user_id = U.id
                 WHERE U.id = '.$user->id.' AND R.favourite = 1
-                AND N.public = 1';
+                AND N.privacy = 1 ORDER BY N.upload DESC';
             $rows = R::getAll($sql);
             $fnotes = R::convertToBeans('note', $rows);
             $context->local()->addval('fnotes', $fnotes);
@@ -68,8 +68,8 @@
                 JOIN user U ON R.user_id = U.id
                 JOIN file F ON N.id = F.note_id
                 WHERE U.id = '.$user->id.' AND R.favourite = 1
-                AND N.public = 1 GROUP BY N.id
-                ORDER BY N.upload ASC, F.id ASC';
+                AND N.privacy = 1 GROUP BY N.id
+                ORDER BY N.upload DESC, F.id ASC';
             $rows = R::getAll($sql);
             $ffiles = R::convertToBeans('file', $rows);
             $context->local()->addval('ffiles', $ffiles);
@@ -78,7 +78,7 @@
             // Get notes as beans
             $sql = 'SELECT N.* FROM note N
                 WHERE N.user_id = '.$user->id.'
-                ORDER BY N.upload ASC';
+                ORDER BY N.upload DESC';
             $rows = R::getAll($sql);
             $mnotes = R::convertToBeans('note', $rows);
             $context->local()->addval('mnotes', $mnotes);
