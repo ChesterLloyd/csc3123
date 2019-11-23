@@ -39,7 +39,7 @@
                     {
                         $upl = \R::dispense('upload');
                         $note->xownFile[] = $upl;
-                        $upl->savefile($context, $fd->filedata('uploads', $ix), $public, $context->user(), $ix);
+                        $save = $upl->savefile($context, $fd->filedata('uploads', $ix), $public, $context->user(), $ix);
                     }
                 }
                 else
@@ -48,11 +48,20 @@
                     { # we only support private or public in this case so there is no flag
                         $upl = \R::dispense('upload');
                         $note->xownFile[] = $upl;
-                        $upl->savefile($context, $fa, Config::UPUBLIC, $context->user(), $ix);
+                        $save = $upl->savefile($context, $fa, Config::UPUBLIC, $context->user(), $ix);
                     }
                 }
-                // Finally, store the note
-                \R::store($note);
+                if ($save)
+                {
+                    // The file uploaded OK, store the note
+                    \R::store($note);
+
+                    // Then assign it to the author (logged in user)
+                    $uid = $context->user()->id;
+                    $user = \R::load('user', $uid);
+                    $user->xownNote[] = $note;
+                    \R::store($user);
+                }
             }
             return '@content/add.twig';
         }

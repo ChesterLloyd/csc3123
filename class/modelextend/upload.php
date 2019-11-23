@@ -27,6 +27,7 @@
  */
         public function canaccess($user, $op = 'r') : bool
         {
+            // \R   get bean's note and see if public, then anyone can access
             return $this->bean->user->equals($user) || $user->isadmin();
         }
 /**
@@ -40,9 +41,10 @@
  */
         public function addData(\Support\Context $context, int $index) : void
         {
-            /*
-             * Your code goes here
-             */
+            $da = new \Framework\FAIterator('uploads')[$index];
+            $this->bean->type = ['type'];
+            $this->bean->size = ['size'];
+            // $file->icon = "";
         }
 /**
  * Called when you try to trash to an upload. Do any cleanup in here
