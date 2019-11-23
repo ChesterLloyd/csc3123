@@ -20,7 +20,9 @@
  */
         public function handle(Context $context)
         {
-            $file = \Framework\Pages\Getfile::handle($context);
+            // $file = \Framework\Pages\Getfile::handle($context);
+
+            $file = \Framework\Pages\Getfile::getinstance();
 
 
             $web = $context->web();
