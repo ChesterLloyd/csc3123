@@ -1,14 +1,16 @@
 <?php
 /**
- * A class that contains code to handle any requests for  /download/
+ * Class for handling downloading files
+ *
+ * @author Chester Lloyd <c.lloyd7@ncl.ac.uk>
  */
      namespace Pages;
 
      use \Support\Context as Context;
      use \Config\Config as Config;
 /**
- * Support /download/
- */
+* A class that contains code to implement a file downloader
+*/
     class Download extends \Framework\Siteaction
     {
 /**
@@ -20,19 +22,10 @@
  */
         public function handle(Context $context)
         {
-            // $file = \Framework\Pages\Getfile::handle($context);
-
-            // $file = \Framework\Pages\Getfile::getinstance();
-
+            // Make a new instance of Getfile and call it
             $getfile = new \Framework\Pages\Getfile;
+            // URL to download files becomes: download/file/upload id
             $getfile->handle($context);
-
-
-            $web = $context->web();
-
-            // $web->sendfile($this->file, $file->filename);
-
-
             return '@content/download.twig';
         }
     }
