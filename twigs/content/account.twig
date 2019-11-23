@@ -1,14 +1,9 @@
-{# Uncomment this if your page uses AJAX
 {% set ajax = TRUE %}
-#}
 
 {% extends '@content/page.twig' %}
 
 {% import '@util/formmacro.twig' as f %}
-
-{# this brings in some useful macros for making bootstrap modals
-{% import '@util/modalmacro.twig' as f %}
-#}
+{% import '@util/modalmacro.twig' as m %}
 
 {% block title %}
     My Account
@@ -41,8 +36,8 @@
             <div class="round-box">
                 <div class="round-box-heading">
                     <div class="right">
-                        <p>Latest Upload: 22/06/2019</p>
-                        <p>User's Name</p>
+                        <p>Latest Upload: {{recent}}</p>
+                        <p>{{user.login}}</p>
                     </div>
                     <h1>Your Dashboard</h1>
                 </div>
@@ -56,60 +51,26 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-4">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon ppt">
-                                        <i class="fas fa-file-powerpoint note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Experimental Design</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                            <a href="#" class="btn btn-warning">Manage</a>
+                        {% for key, file in rfiles %}
+                            <div class="col-sm-12 col-md-12 col-lg-4" id="fn-{{rnotes[file.note_id].id}}">
+                                <div class="card mb-3">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-2 note-icon {{file.icon}}">
+                                            <i class="fas fa-file-{{file.icon}} note-icon"></i>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{rnotes[file.note_id].name}}</h5>
+                                                <p class="card-text"><b>{{rnotes[file.note_id].module}}</b> - {{rnotes[file.note_id].description}}</p>
+                                                <p class="card-text"><small class="text-muted">Uploaded {{rnotes[file.note_id].upload}}</small></p>
+                                                <a href="{{base}}/view?note={{file.note_id}}" class="btn btn-primary">View</a>
+                                                <a href="#" class="btn btn-danger unfavourite" data-note="{{rnotes[file.note_id].id}} ">Unfavourite</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-4">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon ppt">
-                                        <i class="fas fa-file-powerpoint note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Really big long title to see what that looks like</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 10 hours ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                            <a href="#" class="btn btn-warning">Manage</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-4">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon doc">
-                                        <i class="fas fa-file-word note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Experimental Design</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                            <a href="#" class="btn btn-warning">Manage</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -121,65 +82,30 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-4">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon ppt">
-                                        <i class="fas fa-file-powerpoint note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Experimental Design</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                            <a href="#" class="btn btn-danger">Unfavourite</a>
+                        {% for key, file in ffiles %}
+                            <div class="col-sm-12 col-md-12 col-lg-4" id="fn-{{fnotes[file.note_id].id}}">
+                                <div class="card mb-3">
+                                    <div class="row no-gutters">
+                                        <div class="col-md-2 note-icon {{file.icon}}">
+                                            <i class="fas fa-file-{{file.icon}} note-icon"></i>
+                                        </div>
+                                        <div class="col-md-10">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{fnotes[file.note_id].name}}</h5>
+                                                <p class="card-text"><b>{{fnotes[file.note_id].module}}</b> - {{fnotes[file.note_id].description}}</p>
+                                                <p class="card-text"><small class="text-muted">Uploaded {{fnotes[file.note_id].upload}}</small></p>
+                                                <a href="{{base}}/view?note={{file.note_id}}" class="btn btn-primary">View</a>
+                                                <a href="#" class="btn btn-danger unfavourite" data-note="{{fnotes[file.note_id].id}} ">Unfavourite</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-4">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon ppt">
-                                        <i class="fas fa-file-powerpoint note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Really big long title to see what that looks like</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 10 hours ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                            <a href="#" class="btn btn-danger">Unfavourite</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-4">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon doc">
-                                        <i class="fas fa-file-word note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Experimental Design</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                            <a href="#" class="btn btn-danger">Unfavourite</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
         </article>
-
         <article class="col-md-12">
             <div class="round-box">
                 <div class="round-box-heading">
@@ -195,22 +121,16 @@
                             <th>Active</th>
                             <th>Actions</th>
                         </tr>
-                        <tr>
-                            <td><a href="#">Lecture 6 - Prototyping</a></td>
-                            <td>Computer Science</td>
-                            <td>CSC3095</td>
-                            <td>18/11/2019</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><a href="#">Lecture 6 - Prototyping</a></td>
-                            <td>Computer Science</td>
-                            <td>CSC3095</td>
-                            <td>18/11/2019</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        {% for note in mnotes %}
+                            <tr>
+                                <td><a href="{{base}}/view?note={{note.id}}">{{note.name}}</a></td>
+                                <td>{{note.course}}</td>
+                                <td>{{note.module}}</td>
+                                <td>{{note.upload}}</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        {% endfor %}
                     </table>
                     <a href="#" class="btn btn-success">Upload Notes</a>
                 </div>
@@ -225,15 +145,15 @@
                     <table class="stats">
                         <tr>
                             <th>Username</th>
-                            <td>student_user</td>
+                            <td>{{user.login}}</td>
                         </tr>
                         <tr>
                             <th>Favourites</th>
-                            <td>5</td>
+                            <td>{{favourites}}</td>
                         </tr>
                         <tr>
                             <th>Last Upload</th>
-                            <td>12/11/2019</td>
+                            <td>{{recent}}</td>
                         </tr>
                     </table>
                     <a href="#" class="btn btn-warning">Manage Account</a>

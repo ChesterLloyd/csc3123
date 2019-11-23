@@ -20,6 +20,72 @@
  */
         public function handle(Context $context)
         {
+            // Put user bean in context
+            $user = $context->user();
+            $context->local()->addval('user', $user);
+
+            // Get last uploaded note date
+            $recent = R::getCell('SELECT max(upload) FROM note WHERE user_id = ' . $user->id);
+            $context->local()->addval('recent', $recent);
+
+            // Get user's recently uploaded notes
+            // Get notes as beans
+            $sql = 'SELECT N.* FROM note N
+                JOIN user U ON N.user_id = U.id
+                WHERE U.id = '.$user->id.'
+                ORDER BY N.upload ASC LIMIT 4';
+            $rows = R::getAll($sql);
+            $rnotes = R::convertToBeans('note', $rows);
+            $context->local()->addval('rnotes', $rnotes);
+
+            // Get file icons (first file type in set is the icon)
+            $sql = 'SELECT F.* FROM note N
+                JOIN user U ON N.user_id = U.id
+                JOIN file F ON N.id = F.note_id
+                WHERE U.id = '.$userid.'
+                GROUP BY N.id
+                ORDER BY N.upload ASC, F.id ASC
+                LIMIT 4';
+            $rows = R::getAll($sql);
+            $rfiles = R::convertToBeans('file', $rows);
+            $context->local()->addval('rfiles', $rfiles);
+
+            // Get user's favourite notes
+            // Get notes as beans
+            $sql = 'SELECT N.* FROM note N
+                JOIN review R ON N.id = R.note_id
+                JOIN user U ON R.user_id = U.id
+                WHERE U.id = '.$user->id.' AND R.favourite = 1
+                AND N.public = 1';
+            $rows = R::getAll($sql);
+            $fnotes = R::convertToBeans('note', $rows);
+            $context->local()->addval('fnotes', $fnotes);
+
+            // Get file icons (first file type in set is the icon)
+            $sql = 'SELECT F.* FROM note N
+                JOIN review R ON N.id = R.note_id
+                JOIN user U ON R.user_id = U.id
+                JOIN file F ON N.id = F.note_id
+                WHERE U.id = '.$userid.' AND R.favourite = 1
+                AND N.public = 1 GROUP BY N.id
+                ORDER BY N.upload ASC, F.id ASC';
+            $rows = R::getAll($sql);
+            $ffiles = R::convertToBeans('file', $rows);
+            $context->local()->addval('ffiles', $ffiles);
+
+            // Get user's notes for table
+            // Get notes as beans
+            $sql = 'SELECT N.* FROM note N
+                WHERE N.user_id = '.$user->id.'
+                ORDER BY N.upload ASC';
+            $rows = R::getAll($sql);
+            $mnotes = R::convertToBeans('note', $rows);
+            $context->local()->addval('mnotes', $mnotes);
+
+            // Get number of favourite notes
+            $favourites = R::count('review', 'user_id=? AND favourite=?', [$user->id, 1]);
+            $context->local()->addval('favourites', $favourites);
+
             return '@content/account.twig';
         }
     }
