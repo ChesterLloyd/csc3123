@@ -27,6 +27,13 @@
                 </div>
                 <div class="round-box-body">
                     {% include '@util/message.twig' %}
+                    {% if nid > 0 %}
+                        <p>
+                            <a href="{{base}}/view?note={{nid}}">View your new note here</a>. Or upload another below.
+                            <br/>
+                            <br/>
+                        </p>
+                    {% endif %}
                     <form id="nform" action="#" method="post" role="form" enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="text" id="na" name="name" placeholder="Name of Lecture Notes" class="form-control" required="required"/>
