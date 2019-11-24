@@ -69,7 +69,7 @@
         }
 
 /**
-* Returns file size with an apporpriate unit, when given the size in bytes
+* Returns file size with an appropriate unit, when given the size in bytes
 *
 * @param int     The file size in bytes
 *

@@ -26,6 +26,7 @@
                     <h1>Upload Notes</h1>
                 </div>
                 <div class="round-box-body">
+                    {% include '@util/message.twig' %}
                     <form id="nform" action="#" method="post" role="form" enctype="multipart/form-data">
                         <div class="form-group">
                             <input type="text" id="na" name="name" placeholder="Name of Lecture Notes" class="form-control" required="required"/>

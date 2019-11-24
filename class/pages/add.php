@@ -1,13 +1,14 @@
 <?php
 /**
- * A class that contains code to handle any requests for  /add/
+ * A class that handles uploading new notes
  */
      namespace Pages;
 
      use \Support\Context as Context;
      use \Config\Config as Config;
+     use \Framework\Local as Local;
 /**
- * Support /add/
+ * A class that contains code to implement an upload page
  */
     class Add extends \Framework\Siteaction
     {
@@ -23,6 +24,7 @@
             $fd = $context->formdata();
             if ($fd->hasfile('uploads'))
             {
+                // Make a note with the form data
                 $note = \R::dispense('note');
                 $note->name = $fd->post('name', 'No name');
                 $note->course = $fd->post('course', 'Unknown Course');
@@ -53,14 +55,17 @@
                 }
                 if ($save)
                 {
-                    // The file uploaded OK, store the note
-                    \R::store($note);
+                    // The file(s) uploaded OK, store the note
+                    $nid = \R::store($note);
 
                     // Then assign it to the author (logged in user)
                     $uid = $context->user()->id;
                     $user = \R::load('user', $uid);
                     $user->xownNote[] = $note;
                     \R::store($user);
+
+                    // Display a success message with a link to see thier notes
+                    $context->local()->message(Local::MESSAGE, 'Your notes have been uploaded. View them <a href=view?note=' . $nid . '>here</a>.');
                 }
             }
             return '@content/add.twig';
