@@ -71,7 +71,7 @@
                 FROM review R JOIN note N ON R.note_id = N.id
                 WHERE R.user_id = ? AND N.id = ?
                 AND R.rating IS NOT NULL', [$uid, $nid]);
-            if (!$review)
+            if ($review === NULL)
             {
                 $review = 0;
             }
