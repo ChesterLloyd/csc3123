@@ -70,7 +70,7 @@
                             </div>
                         {% else %}
                             {% for file in ffiles %}
-                                <div class="col-sm-12 col-md-12 col-lg-6" id="fn-{{fnotes[file.note_id].id}}">
+                                <div class="col-sm-12 col-md-12 col-lg-6" id="fn-{{fnotes[loop.index0].id}}">
                                     <div class="card mb-3">
                                         <div class="row no-gutters">
                                             <div class="col-md-2 note-icon {{file.icon}}">
