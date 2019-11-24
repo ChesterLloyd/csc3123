@@ -130,5 +130,41 @@
                 </div>
             </div>
         </article>
+        <article class="col-md-12">
+            <div class="round-box">
+                <div class="round-box-heading">
+                    <h2>All Notes</h2>
+                </div>
+                <div class="round-box-body">
+                    <div class="row">
+                        {% if afiles|length < 1 %}
+                            <div class="col-12">
+                                <p>No notes to display</p>
+                            </div>
+                        {% else %}
+                            {% for file in afiles %}
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <div class="card mb-3">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-2 note-icon {{file.icon}}">
+                                                <i class="fas fa-{{file.icon}} note-icon"></i>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{anotes[loop.index0].name}}</h5>
+                                                    <p class="card-text"><b>{{anotes[loop.index0].module}}</b> - {{anotes[loop.index0].description}}</p>
+                                                    <p class="card-text"><small class="text-muted">Uploaded {{anotes[loop.index0].upload}}</small></p>
+                                                    <a href="{{base}}/view?note={{file.note_id}}" class="btn btn-primary">View</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </article>
     </section>
 {% endblock main %}

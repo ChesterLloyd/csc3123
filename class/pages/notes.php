@@ -25,6 +25,52 @@
             $uid = $user->id;
             $context->local()->addval('user', $user);
 
+            // Get users favourite notes
+            $sql = 'SELECT F.* FROM upload F
+                JOIN note N on N.id = F.note_id
+                JOIN review R ON R.note_id = N.id
+                WHERE R.user_id = '.$uid.' AND R.favourite = 1';
+            $rows = R::getAll($sql);
+            $files = R::convertToBeans('upload', $rows);
+            $notes = array();
+            foreach ($files as $file)
+            {
+                if (!$file->canaccess($context->user()))
+                { # Current user cannot access the file, remove from array
+                    unset($files[$file->id]);
+                }
+                else
+                { # User can access file, save note to array
+                    array_push($notes, $file->note);
+                }
+            }
+            $context->local()->addval('fnotes', $notes);
+            $context->local()->addval('ffiles', $files);
+
+            // Get 6 top notes
+            $sql = 'SELECT F.* FROM upload F
+                JOIN note N on N.id = F.note_id
+                JOIN review R ON R.note_id = N.id
+                GROUP BY N.id
+                ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
+                N.upload DESC LIMIT 6';
+            $rows = R::getAll($sql);
+            $files = R::convertToBeans('upload', $rows);
+            $notes = array();
+            foreach ($files as $file)
+            {
+                if (!$file->canaccess($context->user()))
+                { # Current user cannot access the file, remove from array
+                    unset($files[$file->id]);
+                }
+                else
+                { # User can access file, save note to array
+                    array_push($notes, $file->note);
+                }
+            }
+            $context->local()->addval('tnotes', $notes);
+            $context->local()->addval('tfiles', $files);
+
             // Get every file and note user can access
             $notes = array();
             $files = R::findAll('upload', 'GROUP BY note_id');
@@ -39,61 +85,8 @@
                     array_push($notes, $file->note);
                 }
             }
-
-            $context->local()->addval('tnotes', $notes);
-            $context->local()->addval('tfiles', $files);
-
-
-
-
-            // // Get user's favourite notes
-            //
-            //
-            // // Get notes as beans
-            // $sql = 'SELECT N.* FROM note N
-            //     JOIN review R ON N.id = R.note_id
-            //     JOIN user U ON R.user_id = U.id
-            //     WHERE U.id = '.$userid.' AND R.favourite = 1';
-            // $rows = R::getAll($sql);
-            // $fnotes = R::convertToBeans('note', $rows);
-            // $context->local()->addval('fnotes', $fnotes);
-            //
-            // // Get file icons (first file type in set is the icon)
-            // $sql = 'SELECT F.* FROM note N
-            //     JOIN review R ON N.id = R.note_id
-            //     JOIN user U ON R.user_id = U.id
-            //     JOIN file F ON N.id = F.note_id
-            //     WHERE U.id = '.$userid.' AND R.favourite = 1
-            //     GROUP BY N.id ORDER BY N.upload ASC, F.id ASC';
-            // $rows = R::getAll($sql);
-            // $ffiles = R::convertToBeans('file', $rows);
-            // $context->local()->addval('ffiles', $ffiles);
-            //
-            //
-            // // Get 4 top rated notes
-            // // Get notes as beans
-            // $sql = 'SELECT N.* FROM note N
-            //     JOIN review R ON N.id = R.note_id
-            //     GROUP BY N.id
-            //     ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
-            //     N.upload DESC LIMIT 4';
-            // $rows = R::getAll($sql);
-            // $tnotes = R::convertToBeans('note', $rows);
-            // $context->local()->addval('tnotes', $tnotes);
-            //
-            // // Get file icons (first file type in set is the icon)
-            // $sql = 'SELECT F.* FROM note N
-            //     JOIN review R ON N.id = R.note_id
-            //     JOIN file F ON N.id = F.note_id
-            //     GROUP BY N.id
-            //     ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
-            //     N.upload DESC, F.id ASC LIMIT 4';
-            // $rows = R::getAll($sql);
-            // $tfiles = R::convertToBeans('file', $rows);
-            // $context->local()->addval('tfiles', $tfiles);
-
-
-
+            $context->local()->addval('anotes', $notes);
+            $context->local()->addval('afiles', $files);
 
             return '@content/notes.twig';
         }
