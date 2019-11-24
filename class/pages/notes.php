@@ -36,7 +36,7 @@
                 }
                 else
                 { # User can access file, save note to array
-                    array_push($notes, $file->$note);
+                    array_push($notes, $file->note);
                 }
             }
 
