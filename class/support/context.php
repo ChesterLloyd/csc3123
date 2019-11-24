@@ -26,7 +26,7 @@
 */
         public function getFileIcon(string $ftype) : string
         {
-            switch ($da['type'])
+            switch ($ftype)
             {
             case 'application/msword':
             case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
