@@ -22,8 +22,12 @@
 
 /**
  * Adds a note to the user's favourites
+ *
+ * @param \Support\Context	$context	The context object for the site
+ *
+ * @return void
  */
-        public function addFavourite(Context $context)
+        public function addFavourite(Context $context) : void
         {
             $rest = $context->rest();
             $nid = $rest[1];
@@ -33,12 +37,10 @@
             $review = R::findOne('review', 'note_id=? AND user_id=?', [$nid, $uid]);
 
             if (!$review)
-            {
-                // No bean has been loaded (no review, so make one)
+            { # No bean has been loaded (no review, so make one)
                 $review = R::dispense('review');
                 $review->favourite = 1;
                 $review->rating = NULL;
-                $review->comment = NULL;
                 $rid = R::store($review);
 
                 // Give review to note
@@ -59,13 +61,11 @@
             else
             {
                 if ($review->favourite == 1)
-                {
-                    // Already a favourite
+                { # Already a favourite
                     echo "This note is already saved in your favourites.";
                 }
                 else
-                {
-                    // Update review bean
+                { # Update review bean
                     $review->favourite = 1;
                     R::store($review);
                     echo "This note has been added to your favourites.";
@@ -74,38 +74,83 @@
         }
 
 /**
- * Removes a note to the user's favourites
+ * Removes a note from the user's favourites
+ *
+ * @param \Support\Context	$context	The context object for the site
+ *
+ * @return void
  */
-       public function removeFavourite(Context $context)
-       {
-           $rest = $context->rest();
-           $nid = $rest[1];
-           $note = R::findOne('note', 'id=?', [$nid]);
-           $uid = $context->user()->id;
-           // Find review for this user and this note (favourite flag stored in reviews)
-           $review = R::findOne('review', 'note_id=? AND user_id=?', [$nid, $uid]);
+        public function removeFavourite(Context $context) : void
+        {
+            $rest = $context->rest();
+            $nid = $rest[1];
+            $note = R::findOne('note', 'id=?', [$nid]);
+            $uid = $context->user()->id;
+            // Find review for this user and this note (favourite flag stored in reviews)
+            $review = R::findOne('review', 'note_id=? AND user_id=?', [$nid, $uid]);
 
-           if (!$review)
-           {
-               // No bean has been loaded (no review, nothing to do)
-               echo "This note has already been removed from your favourites.";
-           }
-           else
-           {
-               if ($review->favourite == 1)
-               {
-                   // Update review bean
-                   $review->favourite = 0;
-                   R::store($review);
-                   echo "This note has been removed from your favourites.";
-               }
-               else
-               {
-                   // Review exists, but not as a favourite
-                   echo "This note has already been removed from your favourites.";
-               }
-           }
-       }
+            if (!$review)
+            { # No bean has been loaded (no review, nothing to do)
+                echo "This note has already been removed from your favourites.";
+            }
+            else
+            {
+                if ($review->favourite == 1)
+                { # Update review bean
+                    $review->favourite = 0;
+                    R::store($review);
+                    echo "This note has been removed from your favourites.";
+                }
+                else
+                { # Review exists, but not as a favourite
+                    echo "This note has already been removed from your favourites.";
+                }
+            }
+        }
+
+/**
+ * Adds a review for a note, by a user. Updates the rating if a review exists.
+ *
+ * @param \Support\Context	$context	The context object for the site
+ *
+ * @return void
+ */
+        public function addReview(Context $context) : void
+        {
+            $rest = $context->rest();
+            $nid = $rest[1];
+            $rating = $rest[2];
+            $note = R::findOne('note', 'id=?', [$nid]);
+            $uid = $context->user()->id;
+            // Find review for this user and this note (favourite flag stored in reviews)
+            $review = R::findOne('review', 'note_id=? AND user_id=?', [$nid, $uid]);
+
+            if (!$review)
+            { # No bean has been loaded (no review, add a new one)
+                $review = R::dispense('review');
+                $review->favourite = 0;
+                $review->rating = $rating;
+                $rid = R::store($review);
+
+                // Give review to note
+                $note->xownReview[] = $review;
+                R::store($note);
+
+                // Give review to user
+                $user = R::load('user', $uid);
+                $user->xownReview[] = $review;
+                R::store($user);
+
+                echo "This review has been added.";
+            }
+            else
+            { # Update review bean
+                $review->rating = $rating;
+                R::store($review);
+                echo "Your review has been updated.";
+            }
+        }
+
 
 /**
  * If you are using the pagination or search hinting features of the framework then you need to

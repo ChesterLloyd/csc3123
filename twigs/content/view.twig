@@ -33,8 +33,8 @@
         $('#unFavourite').hide();
     {% endif %}
 
-    $('#addFavourite').click(function() {
-        $.post('{{base}}/ajax/addFavourite/{{note.id}}/', {
+    $('#addFavourite').click(function(){
+        $.post('{{base}}/ajax/addFavourite/{{note.id}}/',{
         }).done(function(data){
             $('#addFavourite').hide();
             $('#unFavourite').show();
@@ -43,8 +43,8 @@
             bootbox.alert('<h3>Error</h3><br>'+jqXHR.responseText);
         });
     });
-    $('#unFavourite').click(function() {
-        $.post('{{base}}/ajax/removeFavourite/{{note.id}}/', {
+    $('#unFavourite').click(function(){
+        $.post('{{base}}/ajax/removeFavourite/{{note.id}}/',{
         }).done(function(data){
             $('#addFavourite').show();
             $('#unFavourite').hide();
@@ -52,6 +52,24 @@
         }).fail(function(jqXHR, textStatus, errorThrown){
             bootbox.alert('<h3>Error</h3><br>'+jqXHR.responseText);
         });
+    });
+
+    $('#ratingError').hide();
+    $('#addReview').click(function(){
+        var rating = $("#elementId :selected").val();
+        if (rating > 0){
+            $.post('{{base}}/ajax/addReview/{{note.id}}/'+rating+'/',{
+            }).done(function(data){
+                $('#modalReview').modal('hide');
+                $('#addReview').hide();
+                $('#ratingError').hide();
+                bootbox.alert('<h3>Success</h3><br>'+data);
+            }).fail(function(jqXHR, textStatus, errorThrown){
+                bootbox.alert('<h3>Error</h3><br>'+jqXHR.responseText);
+            });
+        } else {
+            $('#ratingError').show();
+        }
     });
 {% endblock onload %}
 
@@ -157,7 +175,8 @@
                         </div>
                     </div>
                     {% if reviewed is same as("0") and not user.id is same as(author.id) %}
-                        <a href="#" class="btn btn-primary">Add Review</a>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalReview" type="button">Add Review</button>
+                        {{m.invoke('modald', 'Add Review')}}
                     {% endif %}
                     <a href="#" class="btn btn-danger" id="unFavourite">Unfavourite</a>
                     <a href="#" class="btn btn-success" id="addFavourite">Add Favourite</a>
@@ -168,4 +187,23 @@
             </div>
         </article>
     </section>
+    {{m.open({id: 'modalReview', title: 'Add Review'})}}
+    <div class="modal-body">
+        <p>Rate these notes out of 5 below.</p>
+        <form id="rform" action="#" method="post" role="form">
+            <div class="form-group">
+                <select class="form-control" id="ra" name="rating" required="required">
+                    <option selected disabled>Rating</option>
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+            </div>
+        </form>
+        <p id="ratingError">Rating must be at least 1 star.</p>
+    </div>
+    {{m.close({action: 'Close', id: 'closeReview'})}}
+    {{m.close({action: 'Add', id: 'addReview'})}}
 {% endblock main %}
