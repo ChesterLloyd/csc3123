@@ -73,11 +73,11 @@
                                         </div>
                                         <div class="col-md-10">
                                             <div class="card-body">
-                                                <h5 class="card-title">{{fnotes[file.note_id].name}}</h5>
-                                                <p class="card-text"><b>{{fnotes[file.note_id].module}}</b> - {{fnotes[file.note_id].description}}</p>
-                                                <p class="card-text"><small class="text-muted">Uploaded {{fnotes[file.note_id].upload}}</small></p>
+                                                <h5 class="card-title">{{fnotes[loop.index0].name}}</h5>
+                                                <p class="card-text"><b>{{fnotes[loop.index0].module}}</b> - {{fnotes[loop.index0].description}}</p>
+                                                <p class="card-text"><small class="text-muted">Uploaded {{fnotes[loop.index0].upload}}</small></p>
                                                 <a href="{{base}}/view?note={{file.note_id}}" class="btn btn-primary">View</a>
-                                                <button type="button" class="btn btn-danger unfavourite" data-note="{{fnotes[file.note_id].id}}">unFavourite</button>
+                                                <button type="button" class="btn btn-danger unfavourite" data-note="{{fnotes[loop.index0].id}}">unFavourite</button>
                                             </div>
                                         </div>
                                     </div>
@@ -104,9 +104,9 @@
                                         </div>
                                         <div class="col-md-10">
                                             <div class="card-body">
-                                                <h5 class="card-title">{{tnotes[file.note_id].name}}</h5>
-                                                <p class="card-text"><b>{{tnotes[file.note_id].module}}</b> - {{tnotes[file.note_id].description}}</p>
-                                                <p class="card-text"><small class="text-muted">Uploaded {{tnotes[file.note_id].upload}}</small></p>
+                                                <h5 class="card-title">{{tnotes[loop.index0].name}}</h5>
+                                                <p class="card-text"><b>{{tnotes[loop.index0].module}}</b> - {{tnotes[loop.index0].description}}</p>
+                                                <p class="card-text"><small class="text-muted">Uploaded {{tnotes[loop.index0].upload}}</small></p>
                                                 <a href="{{base}}/view?note={{file.note_id}}" class="btn btn-primary">View</a>
                                             </div>
                                         </div>
