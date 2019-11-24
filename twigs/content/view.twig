@@ -58,9 +58,9 @@
     $('#addReview').click(function(){
         var rating = $('#ra :selected').val();
         if (rating > 0){
+            $('#modalReview').modal('hide');
             $.post('{{base}}/ajax/addReview/{{note.id}}/'+rating+'/',{
             }).done(function(data){
-                $('#modalReview').modal('hide');
                 $('#addReview').hide();
                 $('#ratingError').hide();
                 bootbox.alert('<h3>Success</h3><br>'+data);
