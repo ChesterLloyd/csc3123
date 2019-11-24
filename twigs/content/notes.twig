@@ -64,26 +64,32 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
-                        {% for file in ffiles %}
-                            <div class="col-sm-12 col-md-12 col-lg-6" id="fn-{{fnotes[file.note_id].id}}">
-                                <div class="card mb-3">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-2 note-icon {{file.icon}}">
-                                            <i class="fas fa-{{file.icon}} note-icon"></i>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{fnotes[loop.index0].name}}</h5>
-                                                <p class="card-text"><b>{{fnotes[loop.index0].module}}</b> - {{fnotes[loop.index0].description}}</p>
-                                                <p class="card-text"><small class="text-muted">Uploaded {{fnotes[loop.index0].upload}}</small></p>
-                                                <a href="{{base}}/view?note={{file.note_id}}" class="btn btn-primary">View</a>
-                                                <button type="button" class="btn btn-danger unfavourite" data-note="{{fnotes[loop.index0].id}}">unFavourite</button>
+                        {% if ffiles|length < 1 %}
+                            <div class="col-12">
+                                <p>No notes to display</p>
+                            </div>
+                        {% else %}
+                            {% for file in ffiles %}
+                                <div class="col-sm-12 col-md-12 col-lg-6" id="fn-{{fnotes[file.note_id].id}}">
+                                    <div class="card mb-3">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-2 note-icon {{file.icon}}">
+                                                <i class="fas fa-{{file.icon}} note-icon"></i>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{fnotes[loop.index0].name}}</h5>
+                                                    <p class="card-text"><b>{{fnotes[loop.index0].module}}</b> - {{fnotes[loop.index0].description}}</p>
+                                                    <p class="card-text"><small class="text-muted">Uploaded {{fnotes[loop.index0].upload}}</small></p>
+                                                    <a href="{{base}}/view?note={{file.note_id}}" class="btn btn-primary">View</a>
+                                                    <button type="button" class="btn btn-danger unfavourite" data-note="{{fnotes[loop.index0].id}}">unFavourite</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -95,25 +101,31 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
-                        {% for file in tfiles %}
-                            <div class="col-sm-12 col-md-12 col-lg-6">
-                                <div class="card mb-3">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-2 note-icon {{file.icon}}">
-                                            <i class="fas fa-{{file.icon}} note-icon"></i>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{tnotes[loop.index0].name}}</h5>
-                                                <p class="card-text"><b>{{tnotes[loop.index0].module}}</b> - {{tnotes[loop.index0].description}}</p>
-                                                <p class="card-text"><small class="text-muted">Uploaded {{tnotes[loop.index0].upload}}</small></p>
-                                                <a href="{{base}}/view?note={{file.note_id}}" class="btn btn-primary">View</a>
+                        {% if tfiles|length < 1 %}
+                            <div class="col-12">
+                                <p>No notes to display</p>
+                            </div>
+                        {% else %}
+                            {% for file in tfiles %}
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <div class="card mb-3">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-2 note-icon {{file.icon}}">
+                                                <i class="fas fa-{{file.icon}} note-icon"></i>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{tnotes[loop.index0].name}}</h5>
+                                                    <p class="card-text"><b>{{tnotes[loop.index0].module}}</b> - {{tnotes[loop.index0].description}}</p>
+                                                    <p class="card-text"><small class="text-muted">Uploaded {{tnotes[loop.index0].upload}}</small></p>
+                                                    <a href="{{base}}/view?note={{file.note_id}}" class="btn btn-primary">View</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
