@@ -75,7 +75,7 @@
 *
 * @return string    The file size with the unit
 */
-        public function getFileIcon(int $fsize) : string
+        public function getFileSize(int $fsize) : string
         {
             $unit = 0;
             $units = array('B', 'KB', 'MB', 'GB');
