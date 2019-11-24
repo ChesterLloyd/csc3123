@@ -41,10 +41,12 @@
  */
         public function addData(\Support\Context $context, int $index) : void
         {
+            // Get current file data
             $da = $context->formdata()->filedata('uploads', $index);
-            $this->bean->type = $da['type'];
-            $this->bean->size = $da['size'];
-            // $file->icon = "";
+            // Assign file an icon based on its type
+            $this->bean->icon = context()->getFileIcon($da['type']);
+            // Calculate an appropriate unit size
+            $this->bean->size = context()->getFileIcon($da['size']);
         }
 /**
  * Called when you try to trash to an upload. Do any cleanup in here
