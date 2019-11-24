@@ -1,6 +1,6 @@
 <?php
 /**
- * A class that contains code to handle any requests for  /course/
+ * A class that handles any requests to browse notes by course name
  */
      namespace Pages;
 

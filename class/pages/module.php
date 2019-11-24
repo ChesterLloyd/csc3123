@@ -1,6 +1,6 @@
 <?php
 /**
- * A class that contains code to handle any requests for  /module/
+ * A class that handles any requests to browse notes by module code
  */
      namespace Pages;
 
@@ -23,53 +23,48 @@
         {
             $module = filter_var($_GET['code'], FILTER_SANITIZE_STRING);
             $context->local()->addval('module', $module);
-            // $notes = R::find('note', 'course=? AND privacy=?', [$course, 1]);
-            // $context->local()->addval('anotes', $notes);
 
-            $note = R::findOne('note', 'module=? AND privacy=?', [$module, 1]);
-            $context->local()->addval('course', $note->course);
+            $user = $context->user();
+            $uid = $user->id;
+            $context->local()->addval('user', $user);
 
-            $sql = 'SELECT N.* FROM note N
-                WHERE N.module = "'.$module.'" AND N.privacy = 1
-                ORDER BY N.upload ASC';
-            $rows = R::getAll($sql);
-            $anotes = R::convertToBeans('note', $rows);
-            $context->local()->addval('anotes', $anotes);
+            // Get 6 top notes
+            $notes = array();
+            $files = R::findAll('upload', 'JOIN note N on N.id = uploads.note_id
+                JOIN review R ON R.note_id = N.id WHERE N.module = ?
+                GROUP BY N.id ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
+                N.upload DESC LIMIT 6', [$module]);
+            foreach ($files as $file)
+            {
+                if (!$file->canaccess($context->user()))
+                { # Current user cannot access the file, remove from array
+                    unset($files[$file->id]);
+                }
+                else
+                { # User can access file, save note to array
+                    array_push($notes, $file->note);
+                }
+            }
+            $context->local()->addval('tnotes', $notes);
+            $context->local()->addval('tfiles', $files);
 
-            // Get file icons (first file type in set is the icon)
-            $sql = 'SELECT F.* FROM note N
-                JOIN file F ON N.id = F.note_id
-                WHERE N.module = "'.$module.'" AND N.privacy = 1
-                GROUP BY N.id
-                ORDER BY N.upload ASC, F.id ASC';
-            $rows = R::getAll($sql);
-            $afiles = R::convertToBeans('file', $rows);
-            $context->local()->addval('afiles', $afiles);
-
-
-            // Get 4 top rated notes
-            // Get notes as beans
-            $sql = 'SELECT N.* FROM note N
-                JOIN review R ON N.id = R.note_id
-                WHERE N.module = "'.$module.'" AND N.privacy = 1
-                GROUP BY N.id
-                ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
-                N.upload DESC LIMIT 4';
-            $rows = R::getAll($sql);
-            $tnotes = R::convertToBeans('note', $rows);
-            $context->local()->addval('tnotes', $tnotes);
-
-            // Get file icons (first file type in set is the icon)
-            $sql = 'SELECT F.* FROM note N
-                JOIN review R ON N.id = R.note_id
-                JOIN file F ON N.id = F.note_id
-                WHERE N.module = "'.$module.'" AND N.privacy = 1
-                GROUP BY N.id
-                ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
-                N.upload DESC, F.id ASC LIMIT 4';
-            $rows = R::getAll($sql);
-            $tfiles = R::convertToBeans('file', $rows);
-            $context->local()->addval('tfiles', $tfiles);
+            // Get every file and note user can access
+            $notes = array();
+            $files = R::findAll('upload', 'JOIN note N on N.id = upload.note_id
+                WHERE N.module = ? GROUP BY note_id ORDER BY added DESC', [$module]);
+            foreach ($files as $file)
+            {
+                if (!$file->canaccess($context->user()))
+                { # Current user cannot access the file, remove from array
+                    unset($files[$file->id]);
+                }
+                else
+                { # User can access file, save note to array
+                    array_push($notes, $file->note);
+                }
+            }
+            $context->local()->addval('anotes', $notes);
+            $context->local()->addval('afiles', $files);
 
             return '@content/module.twig';
         }
