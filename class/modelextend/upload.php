@@ -41,9 +41,9 @@
  */
         public function addData(\Support\Context $context, int $index) : void
         {
-            $da = new \Framework\FAIterator('uploads')[$index];
-            $this->bean->type = ['type'];
-            $this->bean->size = ['size'];
+            $da = (new \Framework\FAIterator('uploads'));
+            $this->bean->type = $da[$index]['type'];
+            $this->bean->size = $da[$index]['size'];
             // $file->icon = "";
         }
 /**
