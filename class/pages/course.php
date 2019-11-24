@@ -23,51 +23,53 @@
         {
             $course = filter_var($_GET['title'], FILTER_SANITIZE_STRING);
             $context->local()->addval('course', $course);
-            // $notes = R::find('note', 'course=? AND privacy=?', [$course, 1]);
-            // $context->local()->addval('anotes', $notes);
 
+            $user = $context->user();
+            $uid = $user->id;
+            $context->local()->addval('user', $user);
 
-            $sql = 'SELECT N.* FROM note N
-                WHERE N.course = "'.$course.'" AND N.privacy = 1
-                ORDER BY N.upload ASC';
-            $rows = R::getAll($sql);
-            $anotes = R::convertToBeans('note', $rows);
-            $context->local()->addval('anotes', $anotes);
-
-            // Get file icons (first file type in set is the icon)
-            $sql = 'SELECT F.* FROM note N
-                JOIN file F ON N.id = F.note_id
-                WHERE N.course = "'.$course.'" AND N.privacy = 1
-                GROUP BY N.id
-                ORDER BY N.upload ASC, F.id ASC';
-            $rows = R::getAll($sql);
-            $afiles = R::convertToBeans('file', $rows);
-            $context->local()->addval('afiles', $afiles);
-
-
-            // Get 4 top rated notes
-            // Get notes as beans
-            $sql = 'SELECT N.* FROM note N
-                JOIN review R ON N.id = R.note_id
-                WHERE N.course = "'.$course.'" AND N.privacy = 1
+            // Get 6 top notes
+            $sql = 'SELECT F.* FROM upload F
+                JOIN note N on N.id = F.note_id
+                JOIN review R ON R.note_id = N.id
+                WHERE N.course = "'.$course.'"
                 GROUP BY N.id
                 ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
-                N.upload DESC LIMIT 4';
+                N.upload DESC LIMIT 6';
             $rows = R::getAll($sql);
-            $tnotes = R::convertToBeans('note', $rows);
-            $context->local()->addval('tnotes', $tnotes);
+            $files = R::convertToBeans('upload', $rows);
+            $notes = array();
+            foreach ($files as $file)
+            {
+                if (!$file->canaccess($context->user()))
+                { # Current user cannot access the file, remove from array
+                    unset($files[$file->id]);
+                }
+                else
+                { # User can access file, save note to array
+                    array_push($notes, $file->note);
+                }
+            }
+            $context->local()->addval('tnotes', $notes);
+            $context->local()->addval('tfiles', $files);
 
-            // Get file icons (first file type in set is the icon)
-            $sql = 'SELECT F.* FROM note N
-                JOIN review R ON N.id = R.note_id
-                JOIN file F ON N.id = F.note_id
-                WHERE N.course = "'.$course.'" AND N.privacy = 1
-                GROUP BY N.id
-                ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
-                N.upload DESC, F.id ASC LIMIT 4';
-            $rows = R::getAll($sql);
-            $tfiles = R::convertToBeans('file', $rows);
-            $context->local()->addval('tfiles', $tfiles);
+            // Get every file and note user can access
+            $notes = array();
+            $files = R::findAll('upload', 'JOIN note N on N.id = upload.note_id
+                WHERE N.course = ? GROUP BY note_id ORDER BY added DESC', [$course]);
+            foreach ($files as $file)
+            {
+                if (!$file->canaccess($context->user()))
+                { # Current user cannot access the file, remove from array
+                    unset($files[$file->id]);
+                }
+                else
+                { # User can access file, save note to array
+                    array_push($notes, $file->note);
+                }
+            }
+            $context->local()->addval('anotes', $notes);
+            $context->local()->addval('afiles', $files);
 
             return '@content/course.twig';
         }
