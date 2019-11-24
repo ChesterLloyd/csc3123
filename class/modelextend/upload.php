@@ -42,8 +42,8 @@
         public function addData(\Support\Context $context, int $index) : void
         {
             $da = $context->formdata()->filedata('uploads', $index);
-            $this->bean->type = $da[$index]['type'];
-            $this->bean->size = $da[$index]['size'];
+            $this->bean->type = $da['type'];
+            $this->bean->size = $da['size'];
             // $file->icon = "";
         }
 /**
