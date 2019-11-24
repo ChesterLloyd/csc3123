@@ -67,17 +67,26 @@ div.note-icon > i {
     font-size: 3em;
     padding-top: 50%;
 }
-div.pdf {
-    background-color: #f5adad;
-}
-div.word {
+div.file-word {
     background-color: #a2b7fb;
 }
-div.powerpoint {
+div.file-excel {
+    background-color: #8eca91;
+}
+div.file-powerpoint {
     background-color: #ffd669;
 }
-div.archive {
-    background-color: #ffcc80;
+div.file-pdf {
+    background-color: #f5adad;
+}
+div.file-archive {
+    background-color: #76d4cb;
+}
+div.file-code {
+    background-color: #a1887f;
+}
+div.file {
+    background-color: #c09dff;
 }
 @media (max-width: 768px) {
     div.note-icon {
