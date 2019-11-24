@@ -141,13 +141,20 @@
                 $user->xownReview[] = $review;
                 R::store($user);
 
-                echo "This review has been added.";
+                echo "Your review has been added.";
             }
             else
             { # Update review bean
+                if ($review->rating === NULL)
+                { # New review
+                    echo "Your review has been added.";
+                }
+                else
+                { # Updated existing review
+                    echo "Your review has been updated.";
+                }
                 $review->rating = $rating;
                 R::store($review);
-                echo "Your review has been updated.";
             }
         }
 

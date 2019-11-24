@@ -44,41 +44,38 @@
             $context->local()->addval('user', $user);
 
             // Put author bean in context
-            $author = R::findOne('user', 'id=?', [$note->user_id]);
+            $author = R::findOne('user', 'id = ?', [$note->user_id]);
             $context->local()->addval('author', $author);
 
             // Get rating of the notes
-            $sql = 'SELECT (SUM(R.rating) / COUNT(R.rating)) AS rating
-                FROM note N
-                JOIN review R ON N.id = R.note_id
-                WHERE N.id = '.$nid.' GROUP BY N.id';
-            $rating = R::getCell($sql);
+            $rating = R::getCell('SELECT (SUM(R.rating) / COUNT(R.rating)) AS rating
+                FROM note N JOIN review R ON N.id = R.note_id
+                WHERE N.id = ? GROUP BY N.id', [$nid]);
             $rating = round($rating);
             $context->local()->addval('rating', $rating);
 
             // Get number of favourites for the note
-            $sql = 'SELECT COUNT(R.favourite) AS favourite
-                FROM review R
-                JOIN note N ON R.note_id = N.id
-                WHERE N.id = '.$nid.' AND R.favourite = 1';
-            $favourites = R::getCell($sql);
+            $favourites = R::getCell('SELECT COUNT(R.favourite) AS favourite
+                FROM review R JOIN note N ON R.note_id = N.id
+                WHERE N.id = ? AND R.favourite = 1', [$nid]);
             $context->local()->addval('favourites', $favourites);
 
             // Is this note in the user's favourites
-            $sql = 'SELECT R.favourite
-                FROM review R
-                JOIN note N ON R.note_id = N.id
-                WHERE R.user_id = '.$uid.' AND N.id = '.$nid;
-            $favourite = R::getCell($sql);
+            $favourite = R::getCell('SELECT R.favourite
+                FROM review R JOIN note N ON R.note_id = N.id
+                WHERE R.user_id = ? AND N.id = ?', [$uid, $nid]);
             $context->local()->addval('favourite', $favourite);
 
             // Has this user reviewed this note
-            $sql = 'SELECT COUNT(R.id)
-                FROM review R
-                JOIN note N ON R.note_id = N.id
-                WHERE R.user_id = '.$uid.' AND N.id = '.$nid;
-            $reviewed = R::getCell($sql);
-            $context->local()->addval('reviewed', $reviewed);
+            $review = R::getCell('SELECT R.rating
+                FROM review R JOIN note N ON R.note_id = N.id
+                WHERE R.user_id = ? AND N.id = ?
+                AND R.rating IS NOT NULL', [$uid, $nid]);
+            if (!$review)
+            {
+                $review = 0;
+            }
+            $context->local()->addval('review', $review);
 
             return '@content/view.twig';
         }
