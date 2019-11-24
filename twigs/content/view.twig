@@ -176,7 +176,7 @@
                     </div>
                     {% if reviewed is same as("0") and not user.id is same as(author.id) %}
                         <button class="btn btn-primary" data-toggle="modal" data-target="#modalReview" type="button">Add Review</button>
-                        {{m.invoke('modald', 'Add Review')}}
+                        <!-- {{m.invoke('modalReview', 'Add Review')}} -->
                     {% endif %}
                     <a href="#" class="btn btn-danger" id="unFavourite">Unfavourite</a>
                     <a href="#" class="btn btn-success" id="addFavourite">Add Favourite</a>
@@ -190,7 +190,7 @@
     {{m.open({id: 'modalReview', title: 'Add Review'})}}
     <div class="modal-body">
         <p>Rate these notes out of 5 below.</p>
-        <form id="rform" action="#" method="post" role="form">
+        <form id="addReviewForm" action="#" method="post">
             <div class="form-group">
                 <select class="form-control" id="ra" name="rating" required="required">
                     <option selected disabled>Rating</option>
@@ -204,6 +204,5 @@
         </form>
         <p id="ratingError">Rating must be at least 1 star.</p>
     </div>
-    {{m.close({action: 'Close', id: 'closeReview'})}}
     {{m.close({action: 'Add', id: 'addReview'})}}
 {% endblock main %}
