@@ -1,6 +1,6 @@
 <?php
 /**
- * A class that contains code to handle any requests for  /view/
+ * A class that collects all the data from the database when viewing a note
  */
      namespace Pages;
 
