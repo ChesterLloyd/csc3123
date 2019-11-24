@@ -17,8 +17,8 @@
 /**
  * Determine if a user can access the file
  *
- * At the moment it is either the user or any admin that is allowd. Rewrite the
- * method to add more complex access control schemes.
+ * It is either the user or any admin that is allowd. If the note is set
+ * to public, then active user can have access.
  *
  * @param object	$user	A user object
  * @param string    $op     r for read, u for update, d for delete
@@ -27,7 +27,13 @@
  */
         public function canaccess($user, $op = 'r') : bool
         {
-            // \R   get bean's note and see if public, then anyone can access
+            // Get note and see if author set it to public
+            $note = \R::findOne('note', 'id=?', [$this->bean->note_id]);
+            if ($note->privacy == 1)
+            { # ANyone can see this if they are logged in and active
+                return $this->bean->user->isactive();
+            }
+            // Else, only the author or an admin
             return $this->bean->user->equals($user) || $user->isadmin();
         }
 /**
