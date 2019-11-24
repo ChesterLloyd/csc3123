@@ -75,7 +75,7 @@
             {
                 $review = 0;
             }
-            $context->local()->addval('review', $review);
+            $context->local()->addval('review', (int)$review);
 
             return '@content/view.twig';
         }
