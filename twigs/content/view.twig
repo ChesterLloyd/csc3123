@@ -56,7 +56,7 @@
 
     $('#ratingError').hide();
     $('#addReview').click(function(){
-        var rating = $("#elementId :selected").val();
+        var rating = $('#ra :selected').val();
         if (rating > 0){
             $.post('{{base}}/ajax/addReview/{{note.id}}/'+rating+'/',{
             }).done(function(data){
@@ -175,8 +175,7 @@
                         </div>
                     </div>
                     {% if reviewed is same as("0") and not user.id is same as(author.id) %}
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalReview" type="button">Add Review</button>
-                        <!-- {{m.invoke('modalReview', 'Add Review')}} -->
+                        {{m.invoke('modalReview', 'Add Review')}}
                     {% endif %}
                     <a href="#" class="btn btn-danger" id="unFavourite">Unfavourite</a>
                     <a href="#" class="btn btn-success" id="addFavourite">Add Favourite</a>
