@@ -27,7 +27,7 @@
 
             // Get every file and note user can access
             $notes = array();
-            $files = R::findAll('upload');
+            $files = R::findAll('upload', 'GROUP BY note_id');
             foreach ($files as $file)
             {
                 if (!$file->canaccess($context->user()))
