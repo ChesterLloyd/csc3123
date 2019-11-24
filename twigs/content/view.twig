@@ -106,14 +106,14 @@
                         <div class="col-12">
                             <table>
                                 <tr>
+                                    <th></th>
                                     <th>File Name</th>
-                                    <th>Type</th>
                                     <th>Size</th>
                                 </tr>
                                 {% for key, file in files %}
                                     <tr>
-                                        <td><a href="#">{{file.name}}</a></td>
-                                        <td>{{file.type}}</td>
+                                        <td><i class="fas fa-{{file.icon}}"></i></td>
+                                        <td><a href="{{base}}/download/file/{{file.id}}" target="_blank">{{file.filename}}</a></td>
                                         <td>{{file.size}}</td>
                                     </tr>
                                 {% endfor %}
