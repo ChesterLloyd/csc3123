@@ -32,7 +32,7 @@
             {
                 if (!$file->canaccess($context->user()))
                 { # Current user cannot access the file, remove from array
-                    unset($files[$file]);
+                    unset($files[$file->id]);
                 }
                 else
                 { # User can access file, save note to array
