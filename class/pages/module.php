@@ -24,13 +24,16 @@
             $module = filter_var($_GET['code'], FILTER_SANITIZE_STRING);
             $context->local()->addval('module', $module);
 
+            $note = R::findOne('note', 'module = ?', [$module]);
+            $context->local()->addval('course', $note->course);
+
             $user = $context->user();
             $uid = $user->id;
             $context->local()->addval('user', $user);
 
             // Get 6 top notes
             $notes = array();
-            $files = R::findAll('upload', 'JOIN note N on N.id = uploads.note_id
+            $files = R::findAll('upload', 'JOIN note N on N.id = upload.note_id
                 JOIN review R ON R.note_id = N.id WHERE N.module = ?
                 GROUP BY N.id ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
                 N.upload DESC LIMIT 6', [$module]);
