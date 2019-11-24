@@ -176,7 +176,7 @@
                     </div>
                     {% if not user.id is same as(author.id) %}
                         <button id="invokeAddReview" class="btn btn-primary" data-toggle="modal" data-target="#modalReview" type="button">
-                        {% if review is same as("0") %}
+                        {% if review is same as(0) %}
                             Add Review
                         {% else %}
                             Modify Review
@@ -195,18 +195,18 @@
     {{m.open({id: 'modalReview', title: 'Review this Note'})}}
     <div class="modal-body">
         <p>Rate these notes out of 5 below.</p>
-        {% if not review is same as("0") %}
+        {% if not review is same as(0) %}
             <p>You have already rated these notes. Your previous rating has been pre-selected</p>
         {% endif %}
         <form id="addReviewForm" action="#" method="post">
             <div class="form-group">
                 <select class="form-control" id="ra" name="rating" required="required">
-                    <option {% if review is same as("0") %}selected {% endif %} disabled>Rating</option>
-                    <option {% if review is same as("1") %}selected {% endif %} value="1">1 Star</option>
-                    <option {% if review is same as("2") %}selected {% endif %} value="2">2 Stars</option>
-                    <option {% if review is same as("3") %}selected {% endif %} value="3">3 Stars</option>
-                    <option {% if review is same as("4") %}selected {% endif %} value="4">4 Stars</option>
-                    <option {% if review is same as("5") %}selected {% endif %} value="5">5 Stars</option>
+                    <option {% if review is same as(0) %}selected {% endif %} disabled>Rating</option>
+                    <option {% if review is same as(1) %}selected {% endif %} value="1">1 Star</option>
+                    <option {% if review is same as(2) %}selected {% endif %} value="2">2 Stars</option>
+                    <option {% if review is same as(3) %}selected {% endif %} value="3">3 Stars</option>
+                    <option {% if review is same as(4) %}selected {% endif %} value="4">4 Stars</option>
+                    <option {% if review is same as(5) %}selected {% endif %} value="5">5 Stars</option>
                 </select>
             </div>
         </form>
