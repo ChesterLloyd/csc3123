@@ -85,6 +85,9 @@ div.file-archive {
 div.file-code {
     background-color: #a1887f;
 }
+div.file-image {
+    background-color: #88c9e6;
+}
 div.file {
     background-color: #c09dff;
 }
