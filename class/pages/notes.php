@@ -29,7 +29,8 @@
             $sql = 'SELECT F.* FROM upload F
                 JOIN note N on N.id = F.note_id
                 JOIN review R ON R.note_id = N.id
-                WHERE R.user_id = '.$uid.' AND R.favourite = 1';
+                WHERE R.user_id = '.$uid.' AND R.favourite = 1
+                GROUP BY N.id';
             $rows = R::getAll($sql);
             $files = R::convertToBeans('upload', $rows);
             $notes = array();
@@ -73,7 +74,7 @@
 
             // Get every file and note user can access
             $notes = array();
-            $files = R::findAll('upload', 'GROUP BY note_id');
+            $files = R::findAll('upload', 'GROUP BY note_id ORDER BY added DESC');
             foreach ($files as $file)
             {
                 if (!$file->canaccess($context->user()))
