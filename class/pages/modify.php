@@ -113,7 +113,7 @@
                         for ($i = 0; $i < $removeCount; $i ++)
                         {
                             $file = R::findOne('upload', 'id = ?', [$deleteFiles[$i]]);
-                            // $file->delete();
+                            $file->delete();
                         }
                     }
                     elseif ($removeCount != 0)
