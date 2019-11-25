@@ -107,7 +107,7 @@
                     for ($i = 0; $i < $removeCount; $i ++)
                     {
                         $file = R::findOne('upload', 'id = ?', [(int)$dfiles[$i]]);
-                        $fid = $context->load('fileID', $dfiles[$i]);
+                        $fid = $context->load('upload', $dfiles[$i]);
                         $file->delete();
                     }
                 }
