@@ -40,30 +40,30 @@
                 $tfiles = 0;
                 if (Config::UPUBLIC && Config::UPRIVATE)
                 { # need to check the flag could be either private or public
+                    $tfiles = sizeof($fd->posta('public'));
                     foreach ($fd->posta('public') as $ix => $public)
                     {
                         $upl = \R::dispense('upload');
-                        $note->xownFile[] = $upl;
                         $save = $upl->savefile($context, $fd->filedata('uploads', $ix), $public, $context->user(), $ix);
                         if ($save)
                         {
+                            $note->xownFile[] = $upl;
                             $nfiles ++;
                         }
-                        $tfiles = $ix;
                     }
                 }
                 else
                 {
+                    $tfiles = sizeof(new \Framework\FAIterator('uploads'));
                     foreach(new \Framework\FAIterator('uploads') as $ix => $fa)
                     { # we only support private or public in this case so there is no flag
                         $upl = \R::dispense('upload');
-                        $note->xownFile[] = $upl;
                         $save = $upl->savefile($context, $fa, Config::UPUBLIC, $context->user(), $ix);
                         if ($save)
                         {
+                            $note->xownFile[] = $upl;
                             $nfiles ++;
                         }
-                        $tfiles = $ix;
                     }
                 }
                 if ($nfiles > 0)
