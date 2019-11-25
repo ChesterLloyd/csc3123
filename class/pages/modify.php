@@ -99,7 +99,7 @@
 
                 // Start deleting files if we have 1 or more remaining
                 $dfiles = explode(',', $fd->post('delete'));
-                if (($nfiles > 0) || (sizeof($dfiles) < sizeof($files)))
+                if (($nfiles > 0) || ((sizeof($dfiles) - 1) < sizeof($files)))
                 { # Delete any note slected to remove
                     $rfiles = $people = R::loadAll('upload', $dfiles);
                     foreach ($rfiles as $file)
@@ -115,16 +115,7 @@
 
             // Update file list (could be new ones from above)
             $files = R::find('upload', 'note_id = ?', [$nid]);
-            foreach ($files as $file)
-            {
-                if (!$file->canaccess($context->user()))
-                { # current user cannot access the file, should not access notes
-                    throw new \Framework\Exception\Forbidden('No access');
-                }
-            }
             $context->local()->addval('files', $files);
-
-            // Put current (maybe updated) note bean in context
             $context->local()->addval('note', $note);
 
             // Put current user bean in context
