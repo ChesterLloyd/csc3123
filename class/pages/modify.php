@@ -108,7 +108,7 @@
                     $context->local()->addval('removeCount', $removeCount);
                     $context->local()->addval('totalCount', $totalCount);
 
-                    if (($nfiles > 0) || ($removeCount < $remainCount))
+                    if (($nfiles > 0) || ($removeCount < $totalCount))
                     { # Delete any note slected to remove
                         for ($i = 0; $i < $removeCount; $i ++)
                         {
