@@ -36,7 +36,7 @@
 
             // Do this if form is submitted
             $fd = $context->formdata();
-            if (isset($_POST['modify'])
+            if (isset($_POST['modify']))
             { # There has been a post
 
                 // Update note bean with the form data
