@@ -35,6 +35,9 @@
                 $note->description = $fd->post('description', 'No description');
                 $note->comment = $fd->post('comment', 'No comments.');
 
+                // Upload new files
+                $nfiles = 0;
+                $tfiles = 0;
                 if (Config::UPUBLIC && Config::UPRIVATE)
                 { # need to check the flag could be either private or public
                     foreach ($fd->posta('public') as $ix => $public)
