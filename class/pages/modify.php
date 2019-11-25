@@ -106,9 +106,9 @@
                 { # Delete any note slected to remove
                     for ($i = 0; $i < $removeCount; $i ++)
                     {
-                        $file = R::findOne('upload', 'id = ?', [(int)$dfiles[$i]]);
-                        $fid = $context->load('upload', $dfiles[$i]);
-                        $file->delete();
+                        echo "CALL DELETE ON: ".$dfiles[$i];
+                        // $file = R::findOne('upload', 'id = ?', [(int)$dfiles[$i]]);
+                        // $file->delete();
                     }
                 }
                 elseif ($removeCount != 0)
