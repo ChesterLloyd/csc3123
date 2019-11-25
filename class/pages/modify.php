@@ -101,11 +101,17 @@
                 // Start deleting files if we have 1 or more remaining
                 $dfiles = explode(',', $fd->post('delete'));
                 $removeCount = ($dfiles[0] == '') ? 0 : sizeof($dfiles);
-                if (($nfiles > 0) || (($removeCount > 0) && ($removeCount < sizeof($files))))
+                $remainCount = R::count('upload', 'note_id = ?', [$nid]);
+                if (($nfiles > 0) || (($removeCount > 0) && ($removeCount < $remainCount)))
                 { # Delete any note slected to remove
-                    $dbeans = R::loadAll('upload', $dfiles);
-                    $dbeans = R::convertToBeans('upload', $dbeans);
-                    foreach ($dbeans as $file)
+
+                    // $dbeans = R::loadAll('upload', $dfiles);
+                    // $dbeans = R::convertToBeans('upload', $dbeans);
+
+
+                    foreach (R::findAll('upload', 'id = ?', $dfiles) as $file)
+
+                    // foreach ($dbeans as $file)
                     { # Delete each file in delete array
                         $file->delete();
                     }
