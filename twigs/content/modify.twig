@@ -17,10 +17,10 @@
 
 {% block onload %}
     $('.delete-file').click(function(){
-        var fid = $(this).data('file');
+        var fid = String($(this).data('file'));
         var dfile = $('#de').val();
         var dfiles = dfile.split(',');
-        if($.inArray(fid, dfiles) !== -1){
+        if(dfiles.includes(fid)){
             $('#deleteIcon' + fid).css('color', 'black');
             dfiles.splice($.inArray(fid, dfiles), 1);
         }else{
