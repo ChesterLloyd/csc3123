@@ -25,6 +25,7 @@
             if ($fd->hasfile('uploads'))
             {
                 // Make a note with the form data
+                $nid = 0;
                 $note = \R::dispense('note');
                 $note->name = $fd->post('name', 'No name');
                 $note->course = $fd->post('course', 'Unknown Course');
