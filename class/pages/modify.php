@@ -106,7 +106,8 @@
                 { # Delete any note slected to remove
                     for ($i = 0; $i < $removeCount; $i ++)
                     {
-                        $file = R::load('upload', (int)$dfiles[$i]);
+                        $file = R::findOne('upload', 'id = ?', [(int)$dfiles[$i]]);
+                        $fid = $context->load('fileID', $dfiles[$i]);
                         $file->delete();
                     }
                 }
