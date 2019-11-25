@@ -104,7 +104,7 @@
                     $deleteFiles = explode(',', $fd->post('delete'));
                     $removeCount = sizeof($deleteFiles);
                     $totalCount = R::count('upload', 'note_id = ?', [$nid]);
-                    $context->local()->addval('deleteFiles', $deleteFiles);
+                    $context->local()->addval('deleteFiles', implode(",",$deleteFiles));
                     $context->local()->addval('removeCount', $removeCount);
                     $context->local()->addval('totalCount', $totalCount);
 
