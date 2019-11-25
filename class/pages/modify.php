@@ -6,6 +6,7 @@
 
      use \Support\Context as Context;
      use \Config\Config as Config;
+     use \Framework\Local as Local;
      use \R as R;
 /**
  * Support /modify/
