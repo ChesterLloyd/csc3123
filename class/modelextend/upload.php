@@ -89,11 +89,6 @@
 // Now delete the file
             unlink($context->local()->basedir().$this->fname);
 /**** Put any cleanup code of yours after this line ****/
-            /*
-             * Remove upload bean
-             */
-            // $upload = \R::load('upload', $this->bean->id);
-            // \R::trash($upload);
         }
     }
 ?>

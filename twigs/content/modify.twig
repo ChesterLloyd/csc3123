@@ -40,15 +40,6 @@
 {% block main %}
     <section class="row">
         <article class="col-md-12">
-            <p>{{deleteFiles}}<br/></p>
-            <p>{{removeCount}}<br/></p>
-            <p>{{totalCount}}<br/></p>
-
-            <p>{{df-0}}<br/></p>
-            <p>{{df-1}}<br/></p>
-            <p>{{df-2}}<br/></p>
-            <p>{{df-3}}<br/></p>
-
             <div class="round-box">
                 <div class="round-box-heading">
                     <h1>Modify Note</h1>
@@ -63,7 +54,7 @@
                         </p>
                     {% endif %}
                     <form id="mform" action="#" method="post" role="form" enctype="multipart/form-data">
-                        <input type="text" id="de" name="delete"/>
+                        <input type="hidden" id="de" name="delete"/>
                         <div class="form-group">
                             <input type="text" id="na" name="name" placeholder="Name of Lecture Notes" class="form-control" required="required" value="{{note.name}}"/>
                         </div>

@@ -93,10 +93,6 @@
                         $context->local()->message(Local::WARNING, 'Some files have not been uploaded.');
                     }
                 }
-                elseif ($fd->hasfile('uploads'))
-                { # No files were uploaded
-                    $context->local()->message(Local::ERROR, 'There was an issue uploading some of your files.');
-                }
 
                 // Start deleting files only if we have 1 or more remaining
                 if ($fd->post('delete') != '')
@@ -104,16 +100,11 @@
                     $deleteFiles = explode(',', $fd->post('delete'));
                     $removeCount = sizeof($deleteFiles);
                     $totalCount = R::count('upload', 'note_id = ?', [$nid]);
-                    $context->local()->addval('deleteFiles', implode(",",$deleteFiles));
-                    $context->local()->addval('removeCount', $removeCount);
-                    $context->local()->addval('totalCount', $totalCount);
-
                     if (($nfiles > 0) || ($removeCount < $totalCount))
                     { # Delete any note slected to remove
                         for ($i = 0; $i < $removeCount; $i ++)
                         {
                             $file = R::findOne('upload', 'id = ?', [$deleteFiles[$i]]);
-                            // $file->delete();
                             R::trash($file);
                         }
                     }
@@ -122,11 +113,8 @@
                         $context->local()->message(Local::ERROR, 'No files were deleted, there must be at least 1 remaining.');
                     }
                 }
-
-
-
-
-
+                $context->local()->message(Local::MESSAGE, 'Note has been saved.');
+                $context->local()->addval('saved', true);
             }
 
             // Update file list (could be new ones from above)
