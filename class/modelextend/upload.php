@@ -92,8 +92,8 @@
             /*
              * Remove upload bean
              */
-            $upload = \R::load('upload', $this->bean->id);
-            \R::trash($upload);
+            // $upload = \R::load('upload', $this->bean->id);
+            // \R::trash($upload);
         }
     }
 ?>
