@@ -27,14 +27,16 @@
  */
         public function canaccess($user, $op = 'r') : bool
         {
-            // Get note and see if author set it to public
             $note = \R::findOne('note', 'id = ?', [$this->bean->note_id]);
-            if ($note->privacy == 1)
-            { # Ayone can see this if they are logged in and active
+            if (($op == 'r') && ($note->privacy == 1))
+            { # Get note and see if author set it to public
+                // Ayone can see this if they are logged in and active
                 return $this->bean->user->isactive();
             }
-            // Else, only the author or an admin
-            return $this->bean->user->equals($user) || $user->isadmin();
+            else
+            { # Else, only the author or an admin can do this
+                return $this->bean->user->equals($user) || $user->isadmin();
+            }
         }
 /**
  * Hook for adding extra data to a file save.
@@ -90,7 +92,7 @@
             /*
              * Remove upload bean
              */
-            $upload = \R::findOne('upload', 'id = ?', [$this->bean->id]);
+            $upload = \R::load('upload', $this->bean->id);
             \R::trash($upload);
         }
     }
