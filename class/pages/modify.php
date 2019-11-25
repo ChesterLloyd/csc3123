@@ -33,6 +33,7 @@
                     throw new \Framework\Exception\Forbidden('No access');
                 }
             }
+            $note = R::find('note', 'id = ?', [$nid]);
 
             // Do this if form is submitted
             $fd = $context->formdata();
@@ -123,7 +124,6 @@
             $context->local()->addval('files', $files);
 
             // Put current (maybe updated) note bean in context
-            $note = $context->load('note', $nid);
             $context->local()->addval('note', $note);
 
             // Put current user bean in context
