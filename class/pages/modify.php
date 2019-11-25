@@ -106,7 +106,7 @@
                 { # Delete any note slected to remove
                     for ($i = 0; $i < $removeCount; $i ++)
                     {
-                        $file = R::load('upload', $dfiles[$i]);
+                        $file = R::load('upload', (int)$dfiles[$i]);
                         $file->delete();
                     }
                 }
