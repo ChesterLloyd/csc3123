@@ -30,7 +30,7 @@
                 $note->name = $fd->post('name', 'No name');
                 $note->course = $fd->post('course', 'Unknown Course');
                 $note->module = $fd->post('module', 'Unknown Module');
-                $note->privacy = $fd->post('privacy', '0');
+                $note->privacy = $fd->post('privacy', 1);
                 $note->downloads = 0;
                 $note->upload = $context->utcnow();
                 $note->description = $fd->post('description', 'No description');

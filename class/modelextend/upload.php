@@ -30,7 +30,7 @@
             // Get note and see if author set it to public
             $note = \R::findOne('note', 'id=?', [$this->bean->note_id]);
             if ($note->privacy == 1)
-            { # ANyone can see this if they are logged in and active
+            { # Ayone can see this if they are logged in and active
                 return $this->bean->user->isactive();
             }
             // Else, only the author or an admin

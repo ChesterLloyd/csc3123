@@ -45,7 +45,7 @@
                 $note->name = $fd->post('name', 'No name');
                 $note->course = $fd->post('course', 'Unknown Course');
                 $note->module = $fd->post('module', 'Unknown Module');
-                $note->privacy = $fd->post('privacy', '0');
+                $note->privacy = $fd->post('privacy', 1);
                 $note->description = $fd->post('description', 'No description');
                 $note->comment = $fd->post('comment', 'No comments.');
                 R::store($note);
@@ -83,6 +83,7 @@
                 }
                 if ($nfiles > 0)
                 { # New files have been saved
+                    R::store($note);
                     if ($nfiles == $tfiles)
                     { # All files were uploaded, display a success message
                         $context->local()->message(Local::MESSAGE, 'Your files have been uploaded.');
@@ -99,9 +100,10 @@
 
                 // Start deleting files if we have 1 or more remaining
                 $dfiles = explode(',', $fd->post('delete'));
-                if (($nfiles > 0) || ((sizeof($dfiles) - 1) < sizeof($files)))
+                $dfiles = array_shift($dfiles);
+                if (($nfiles > 0) || (sizeof($dfiles) < sizeof($files)))
                 { # Delete any note slected to remove
-                    $rfiles = $people = R::loadAll('upload', $dfiles);
+                    $rfiles = R::loadAll('upload', $dfiles);
                     foreach ($rfiles as $file)
                     { # Delete each file in delete array
                         $file->delete();
