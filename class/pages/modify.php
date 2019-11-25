@@ -100,7 +100,7 @@
 
                 // Start deleting files if we have 1 or more remaining
                 $dfiles = explode(',', $fd->post('delete'));
-                if ($dfiles[0] == '') ? $removeCount = 0 : $removeCount = sizeof($dfiles);
+                $removeCount = ($dfiles[0] == '') ? 0 : sizeof($dfiles);
                 if (($nfiles > 0) || ($removeCount < sizeof($files)))
                 { # Delete any note slected to remove
                     $rfiles = R::loadAll('upload', $dfiles);
