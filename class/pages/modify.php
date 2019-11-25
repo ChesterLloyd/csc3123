@@ -92,7 +92,7 @@
                         $context->local()->message(Local::WARNING, 'Some files have not been uploaded.');
                     }
                 }
-                else
+                elseif ($fd->hasfile('uploads'))
                 { # No files were uploaded
                     $context->local()->message(Local::ERROR, 'There was an issue uploading some of your files.');
                 }
