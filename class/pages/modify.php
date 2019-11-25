@@ -100,6 +100,7 @@
 
                 // Start deleting files if we have 1 or more remaining
                 $dfiles = explode(',', $fd->post('delete'));
+                $removeCount = ($dfiles[0] == '') ? 0 : sizeof($dfiles);
                 if (($nfiles > 0) || (($dfiles[0] != '') && ($removeCount < sizeof($files))))
                 { # Delete any note slected to remove
                     $rfiles = R::loadAll('upload', $dfiles);
@@ -108,7 +109,7 @@
                         $file->delete();
                     }
                 }
-                else
+                elseif ($removeCount != 0)
                 { # Do not delete notes, will not be enough left
                     $context->local()->message(Local::ERROR, 'No files were deleted, there must be at least 1 remaining.');
                 }
