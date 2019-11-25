@@ -90,8 +90,8 @@
             /*
              * Remove upload bean
              */
-            $upl = \R::findOne('upload', 'id = ?', [$this->id]);
-            \R::trash($upl);
+            $upload = \R::findOne('upload', 'id = ?', [$this->bean->id]);
+            \R::trash($upload);
         }
     }
 ?>
