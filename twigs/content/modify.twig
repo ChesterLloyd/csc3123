@@ -18,8 +18,7 @@
 {% block onload %}
     $('.delete-file').click(function(){
         var fid = String($(this).data('file'));
-        var dfile = $('#de').val();
-        var dfiles = dfile.split(',');
+        var dfiles = $('#de').val().split(',');
         if(dfiles.includes(fid)){
             $('#deleteIcon' + fid).css('color', 'black');
             dfiles.splice($.inArray(fid, dfiles), 1);
@@ -27,7 +26,11 @@
             $('#deleteIcon' + fid).css('color', 'red');
             dfiles.push(fid);
         }
-        $('#de').val(dfiles.join(','));
+        var output = dfiles.toString();
+        if (output[0] == ',') {
+            output = output.substring(1);
+        }
+        $('#de').val(output);
     });
 {% endblock onload %}
 

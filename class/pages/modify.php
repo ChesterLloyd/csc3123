@@ -104,15 +104,9 @@
                 $remainCount = R::count('upload', 'note_id = ?', [$nid]);
                 if (($nfiles > 0) || (($removeCount > 0) && ($removeCount < $remainCount)))
                 { # Delete any note slected to remove
-
-                    // $dbeans = R::loadAll('upload', $dfiles);
-                    // $dbeans = R::convertToBeans('upload', $dbeans);
-
-
-                    foreach (R::findAll('upload', 'id = ?', $dfiles) as $file)
-
-                    // foreach ($dbeans as $file)
-                    { # Delete each file in delete array
+                    for ($i = 0; $i < $removeCount; $i ++)
+                    {
+                        $file = R::find('upload', 'id = ?', [$dfiles[$i]]);
                         $file->delete();
                     }
                 }
