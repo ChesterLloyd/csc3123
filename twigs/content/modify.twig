@@ -15,6 +15,22 @@
     <link rel="stylesheet" href="{{assets}}/css/index.css">
 {% endblock css %}
 
+{% block onload %}
+    $('.delete-file').click(function(){
+        var fid = $(this).data('file');
+        var dfile = $('#de').val();
+        var dfiles = dfile.split(',');
+        if($.inArray(fid, dfiles) !== -1){
+            $('#deleteIcon' + fid).css('color', 'black');
+            dfiles.splice($.inArray(fid, dfiles), 1);
+        }else{
+            $('#deleteIcon' + fid).css('color', 'red');
+            dfiles.push(fid);
+        }
+        $('#de').val(arr.join(','));
+    });
+{% endblock onload %}
+
 {% block pageheader %}
 {% endblock pageheader %}
 
@@ -35,6 +51,7 @@
                         </p>
                     {% endif %}
                     <form id="mform" action="#" method="post" role="form" enctype="multipart/form-data">
+                        <input type="text" id="de" name="delete"/>
                         <div class="form-group">
                             <input type="text" id="na" name="name" placeholder="Name of Lecture Notes" class="form-control" required="required" value="{{note.name}}"/>
                         </div>
@@ -65,7 +82,10 @@
                             accept=".pdf,.txt,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.tar.gz,.7z,.zip,image/*"/>
                         </div>
 
+                        <br/>
+                        <br/>
                         <h2>Files</h2>
+                        <br/>
                         <table>
                             <tr>
                                 <th></th>
@@ -78,11 +98,12 @@
                                     <td><i class="fas fa-{{file.icon}}"></i></td>
                                     <td><a href="{{base}}/download/file/{{file.id}}" target="_blank">{{file.filename}}</a></td>
                                     <td>{{file.size}}</td>
-                                    <td><i class="fas fa-trash delete-file" data-file="{{file.id}}"></i></td>
+                                    <td><i class="fas fa-trash delete-file" id="deleteIcon{{file.id}}" data-file="{{file.id}}"></i></td>
                                 </tr>
                             {% endfor %}
                         </table>
-                        <button class="btn btn-success" type="submit">Save Changes</button>
+                        <br/>
+                        <button class="btn btn-success" type="submit" name="modify">Save Changes</button>
                     </form>
                 </div>
             </div>
