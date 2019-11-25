@@ -39,9 +39,9 @@
 /**
  * Hook for adding extra data to a file save.
  *
- * @param \Support\Context	$context	The context object for the site
- * @param int	$index	If you are reading data from an array fo files, this is the index
- *                      in the file. You may have paralleld data arrays and need this index.
+ * @param \Support\Context	$context  The context object for the site
+ * @param int	                $index	  If you are reading data from an array fo files, this is the index
+ *                                        in the file. You may have paralleld data arrays and need this index.
  *
  * @return void
  */
@@ -53,6 +53,21 @@
             $this->bean->icon = $context->getFileIcon($da['type']);
             // Calculate an appropriate unit size
             $this->bean->size = $context->getFileSize($da['size']);
+        }
+/**
+ * Hook for adding extra data to a file replace.
+ *
+ * @param \Support\Context	$context  The context object for the site
+ * @param int	                $index	  If you are reading data from an array fo files, this is the index
+ *                                        in the file. You may have paralleld data arrays and need this index.
+ *
+ * @return void
+ */
+        public function updateData(\Support\Context $context, int $index) : void
+        {
+            /*
+             * Your code goes here
+             */
         }
 /**
  * Called when you try to trash to an upload. Do any cleanup in here
