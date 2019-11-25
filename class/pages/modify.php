@@ -33,7 +33,7 @@
                     throw new \Framework\Exception\Forbidden('No access');
                 }
             }
-            $note = R::find('note', 'id = ?', [$nid]);
+            $user = R::load('note', $nid);
 
             // Do this if form is submitted
             $fd = $context->formdata();
