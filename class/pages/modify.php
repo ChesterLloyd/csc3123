@@ -115,6 +115,7 @@
                 }
                 $context->local()->message(Local::MESSAGE, 'Note has been saved.');
                 $context->local()->addval('saved', true);
+                $context->local()->addval('nid', $nid);
             }
 
             // Update file list (could be new ones from above)
