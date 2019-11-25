@@ -102,11 +102,15 @@
                 $dfiles = explode(',', $fd->post('delete'));
                 $removeCount = ($dfiles[0] == '') ? 0 : sizeof($dfiles);
                 $remainCount = R::count('upload', 'note_id = ?', [$nid]);
+                $context->local()->addval('removeC', $dfiles);
+                $context->local()->addval('remainC', $removeCount);
+                $context->local()->addval('dfiles', $remainCount);
+
                 if (($nfiles > 0) || (($removeCount > 0) && ($removeCount < $remainCount)))
                 { # Delete any note slected to remove
                     for ($i = 0; $i < $removeCount; $i ++)
                     {
-                        echo "CALL DELETE ON: ".$dfiles[$i];
+                        $context->local()->addval('df-'.$i, $dfiles[$i]);
                         // $file = R::findOne('upload', 'id = ?', [(int)$dfiles[$i]]);
                         // $file->delete();
                     }
