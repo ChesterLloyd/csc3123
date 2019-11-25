@@ -28,7 +28,7 @@
         public function canaccess($user, $op = 'r') : bool
         {
             // Get note and see if author set it to public
-            $note = \R::findOne('note', 'id=?', [$this->bean->note_id]);
+            $note = \R::findOne('note', 'id = ?', [$this->bean->note_id]);
             if ($note->privacy == 1)
             { # Ayone can see this if they are logged in and active
                 return $this->bean->user->isactive();
@@ -73,8 +73,10 @@
             unlink($context->local()->basedir().$this->fname);
 /**** Put any cleanup code of yours after this line ****/
             /*
-             * Your code goes here
+             * Remove upload bean
              */
+            $upl = \R::findOne('upload', 'id = ?', [$this->bean->id]);
+            \R::trash($upl);
         }
     }
 ?>
