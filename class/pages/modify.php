@@ -98,27 +98,34 @@
                     $context->local()->message(Local::ERROR, 'There was an issue uploading some of your files.');
                 }
 
-                // Start deleting files if we have 1 or more remaining
-                $dfiles = explode(',', $fd->post('delete'));
-                $removeCount = ($dfiles[0] == '') ? 0 : sizeof($dfiles);
-                $remainCount = R::count('upload', 'note_id = ?', [$nid]);
-                $context->local()->addval('removeC', $dfiles);
-                $context->local()->addval('remainC', $removeCount);
-                $context->local()->addval('dfiles', $remainCount);
+                // Start deleting files only if we have 1 or more remaining
+                if ($fd->post('delete') != '')
+                { # Something marked to delete
+                    $deleteFiles = explode(',', $fd->post('delete'));
+                    $removeCount = sizeof($deleteFiles);
+                    $totalCount = R::count('upload', 'note_id = ?', [$nid]);
+                    $context->local()->addval('deleteFiles', $deleteFiles);
+                    $context->local()->addval('removeCount', $removeCount);
+                    $context->local()->addval('totalCount', $totalCount);
 
-                if (($nfiles > 0) || (($removeCount > 0) && ($removeCount < $remainCount)))
-                { # Delete any note slected to remove
-                    for ($i = 0; $i < $removeCount; $i ++)
-                    {
-                        $context->local()->addval('df-'.$i, $dfiles[$i]);
-                        // $file = R::findOne('upload', 'id = ?', [(int)$dfiles[$i]]);
-                        // $file->delete();
+                    if (($nfiles > 0) || ($removeCount < $remainCount))
+                    { # Delete any note slected to remove
+                        for ($i = 0; $i < $removeCount; $i ++)
+                        {
+                            // $file = R::findOne('upload', 'id = ?', [(int)$dfiles[$i]]);
+                            // $file->delete();
+                        }
+                    }
+                    elseif ($removeCount != 0)
+                    { # Do not delete notes, will not be enough left
+                        $context->local()->message(Local::ERROR, 'No files were deleted, there must be at least 1 remaining.');
                     }
                 }
-                elseif ($removeCount != 0)
-                { # Do not delete notes, will not be enough left
-                    $context->local()->message(Local::ERROR, 'No files were deleted, there must be at least 1 remaining.');
-                }
+
+
+
+
+
             }
 
             // Update file list (could be new ones from above)
