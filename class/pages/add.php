@@ -42,6 +42,11 @@
                         $upl = \R::dispense('upload');
                         $note->xownFile[] = $upl;
                         $save = $upl->savefile($context, $fd->filedata('uploads', $ix), $public, $context->user(), $ix);
+                        if ($save)
+                        {
+                            $nfiles ++;
+                        }
+                        $tfiles = $ix;
                     }
                 }
                 else
@@ -51,11 +56,15 @@
                         $upl = \R::dispense('upload');
                         $note->xownFile[] = $upl;
                         $save = $upl->savefile($context, $fa, Config::UPUBLIC, $context->user(), $ix);
+                        if ($save)
+                        {
+                            $nfiles ++;
+                        }
+                        $tfiles = $ix;
                     }
                 }
-                if ($save)
-                {
-                    // The file(s) uploaded OK, store the note
+                if ($nfiles > 0)
+                { # Number of successfully saved files is > 0, save the note
                     $nid = \R::store($note);
 
                     // Then assign it to the author (logged in user)
@@ -64,8 +73,18 @@
                     $user->xownNote[] = $note;
                     \R::store($user);
 
-                    // Display a success message with a link to see thier notes
-                    $context->local()->message(Local::MESSAGE, 'Your notes have been uploaded. View them <a href=view?note=' . $nid . '>here</a>.');
+                    if ($nfiles == $tfiles)
+                    { # All files were saved, display a success message
+                        $context->local()->message(Local::MESSAGE, 'Your notes have been uploaded.');
+                    }
+                    else
+                    { # Not all files were saved
+                        $context->local()->message(Local::WARNING, 'Your notes have been uploaded, but some files have not been saved.');
+                    }
+                }
+                else
+                { # Note not saved as no files were uploaded
+                    $context->local()->message(Local::ERROR, 'Your notes have not been saved as there was an issue with the file(s) selected.');
                 }
             }
             return '@content/add.twig';
