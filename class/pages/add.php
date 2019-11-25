@@ -76,6 +76,7 @@
                     $user = \R::load('user', $uid);
                     $user->xownNote[] = $note;
                     \R::store($user);
+                    $context->local()->addval('nid', $nid);
 
                     if ($nfiles == $tfiles)
                     { # All files were saved, display a success message
