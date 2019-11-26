@@ -133,13 +133,13 @@
                     {% if notes|length < 1 %}
                         <p>No notes to display. You have not yet uploaded any notes.</p>
                     {% else %}
-                        <table>
+                        <table class="notes">
                             <tr>
                                 <th>Name</th>
                                 <th>Course</th>
                                 <th>Module</th>
                                 <th>Date</th>
-                                <th>Active</th>
+                                <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                             {% for upload in notes %}
@@ -148,8 +148,11 @@
                                     <td>{{upload.note.course}}</td>
                                     <td>{{upload.note.module}}</td>
                                     <td>{{upload.note.upload}}</td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{% if upload.note.privacy is same as(0) %}Private{% endif %}</td>
+                                    <td>
+                                        <a href="{{base}}/modify?note={{upload.note_id}}"><i class="fas fa-edit edit-note"></i></a>
+                                        <a href="{{base}}/delete/note/{{upload.note_id}}"><i class="fas fa-delete delete-note"></i></a>
+                                    </td>
                                 </tr>
                             {% endfor %}
                         </table>

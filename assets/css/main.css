@@ -114,6 +114,16 @@ table.stats > tbody > tr > th {
 table > tbody > tr > td > i {
     cursor: pointer;
 }
+/* privacy */
+table.notes > tbody > tr > td:nth-child(5) {
+    color: #f44336;
+}
+i.edit-note {
+    color: #fb8c00;
+}
+i.delete-note {
+    color: #ef5350;
+}
 
 /* Rating styles */
 div.stars {
