@@ -187,8 +187,8 @@
             // $context->local()->addval('mnotes', $mnotes);
 
             // Get number of favourite notes
-            $favourites = R::count('review', 'user_id = ? AND favourite = ?', [$uid, 1]);
-            $context->local()->addval('favourites', $favourites);
+            $nfavourites = R::count('review', 'user_id = ? AND favourite = ?', [$uid, 1]);
+            $context->local()->addval('nfavourites', $nfavourites);
 
             return '@content/account.twig';
         }
