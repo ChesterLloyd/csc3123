@@ -15,7 +15,7 @@
     {
         use \ModelExtend\Upload;
 /**
- * Return the owner of this uplaod
+ * Return the owner of this upload
  *
  * @return ?object
  */
@@ -24,7 +24,7 @@
             return $this->bean->user;
         }
 /**
- * Return the owner of this uplaod
+ * Return the corresponding note bean for this upload
  *
  * @return ?object
  */
