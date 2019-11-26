@@ -37,7 +37,7 @@
 
             // Get user's favourite notes
             $favourites = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
-                JOIN review R ON R.note_id = N.id WHERE user_id = ? AND
+                JOIN review R ON R.note_id = N.id WHERE upload.user_id = ? AND
                 R.favourite = ? GROUP BY N.id ORDER BY N.upload DESC', [$uid, 1]);
             $context->local()->addval('favourites', $favourites);
 
