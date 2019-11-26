@@ -24,6 +24,15 @@
             return $this->bean->user;
         }
 /**
+ * Return the owner of this uplaod
+ *
+ * @return ?object
+ */
+        public function note() : ?object
+        {
+            return \R::getOne('note', 'id = ?', [$this->bean->note_id]);
+        }
+/**
  * Store a file
  *
  * This is the basic functionality assumed by the framework. You can adapt this by changing this function.

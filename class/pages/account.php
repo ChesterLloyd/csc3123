@@ -30,15 +30,20 @@
             $recent = R::getCell('SELECT max(upload) FROM note WHERE user_id = ?', [$uid]);
             $context->local()->addval('recent', $recent);
 
-            // // Get user's recently uploaded notes
-            // // Get notes as beans
-            // $sql = 'SELECT N.* FROM note N
-            //     JOIN user U ON N.user_id = U.id
-            //     WHERE U.id = '.$user->id.'
-            //     ORDER BY N.upload DESC LIMIT 4';
-            // $rows = R::getAll($sql);
-            // $rnotes = R::convertToBeans('note', $rows);
-            // $context->local()->addval('rnotes', $rnotes);
+
+
+            // Get user's recently uploaded files
+            $ruploads = R::findAll('upload', 'WHERE user_id = ?
+                GROUP BY note_id ORDER BY added DESC LIMIT 4', [$uid]);
+            $context->local()->addval('ruploads', $ruploads);
+
+
+
+
+
+
+
+
             //
             //
             // // Get 6 top notes

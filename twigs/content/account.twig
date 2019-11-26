@@ -59,19 +59,19 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
-                        {% for key, file in rfiles %}
+                        {% for upload in ruploads %}
                             <div class="col-sm-12 col-md-12 col-lg-4">
                                 <div class="card mb-3">
                                     <div class="row no-gutters">
-                                        <div class="col-md-2 note-icon {{file.icon}}">
-                                            <i class="fas fa-file-{{file.icon}} note-icon"></i>
+                                        <div class="col-md-2 note-icon {{upload.icon}}">
+                                            <i class="fas fa-file-{{upload.icon}} note-icon"></i>
                                         </div>
                                         <div class="col-md-10">
                                             <div class="card-body">
-                                                <h5 class="card-title">{{rnotes[file.note_id].name}}</h5>
-                                                <p class="card-text"><b>{{rnotes[file.note_id].module}}</b> - {{rnotes[file.note_id].description}}</p>
-                                                <p class="card-text"><small class="text-muted">Uploaded {{rnotes[file.note_id].upload}}</small></p>
-                                                <a href="{{base}}/view?note={{file.note_id}}" class="btn btn-primary">View</a>
+                                                <h5 class="card-title">{{upload.note.name}}</h5>
+                                                <p class="card-text"><b>{{upload.note.module}}</b> - {{upload.note.description}}</p>
+                                                <p class="card-text"><small class="text-muted">Uploaded {{upload.note.upload}}</small></p>
+                                                <a href="{{base}}/view?note={{upload.note_id}}" class="btn btn-primary">View</a>
                                             </div>
                                         </div>
                                     </div>
