@@ -30,7 +30,7 @@
  */
         public function note() : ?object
         {
-            return \R::getOne('note', 'id = ?', [$this->bean->note_id]);
+            return \R::findOne('note', 'id = ?', [$this->bean->note_id]);
         }
 /**
  * Store a file
