@@ -86,7 +86,6 @@
             }
             return round($fsize, 2) . ' ' . $units[$unit];
         }
-    }
 
 /**
 * Takes an array of files and returns a new array with the files the user can access
@@ -106,4 +105,5 @@
             }
             return $files;
         }
+    }
 ?>
