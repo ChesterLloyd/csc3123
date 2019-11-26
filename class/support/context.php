@@ -87,4 +87,23 @@
             return round($fsize, 2) . ' ' . $units[$unit];
         }
     }
+
+/**
+* Takes an array of files and returns a new array with the files the user can access
+*
+* @param array     The files the user wants to access
+*
+* @return array    The files that the user can access
+*/
+        public function canAccessFiles(array $files) : array
+        {
+            foreach ($files as $file)
+            {
+                if (!$file->canaccess($context->user()))
+                { # Current user cannot access the file, remove from array
+                    unset($files[$file->id]);
+                }
+            }
+            return $files;
+        }
 ?>
