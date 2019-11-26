@@ -59,25 +59,31 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
-                        {% for upload in ruploads %}
-                            <div class="col-sm-12 col-md-12 col-lg-4">
-                                <div class="card mb-3">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-2 note-icon {{upload.icon}}">
-                                            <i class="fas fa-{{upload.icon}} note-icon"></i>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{upload.note.name}}</h5>
-                                                <p class="card-text"><b>{{upload.note.module}}</b> - {{upload.note.description}}</p>
-                                                <p class="card-text"><small class="text-muted">Uploaded {{upload.note.upload}}</small></p>
-                                                <a href="{{base}}/view?note={{upload.note_id}}" class="btn btn-primary">View</a>
+                        {% if ruploads|length < 1 %}
+                            <div class="col-12">
+                                <p>No notes to display. You have not yet uploaded any notes.</p>
+                            </div>
+                        {% else %}
+                            {% for upload in ruploads %}
+                                <div class="col-sm-12 col-md-12 col-lg-4">
+                                    <div class="card mb-3">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-2 note-icon {{upload.icon}}">
+                                                <i class="fas fa-{{upload.icon}} note-icon"></i>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{upload.note.name}}</h5>
+                                                    <p class="card-text"><b>{{upload.note.module}}</b> - {{upload.note.description}}</p>
+                                                    <p class="card-text"><small class="text-muted">Uploaded {{upload.note.upload}}</small></p>
+                                                    <a href="{{base}}/view?note={{upload.note_id}}" class="btn btn-primary">View</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -89,25 +95,31 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
-                        {% for upload in favourites %}
-                            <div class="col-sm-12 col-md-12 col-lg-4">
-                                <div class="card mb-3">
-                                    <div class="row no-gutters">
-                                        <div class="col-md-2 note-icon {{upload.icon}}">
-                                            <i class="fas fa-{{upload.icon}} note-icon"></i>
-                                        </div>
-                                        <div class="col-md-10">
-                                            <div class="card-body">
-                                                <h5 class="card-title">{{upload.note.name}}</h5>
-                                                <p class="card-text"><b>{{upload.note.module}}</b> - {{upload.note.description}}</p>
-                                                <p class="card-text"><small class="text-muted">Uploaded {{upload.note.upload}}</small></p>
-                                                <a href="{{base}}/view?note={{upload.note_id}}" class="btn btn-primary">View</a>
+                        {% if favourites|length < 1 %}
+                            <div class="col-12">
+                                <p>No notes to display. You have not added any notes to your favourites.</p>
+                            </div>
+                        {% else %}
+                            {% for upload in favourites %}
+                                <div class="col-sm-12 col-md-12 col-lg-4">
+                                    <div class="card mb-3">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-2 note-icon {{upload.icon}}">
+                                                <i class="fas fa-{{upload.icon}} note-icon"></i>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{upload.note.name}}</h5>
+                                                    <p class="card-text"><b>{{upload.note.module}}</b> - {{upload.note.description}}</p>
+                                                    <p class="card-text"><small class="text-muted">Uploaded {{upload.note.upload}}</small></p>
+                                                    <a href="{{base}}/view?note={{upload.note_id}}" class="btn btn-primary">View</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        {% endfor %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -118,26 +130,32 @@
                     <h2>My Notes</h2>
                 </div>
                 <div class="round-box-body">
-                    <table>
-                        <tr>
-                            <th>Name</th>
-                            <th>Course</th>
-                            <th>Module</th>
-                            <th>Date</th>
-                            <th>Active</th>
-                            <th>Actions</th>
-                        </tr>
-                        {% for upload in notes %}
+                    {% if notes|length < 1 %}
+                        <div class="col-12">
+                            <p>No notes to display. You have not yet uploaded any notes.</p>
+                        </div>
+                    {% else %}
+                        <table>
                             <tr>
-                                <td><a href="{{base}}/view?note={{upload.note_id}}">{{upload.note.name}}</a></td>
-                                <td>{{upload.note.course}}</td>
-                                <td>{{upload.note.module}}</td>
-                                <td>{{upload.note.upload}}</td>
-                                <td></td>
-                                <td></td>
+                                <th>Name</th>
+                                <th>Course</th>
+                                <th>Module</th>
+                                <th>Date</th>
+                                <th>Active</th>
+                                <th>Actions</th>
                             </tr>
-                        {% endfor %}
-                    </table>
+                            {% for upload in notes %}
+                                <tr>
+                                    <td><a href="{{base}}/view?note={{upload.note_id}}">{{upload.note.name}}</a></td>
+                                    <td>{{upload.note.course}}</td>
+                                    <td>{{upload.note.module}}</td>
+                                    <td>{{upload.note.upload}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endif %}
                     <a href="{{base}}/add/" class="btn btn-success">Upload Notes</a>
                 </div>
             </div>
