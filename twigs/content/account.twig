@@ -127,12 +127,12 @@
                             <th>Active</th>
                             <th>Actions</th>
                         </tr>
-                        {% for note in mnotes %}
+                        {% for upload in notes %}
                             <tr>
-                                <td><a href="{{base}}/view?note={{note.id}}">{{note.name}}</a></td>
-                                <td>{{note.course}}</td>
-                                <td>{{note.module}}</td>
-                                <td>{{note.upload}}</td>
+                                <td><a href="{{base}}/view?note={{upload.note_id}}">{{upload.note.name}}</a></td>
+                                <td>{{upload.note.course}}</td>
+                                <td>{{upload.note.module}}</td>
+                                <td>{{upload.note.upload}}</td>
                                 <td></td>
                                 <td></td>
                             </tr>

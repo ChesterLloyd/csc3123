@@ -41,6 +41,10 @@
                 R.favourite = ? GROUP BY N.id ORDER BY N.upload DESC', [$uid, 1]);
             $context->local()->addval('favourites', $favourites);
 
+            // Get user's own notes
+            $notes = R::findAll('upload', 'WHERE user_id = ?
+                GROUP BY note_id ORDER BY added DESC', [$uid]);
+            $context->local()->addval('notes', $notes);
 
 
 
