@@ -148,10 +148,10 @@
                                     <td>{{upload.note.course}}</td>
                                     <td>{{upload.note.module}}</td>
                                     <td>{{upload.note.upload}}</td>
-                                    <td>{% if upload.note.privacy is same as(0) %}Private{% endif %}</td>
+                                    <td>{% if upload.note.privacy is same as('0') %}Private{% endif %}</td>
                                     <td>
                                         <a href="{{base}}/modify?note={{upload.note_id}}"><i class="fas fa-edit edit-note"></i></a>
-                                        <a href="{{base}}/delete/note/{{upload.note_id}}"><i class="fas fa-delete delete-note"></i></a>
+                                        <a href="{{base}}/delete/note/{{upload.note_id}}"><i class="fas fa-trash delete-note"></i></a>
                                     </td>
                                 </tr>
                             {% endfor %}

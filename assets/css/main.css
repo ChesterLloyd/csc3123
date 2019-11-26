@@ -120,6 +120,7 @@ table.notes > tbody > tr > td:nth-child(5) {
 }
 i.edit-note {
     color: #fb8c00;
+    margin-right: 10px;
 }
 i.delete-note {
     color: #ef5350;
