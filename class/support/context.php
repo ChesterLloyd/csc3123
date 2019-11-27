@@ -96,13 +96,13 @@
 */
         public function canAccessFiles(array $files) : array
         {
-            foreach ($files as $file)
-            {
-                if (!$file->canaccess($this->user()))
-                { # Current user cannot access the file, remove from array
-                    unset($files[$file->id]);
-                }
-            }
+            // foreach ($files as $file)
+            // {
+            //     if (!$file->canaccess($this->user()))
+            //     { # Current user cannot access the file, remove from array
+            //         unset($files[$file->id]);
+            //     }
+            // }
             return $files;
         }
     }
