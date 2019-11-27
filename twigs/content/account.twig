@@ -169,7 +169,7 @@
                         <h2>All Notes</h2>
                     </div>
                     <div class="round-box-body">
-                        {% if notes|length < 1 %}
+                        {% if all|length < 1 %}
                             <p>No notes to display. No notes have been added by anyone yet.</p>
                         {% else %}
                             <table class="notes">
@@ -182,7 +182,7 @@
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
-                                {% for upload in notes %}
+                                {% for upload in all %}
                                     <tr>
                                         <td><a href="{{base}}/view?note={{upload.note_id}}">{{upload.note.name}}</a></td>
                                         <td>{{upload.note.course}}</td>
