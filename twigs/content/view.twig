@@ -27,6 +27,7 @@
 {% endblock setup %}
 
 {% block onload %}
+    <script src="{{base}}/assets/js/delete-note.js"></script>
     {% if favourite is same as("1") %}
         $('#addFavourite').hide();
     {% else %}
@@ -69,7 +70,6 @@
             $('#ratingError').show();
         }
     });
-    <script src="{{base}}/assets/js/delete-note.js"></script>
 {% endblock onload %}
 
 {% block main %}
