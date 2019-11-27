@@ -83,7 +83,11 @@
                     <div class="row">
                         {% if top|length < 1 %}
                             <div class="col-12">
-                                <p>No notes to display.</p>
+                                {% if guest %}
+                                    <p>Please <a href="{{base}}/login/">log in</a> to view these lecture notes.</p>
+                                {% else %}
+                                    <p>No notes to display.</p>
+                                {% endif %}
                             </div>
                         {% else %}
                             {% for upload in top %}
