@@ -98,7 +98,7 @@
         {
             foreach ($files as $file)
             {
-                if (!$file->canaccess($context->user()))
+                if (!$file->canaccess($this->user()))
                 { # Current user cannot access the file, remove from array
                     unset($files[$file->id]);
                 }
