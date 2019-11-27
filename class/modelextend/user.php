@@ -9,6 +9,7 @@
  *
  */
     namespace ModelExtend;
+    use \Config\Framework as FW;
 /**
  * User table stores info about users of the system
  */
