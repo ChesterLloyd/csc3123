@@ -103,7 +103,6 @@
             }
             return $files;
         }
-    }
 /**
  * Do we have a logged in teacher user?
  *
@@ -114,4 +113,5 @@
             /** @psalm-suppress PossiblyNullReference */
             return $this->hasuser() && $this->user()->isteacher();
         }
+    }
 ?>
