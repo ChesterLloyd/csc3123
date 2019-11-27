@@ -19,7 +19,6 @@
  * Add functions that implement your AJAX operations here and register them
  * in the handle method below.
  */
-
 /**
  * Adds a note to the user's favourites
  *
@@ -31,10 +30,10 @@
         {
             $rest = $context->rest();
             $nid = $rest[1];
-            $note = R::findOne('note', 'id=?', [$nid]);
+            $note = R::findOne('note', 'id = ?', [$nid]);
             $uid = $context->user()->id;
             // Find review for this user and this note (favourite flag stored in reviews)
-            $review = R::findOne('review', 'note_id=? AND user_id=?', [$nid, $uid]);
+            $review = R::findOne('review', 'note_id = ? AND user_id = ?', [$nid, $uid]);
 
             if (!$review)
             { # No bean has been loaded (no review, so make one)
@@ -72,7 +71,6 @@
                 }
             }
         }
-
 /**
  * Removes a note from the user's favourites
  *
@@ -84,10 +82,10 @@
         {
             $rest = $context->rest();
             $nid = $rest[1];
-            $note = R::findOne('note', 'id=?', [$nid]);
+            $note = R::findOne('note', 'id = ?', [$nid]);
             $uid = $context->user()->id;
             // Find review for this user and this note (favourite flag stored in reviews)
-            $review = R::findOne('review', 'note_id=? AND user_id=?', [$nid, $uid]);
+            $review = R::findOne('review', 'note_id = ? AND user_id = ?', [$nid, $uid]);
 
             if (!$review)
             { # No bean has been loaded (no review, nothing to do)
@@ -107,7 +105,6 @@
                 }
             }
         }
-
 /**
  * Adds a review for a note, by a user. Updates the rating if a review exists.
  *
@@ -120,10 +117,10 @@
             $rest = $context->rest();
             $nid = $rest[1];
             $rating = $rest[2];
-            $note = R::findOne('note', 'id=?', [$nid]);
+            $note = R::findOne('note', 'id = ?', [$nid]);
             $uid = $context->user()->id;
             // Find review for this user and this note (favourite flag stored in reviews)
-            $review = R::findOne('review', 'note_id=? AND user_id=?', [$nid, $uid]);
+            $review = R::findOne('review', 'note_id = ? AND user_id = ?', [$nid, $uid]);
 
             if (!$review)
             { # No bean has been loaded (no review, add a new one)
@@ -157,8 +154,48 @@
                 R::store($review);
             }
         }
-
-
+/**
+ * Deletes a note and all corresponding upload beans
+ *
+ * @param \Support\Context	$context	The context object for the site
+ *
+ * @return void
+ *
+ * @throws \Framework\Exception\Forbidden
+ */
+        public function delete(Context $context) : void
+        {
+            $rest = $context->rest();
+            $nid = $rest[1];
+            $note = R::findOne('note', 'id = ?', [$nid]);
+            if (!$note)
+            { # Note bean has been loaded (no note to delete)
+                echo "This note has already been removed.";
+            }
+            else
+            { # Note does exist, try to delete
+                $uid = $context->user()->id;
+                $access = false;
+                $uploads = R::findAll('upload', 'note_id = ?', [$nid]);
+                foreach ($upload as $upload)
+                { # Iterate through each uploaded file bean attached to the note
+                    if ($upload->canaccess($context->user()))
+                    { # User has access to delete it
+                        R::trash($upload);
+                        $access = true;
+                    }
+                    else
+                    { # USer cannot access the files, should not attempt anymore
+                        throw new \Framework\Exception\Forbidden('No access');
+                    }
+                }
+                if ($access)
+                { # Could access the files, time to delete the note bean
+                    R::trash($note);
+                    echo "This note has been removed.";
+                }
+            }
+        }
 /**
  * If you are using the pagination or search hinting features of the framework then you need to
  * add some appropriate vaues into these arrays.
@@ -211,7 +248,7 @@
         public function handle(Context $context) : void
         {
             //$this->operation(['yourop', ...], [TRUE, [['ContextName', 'RoleName'],...]]);
-            $this->operation(['addFavourite', 'removeFavourite', 'addReview'], [TRUE, [['Site', 'Student']]]);
+            $this->operation(['addFavourite', 'removeFavourite', 'addReview', 'delete'], [TRUE, [['Site', 'Student'], ['Site', 'Teacher']]]);
             // TRUE if login needed, then an array of roles required in form [['context name', 'role name']...] (can be empty)
             $this->pageOrHint(self::$allowPaging, self::$allowHints);
             $this->beanAccess(self::$allowBean, self::$allowToggle, self::$allowTable, self::$audit);

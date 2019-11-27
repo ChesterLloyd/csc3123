@@ -53,6 +53,12 @@
             callback: function (result) {
                 if (result){
                     console.log("DELETE NOTE " + nid);
+                    $.post('{{base}}/ajax/delete/'+nid+'/', {
+                    }).done(function(data){
+                        $('#n-'+nid).hide();
+                    }).fail(function(jqXHR, textStatus, errorThrown){
+                        bootbox.alert('<h3>Error Deleting Note</h3><br>'+jqXHR.responseText);
+                    });
                 }
             }
         });

@@ -19,6 +19,8 @@
  * @param object	$context	The context object for the site
  *
  * @return string	A template name
+ *
+ * @throws \Framework\Exception\Forbidden
  */
         public function handle(Context $context)
         { # Get existing note to page
