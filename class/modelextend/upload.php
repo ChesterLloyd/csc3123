@@ -35,7 +35,7 @@
             }
             else
             { # Else, only the author or an admin can do this
-                return $this->bean->user->equals($user) || $user->isadmin();
+                return $this->bean->user->equals($user) || $user->isadmin() || $user->isteacher();
             }
         }
 /**
