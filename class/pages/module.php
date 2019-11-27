@@ -40,22 +40,9 @@
             $context->local()->addval('top', $context->canAccessFiles($top));
 
             // Get every file and note user can access
-            $notes = array();
-            $files = R::findAll('upload', 'JOIN note N on N.id = upload.note_id
-                WHERE N.module = ? GROUP BY note_id ORDER BY added DESC', [$module]);
-            foreach ($files as $file)
-            {
-                if (!$file->canaccess($context->user()))
-                { # Current user cannot access the file, remove from array
-                    unset($files[$file->id]);
-                }
-                else
-                { # User can access file, save note to array
-                    array_push($notes, $file->note);
-                }
-            }
-            $context->local()->addval('anotes', $notes);
-            $context->local()->addval('afiles', $files);
+            $notes = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
+                WHERE N.module = ? GROUP BY N.id ORDER BY added DESC', [$module]);
+            $context->local()->addval('notes', $context->canAccessFiles($notes));
 
             return '@content/module.twig';
         }
