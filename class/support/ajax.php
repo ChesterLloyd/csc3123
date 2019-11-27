@@ -170,7 +170,7 @@
             $note = R::findOne('note', 'id = ?', [$nid]);
             if (!$note)
             { # Note bean has been loaded (no note to delete)
-                echo "This note has already been removed.";
+                throw new \Framework\Exception\Forbidden('No access');
             }
             else
             { # Note does exist, try to delete
@@ -185,7 +185,7 @@
                         $access = true;
                     }
                     else
-                    { # USer cannot access the files, should not attempt anymore
+                    { # User cannot access the files, should not attempt anymore
                         throw new \Framework\Exception\Forbidden('No access');
                     }
                 }
