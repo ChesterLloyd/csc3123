@@ -67,7 +67,6 @@
                 break;
             }
         }
-
 /**
 * Returns file size with an appropriate unit, when given the size in bytes
 *
@@ -86,7 +85,6 @@
             }
             return round($fsize, 2) . ' ' . $units[$unit];
         }
-
 /**
 * Takes an array of files and returns a new array with the files the user can access
 *
@@ -106,4 +104,14 @@
             return $files;
         }
     }
+/**
+ * Do we have a logged in teacher user?
+ *
+ * @return boolean
+ */
+        public function hasteacher()
+        {
+            /** @psalm-suppress PossiblyNullReference */
+            return $this->hasuser() && $this->user()->isteacher();
+        }
 ?>

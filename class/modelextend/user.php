@@ -44,4 +44,13 @@
             return [];
         }
     }
+/**
+ * Is this user a teacher?
+ *
+ * @return bool
+ */
+        public function isteacher() : bool
+        {
+            return is_object($this->hasrole(FW::FWCONTEXT, 'Teacher'));
+        }
 ?>

@@ -46,6 +46,13 @@
                 GROUP BY note_id ORDER BY added DESC', [$uid]);
             $context->local()->addval('notes', $notes);
 
+            if ($context->hasteacher())
+            { # If user is a teacher, show everyone's notes
+                $all = R::findAll('upload', 'GROUP BY note_id ORDER BY added DESC');
+                $context->local()->addval('all', $all);
+                $context->local()->addval('teacher', true);
+            }
+
             // Get number of favourite notes
             $nfavourites = R::count('review', 'user_id = ? AND favourite = ?', [$uid, 1]);
             $context->local()->addval('nfavourites', $nfavourites);
