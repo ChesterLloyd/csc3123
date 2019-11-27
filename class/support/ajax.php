@@ -177,7 +177,7 @@
                 $uid = $context->user()->id;
                 $access = false;
                 $uploads = R::findAll('upload', 'note_id = ?', [$nid]);
-                foreach ($upload as $upload)
+                foreach ($uploads as $upload)
                 { # Iterate through each uploaded file bean attached to the note
                     if ($upload->canaccess($context->user()))
                     { # User has access to delete it
