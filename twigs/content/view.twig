@@ -27,7 +27,6 @@
 {% endblock setup %}
 
 {% block onload %}
-    <script src="{{base}}/assets/js/delete-note.js"></script>
     {% if favourite is same as("1") %}
         $('#addFavourite').hide();
     {% else %}
@@ -175,11 +174,11 @@
                     </div>
                     {% if not user.id is same as(author.id) %}
                         <button id="invokeAddReview" class="btn btn-primary" data-toggle="modal" data-target="#modalReview" type="button">
-                            {% if review is same as(0) %}
-                                Add Review
-                            {% else %}
-                                Modify Review
-                            {% endif %}
+                        {% if review is same as(0) %}
+                            Add Review
+                        {% else %}
+                            Modify Review
+                        {% endif %}
                         </button>
                     {% endif %}
                     <a href="#" class="btn btn-danger" id="unFavourite">Unfavourite</a>
