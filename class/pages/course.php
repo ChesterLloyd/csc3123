@@ -29,47 +29,17 @@
             $context->local()->addval('user', $user);
 
             // Get 6 top notes
-            $sql = 'SELECT F.* FROM upload F
-                JOIN note N on N.id = F.note_id
-                JOIN review R ON R.note_id = N.id
-                WHERE N.course = "'.$course.'"
-                GROUP BY N.id
+            $top = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
+                JOIN review R ON R.note_id = N.id WHERE N.course = ?
+                AND R.rating > 0 GROUP BY N.id
                 ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
-                N.upload DESC LIMIT 6';
-            $rows = R::getAll($sql);
-            $files = R::convertToBeans('upload', $rows);
-            $notes = array();
-            foreach ($files as $file)
-            {
-                if (!$file->canaccess($context->user()))
-                { # Current user cannot access the file, remove from array
-                    unset($files[$file->id]);
-                }
-                else
-                { # User can access file, save note to array
-                    array_push($notes, $file->note);
-                }
-            }
-            $context->local()->addval('tnotes', $notes);
-            $context->local()->addval('tfiles', $files);
-
+                N.upload DESC LIMIT 6', [$course]);
+            $context->local()->addval('top', $context->canAccessFiles($top));
+            
             // Get every file and note user can access
-            $notes = array();
-            $files = R::findAll('upload', 'JOIN note N on N.id = upload.note_id
-                WHERE N.course = ? GROUP BY note_id ORDER BY added DESC', [$course]);
-            foreach ($files as $file)
-            {
-                if (!$file->canaccess($context->user()))
-                { # Current user cannot access the file, remove from array
-                    unset($files[$file->id]);
-                }
-                else
-                { # User can access file, save note to array
-                    array_push($notes, $file->note);
-                }
-            }
-            $context->local()->addval('anotes', $notes);
-            $context->local()->addval('afiles', $files);
+            $notes = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
+                WHERE N.course = ? GROUP BY N.id ORDER BY added DESC', [$course]);
+            $context->local()->addval('notes', $context->canAccessFiles($notes));
 
             return '@content/course.twig';
         }
