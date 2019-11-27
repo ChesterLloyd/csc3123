@@ -18,7 +18,7 @@
         <article class="col-md-12">
             <div class="jumbotron">
                 <h1>Note Sharing</h1>
-                <p>Text...</p>
+                <p>Share your notes from any course or module on this site.</p>
             </div>
         </article>
     </section>
@@ -30,7 +30,7 @@
                 </div>
                 <div class="round-box-body">
                     <div class="subjects">
-                        <a href="#">
+                        <a href="{{base}}/course?title=Computer%20Science">
                             <div class="subject">
                                 <span class="subject-icon cs">
                                     <i class="fas fa-laptop-code"></i>
@@ -38,7 +38,7 @@
                                 <p>Computer<br> Science</p>
                             </div>
                         </a>
-                        <a href="#">
+                        <a href="{{base}}/course?title=Maths">
                             <div class="subject">
                                 <span class="subject-icon maths">
                                     <i class="fas fa-square-root-alt"></i>
@@ -46,7 +46,7 @@
                                 <p>Maths</p>
                             </div>
                         </a>
-                        <a href="#">
+                        <a href="{{base}}/course?title=Physics">
                             <div class="subject">
                                 <span class="subject-icon physics">
                                     <i class="fas fa-ruler-vertical"></i>
@@ -54,7 +54,7 @@
                                 <p>Physics</p>
                             </div>
                         </a>
-                        <a href="#">
+                        <a href="{{base}}/course?title=Chemistry">
                             <div class="subject">
                                 <span class="subject-icon chemistry">
                                     <i class="fas fa-vial"></i>
@@ -62,7 +62,7 @@
                                 <p>Chemistry</p>
                             </div>
                         </a>
-                        <a href="#">
+                        <a href="{{base}}/course?title=Accounting">
                             <div class="subject">
                                 <span class="subject-icon accounting">
                                     <i class="fas fa-calculator"></i>
@@ -81,74 +81,31 @@
                 </div>
                 <div class="round-box-body">
                     <div class="row">
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon ppt">
-                                        <i class="fas fa-file-powerpoint note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Experimental Design</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
+                        {% if top|length < 1 %}
+                            <div class="col-12">
+                                <p>No notes to display.</p>
+                            </div>
+                        {% else %}
+                            {% for upload in top %}
+                                <div class="col-sm-12 col-md-12 col-lg-6">
+                                    <div class="card mb-3">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-2 note-icon {{upload.icon}}">
+                                                <i class="fas fa-{{upload.icon}} note-icon"></i>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{upload.note.name}}</h5>
+                                                    <p class="card-text"><b>{{upload.note.module}}</b> - {{upload.note.description}}</p>
+                                                    <p class="card-text"><small class="text-muted">Uploaded {{upload.note.upload}}</small></p>
+                                                    <a href="{{base}}/view?note={{upload.note_id}}" class="btn btn-primary">View</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon ppt">
-                                        <i class="fas fa-file-powerpoint note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Really big long title to see what that looks like</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 10 hours ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon doc">
-                                        <i class="fas fa-file-word note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Experimental Design</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <div class="card mb-3">
-                                <div class="row no-gutters">
-                                    <div class="col-md-2 note-icon pdf">
-                                        <i class="fas fa-file-pdf note-icon"></i>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Experimental Design</h5>
-                                            <p class="card-text"><b>CSC3095</b> - This is a PowerPoint presentation on how to design your experiement.</p>
-                                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                                            <a href="#" class="btn btn-primary">View</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
             </div>
