@@ -32,7 +32,6 @@
     {% else %}
         $('#unFavourite').hide();
     {% endif %}
-
     $('#addFavourite').click(function(){
         $.post('{{base}}/ajax/addFavourite/{{note.id}}/',{
         }).done(function(data){
@@ -53,7 +52,6 @@
             bootbox.alert('<h3>Error</h3><br>'+jqXHR.responseText);
         });
     });
-
     $('#ratingError').hide();
     $('#addReview').click(function(){
         var rating = $('#ra :selected').val();

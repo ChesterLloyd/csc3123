@@ -27,15 +27,7 @@
 {% endblock setup %}
 
 {% block onload %}
-    $('.unfavourite').click(function() {
-        var nid = $(this).data('note');
-        $.post('{{base}}/ajax/removeFavourite/'+nid+'/', {
-        }).done(function(data){
-            $('#fn-'+nid).hide();
-        }).fail(function(jqXHR, textStatus, errorThrown){
-            bootbox.alert('<h3>Error</h3><br>'+jqXHR.responseText);
-        });
-    });
+    <script src="{{base}}/assets/js/unfavourite-buttons.js"></script>
 {% endblock onload %}
 
 {% block main %}
