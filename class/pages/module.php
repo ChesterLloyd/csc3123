@@ -37,7 +37,8 @@
                 AND R.rating > 0 GROUP BY N.id
                 ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
                 N.upload DESC LIMIT 6', [$module]);
-            $context->local()->addval('top', $context->canAccessFiles($top));
+            // $context->local()->addval('top', $context->canAccessFiles($top));
+            $context->local()->addval('top', $top);
 
             // Get every file and note user can access
             $notes = array();
