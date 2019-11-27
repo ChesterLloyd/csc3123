@@ -8,6 +8,7 @@
     namespace Pages;
 
     use \Support\Context as Context;
+    use \R as R;
 /**
  * A class that contains code to implement a home page
  */
