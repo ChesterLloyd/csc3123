@@ -26,69 +26,23 @@
             $context->local()->addval('user', $user);
 
             // Get users favourite notes
-            $sql = 'SELECT F.* FROM upload F
-                JOIN note N on N.id = F.note_id
-                JOIN review R ON R.note_id = N.id
-                WHERE R.user_id = '.$uid.' AND R.favourite = 1
-                GROUP BY N.id';
-            $rows = R::getAll($sql);
-            $files = R::convertToBeans('upload', $rows);
-            $notes = array();
-            foreach ($files as $file)
-            {
-                if (!$file->canaccess($context->user()))
-                { # Current user cannot access the file, remove from array
-                    unset($files[$file->id]);
-                }
-                else
-                { # User can access file, save note to array
-                    array_push($notes, $file->note);
-                }
-            }
-            $context->local()->addval('fnotes', $notes);
-            $context->local()->addval('ffiles', $files);
+            $favourites = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
+                JOIN review R ON R.note_id = N.id WHERE R.user_id = ?
+                AND R.favourite = ? GROUP BY N.id ORDER BY N.upload DESC', [$uid, 1]);
+            $context->local()->addval('favourites', $context->canAccessFiles($favourites));
 
             // Get 6 top notes
-            $sql = 'SELECT F.* FROM upload F
-                JOIN note N on N.id = F.note_id
-                JOIN review R ON R.note_id = N.id
-                GROUP BY N.id
+            $top = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
+                JOIN review R ON R.note_id = N.id WHERE R.rating > 0 GROUP BY N.id
                 ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
-                N.upload DESC LIMIT 6';
-            $rows = R::getAll($sql);
-            $files = R::convertToBeans('upload', $rows);
-            $notes = array();
-            foreach ($files as $file)
-            {
-                if (!$file->canaccess($context->user()))
-                { # Current user cannot access the file, remove from array
-                    unset($files[$file->id]);
-                }
-                else
-                { # User can access file, save note to array
-                    array_push($notes, $file->note);
-                }
-            }
-            $context->local()->addval('tnotes', $notes);
-            $context->local()->addval('tfiles', $files);
+                N.upload DESC LIMIT 6');
+            $context->local()->addval('top', $context->canAccessFiles($top));
 
             // Get every file and note user can access
-            $notes = array();
-            $files = R::findAll('upload', 'GROUP BY note_id ORDER BY added DESC');
-            foreach ($files as $file)
-            {
-                if (!$file->canaccess($context->user()))
-                { # Current user cannot access the file, remove from array
-                    unset($files[$file->id]);
-                }
-                else
-                { # User can access file, save note to array
-                    array_push($notes, $file->note);
-                }
-            }
-            $context->local()->addval('anotes', $notes);
-            $context->local()->addval('afiles', $files);
-
+            $notes = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
+                GROUP BY N.id ORDER BY added DESC');
+            $context->local()->addval('notes', $context->canAccessFiles($notes));
+            
             return '@content/notes.twig';
         }
     }
