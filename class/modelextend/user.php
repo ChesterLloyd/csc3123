@@ -43,7 +43,6 @@
         {
             return [];
         }
-    }
 /**
  * Is this user a teacher?
  *
@@ -53,4 +52,5 @@
         {
             return is_object($this->hasrole(FW::FWCONTEXT, 'Teacher'));
         }
+    }
 ?>
