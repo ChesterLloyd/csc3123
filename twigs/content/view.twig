@@ -69,6 +69,7 @@
             $('#ratingError').show();
         }
     });
+    <script src="{{base}}/assets/js/delete-note.js"></script>
 {% endblock onload %}
 
 {% block main %}
@@ -174,17 +175,18 @@
                     </div>
                     {% if not user.id is same as(author.id) %}
                         <button id="invokeAddReview" class="btn btn-primary" data-toggle="modal" data-target="#modalReview" type="button">
-                        {% if review is same as(0) %}
-                            Add Review
-                        {% else %}
-                            Modify Review
-                        {% endif %}
+                            {% if review is same as(0) %}
+                                Add Review
+                            {% else %}
+                                Modify Review
+                            {% endif %}
                         </button>
                     {% endif %}
                     <a href="#" class="btn btn-danger" id="unFavourite">Unfavourite</a>
                     <a href="#" class="btn btn-success" id="addFavourite">Add Favourite</a>
                     {% if user.id is same as(author.id) %}
                         <a href="{{base}}/modify?note={{note.id}}" class="btn btn-warning">Modify Note</a>
+                        <button class="btn btn-danger delete-note" data-note="{{note.id}}" type="button">Delete</button>
                     {% endif %}
                 </div>
             </div>
