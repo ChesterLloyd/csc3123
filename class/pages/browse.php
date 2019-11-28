@@ -55,6 +55,7 @@
                 case 'module':
                     $note = R::findOne('note', 'module = ?', [$param]);
                     $context->local()->addval('course', $note->course);
+                    $context->local()->addval('module', $param);
 
                     // Get 6 top notes
                     $top = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
