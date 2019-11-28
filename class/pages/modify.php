@@ -88,17 +88,24 @@
                         }
                     }
                 }
-                if ($nfiles > 0)
-                { # New files have been saved
-                    R::store($note);
-                    if ($nfiles == $tfiles)
-                    { # All files were uploaded, display a success message
-                        $context->local()->message(Local::MESSAGE, 'Your files have been uploaded.');
+                if ($tfiles > 0)
+                { # New files were sent to be added
+                    if ($nfiles > 0)
+                    { # New files have been saved
+                        R::store($note);
+                        if ($nfiles == $tfiles)
+                        { # All files were uploaded, display a success message
+                            $context->local()->message(Local::MESSAGE, 'Your files have been uploaded.');
+                        }
+                        else
+                        { # Not all files were uploaded
+                            $context->local()->message(Local::WARNING, 'Some files have not been uploaded.');
+                        }
                     }
-                    else
-                    { # Not all files were uploaded
-                        $context->local()->message(Local::WARNING, 'Some files have not been uploaded.');
-                    }
+                }
+                else
+                { # No files were uploaded
+                    $context->local()->message(Local::ERROR, 'Selected files have not been uploaded.');
                 }
 
                 // Start deleting files only if we have 1 or more remaining
