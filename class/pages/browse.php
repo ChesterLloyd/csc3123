@@ -1,6 +1,6 @@
 <?php
 /**
- * A class that contains code to handle any requests for  /browse/
+ * A class that handles any request to browse notes by course or module code
  */
      namespace Pages;
 
@@ -20,6 +20,55 @@
  */
         public function handle(Context $context)
         {
+            // Get note ID from REST
+            $rest = $context->rest();
+            $page = filter_var($rest[0], FILTER_SANITIZE_STRING);
+            $param = filter_var($rest[1], FILTER_SANITIZE_STRING);
+            if ($page == '' || $param == '')
+            { # No page or parameter passed
+                throw new \Framework\Exception\Forbidden('No access');
+            }
+
+            $user = $context->user();
+            $uid = $user->id;
+            $context->local()->addval('user', $user);
+
+            $context->local()->addval('page', $page);
+            switch ($page) {
+                case 'course':
+                    $context->local()->addval('course', $param);
+
+                    // Get 6 top notes
+                    $top = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
+                        JOIN review R ON R.note_id = N.id WHERE N.course = ?
+                        AND R.rating > 0 GROUP BY N.id
+                        ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
+                        N.upload DESC LIMIT 6', [$course]);
+                    $context->local()->addval('top', $context->canAccessFiles($top));
+
+                    // Get every file and note user can access
+                    $notes = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
+                        WHERE N.course = ? GROUP BY N.id ORDER BY added DESC', [$course]);
+                    $context->local()->addval('notes', $context->canAccessFiles($notes));
+                    break;
+                case 'module':
+                    $note = R::findOne('note', 'module = ?', [$param]);
+                    $context->local()->addval('course', $note->course);
+
+                    // Get 6 top notes
+                    $top = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
+                    JOIN review R ON R.note_id = N.id WHERE N.module = ?
+                    AND R.rating > 0 GROUP BY N.id
+                    ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
+                    N.upload DESC LIMIT 6', [$module]);
+                    $context->local()->addval('top', $context->canAccessFiles($top));
+
+                    // Get every file and note user can access
+                    $notes = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
+                    WHERE N.module = ? GROUP BY N.id ORDER BY added DESC', [$module]);
+                    $context->local()->addval('notes', $context->canAccessFiles($notes));
+                    break;
+            }
             return '@content/browse.twig';
         }
     }
