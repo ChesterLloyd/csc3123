@@ -29,7 +29,7 @@
             }
             $page = filter_var($rest[0], FILTER_SANITIZE_STRING);
             $param = filter_var($rest[1], FILTER_SANITIZE_STRING);
-            if ($page == 'course' || $page == 'module')
+            if ($page != 'course' || $page != 'module')
             { # Invalid page parameter
                 throw new \Framework\Exception\Forbidden('No access');
             }
