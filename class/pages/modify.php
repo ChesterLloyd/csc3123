@@ -102,10 +102,10 @@
                             $context->local()->message(Local::WARNING, 'Some files have not been uploaded.');
                         }
                     }
-                }
-                else
-                { # No files were uploaded
-                    $context->local()->message(Local::ERROR, 'Selected files have not been uploaded.');
+                    else
+                    { # No files were uploaded
+                        $context->local()->message(Local::ERROR, 'Selected files have not been uploaded.');
+                    }
                 }
 
                 // Start deleting files only if we have 1 or more remaining
