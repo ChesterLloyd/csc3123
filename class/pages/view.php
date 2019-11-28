@@ -18,11 +18,17 @@
  * @param object	$context	The context object for the site
  *
  * @return string	A template name
+ *
+ * @throws \Framework\Exception\Forbidden
  */
         public function handle(Context $context)
         {
             // Get note ID from query string
             $nid = filter_var($_GET['note'], FILTER_SANITIZE_STRING);
+            if ($nid == '')
+            { # No note given
+                throw new \Framework\Exception\Forbidden('No access');
+            }
 
             $files = R::find('upload', 'note_id = ?', [$nid]);
             foreach ($files as $file)
