@@ -25,7 +25,7 @@
         {
             // Get note ID from query string
             $nid = filter_var($_GET['note'], FILTER_SANITIZE_STRING);
-            if ($nid == '')
+            if (!$nid || $nid == '')
             { # No note given
                 throw new \Framework\Exception\Forbidden('No access');
             }
