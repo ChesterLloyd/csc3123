@@ -44,12 +44,12 @@
                         JOIN review R ON R.note_id = N.id WHERE N.course = ?
                         AND R.rating > 0 GROUP BY N.id
                         ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
-                        N.upload DESC LIMIT 6', [$course]);
+                        N.upload DESC LIMIT 6', [$param]);
                     $context->local()->addval('top', $context->canAccessFiles($top));
 
                     // Get every file and note user can access
                     $notes = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
-                        WHERE N.course = ? GROUP BY N.id ORDER BY added DESC', [$course]);
+                        WHERE N.course = ? GROUP BY N.id ORDER BY added DESC', [$param]);
                     $context->local()->addval('notes', $context->canAccessFiles($notes));
                     break;
                 case 'module':
@@ -61,12 +61,12 @@
                     JOIN review R ON R.note_id = N.id WHERE N.module = ?
                     AND R.rating > 0 GROUP BY N.id
                     ORDER BY (SUM(R.rating) / COUNT(R.rating)) DESC,
-                    N.upload DESC LIMIT 6', [$module]);
+                    N.upload DESC LIMIT 6', [$param]);
                     $context->local()->addval('top', $context->canAccessFiles($top));
 
                     // Get every file and note user can access
                     $notes = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
-                    WHERE N.module = ? GROUP BY N.id ORDER BY added DESC', [$module]);
+                    WHERE N.module = ? GROUP BY N.id ORDER BY added DESC', [$param]);
                     $context->local()->addval('notes', $context->canAccessFiles($notes));
                     break;
             }
