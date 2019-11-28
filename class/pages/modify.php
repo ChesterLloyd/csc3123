@@ -59,7 +59,7 @@
 
                 // Upload new files
                 $nfiles = 0;
-                $tfiles = count($_FILES['uploads']['name']);
+                $tfiles = count(array_filter($_FILES['uploads']['name']));
                 if (Config::UPUBLIC && Config::UPRIVATE)
                 { # need to check the flag could be either private or public
                     foreach ($fd->posta('public') as $ix => $public)
