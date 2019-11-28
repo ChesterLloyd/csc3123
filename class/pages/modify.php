@@ -59,10 +59,9 @@
 
                 // Upload new files
                 $nfiles = 0;
-                $tfiles = 0;
+                $tfiles = count($_FILES['uploads']['name']);
                 if (Config::UPUBLIC && Config::UPRIVATE)
                 { # need to check the flag could be either private or public
-                    $tfiles = sizeof($fd->posta('public'));
                     foreach ($fd->posta('public') as $ix => $public)
                     {
                         $upl = R::dispense('upload');
@@ -76,7 +75,6 @@
                 }
                 else
                 {
-                    $tfiles = sizeof(new \Framework\FAIterator('uploads'));
                     foreach(new \Framework\FAIterator('uploads') as $ix => $fa)
                     { # we only support private or public in this case so there is no flag
                         $upl = R::dispense('upload');
