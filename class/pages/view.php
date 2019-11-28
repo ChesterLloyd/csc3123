@@ -23,9 +23,11 @@
  */
         public function handle(Context $context)
         {
-            // Get note ID from query string
-            $nid = filter_var($_GET['note'], FILTER_SANITIZE_STRING);
-            if (!$nid || $nid == '')
+            // Get note ID from URL
+            $rest = $context->rest();
+            $nid = filter_var($rest[0], FILTER_SANITIZE_STRING);
+
+            if ($nid == '')
             { # No note given
                 throw new \Framework\Exception\Forbidden('No access');
             }
