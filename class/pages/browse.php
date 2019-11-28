@@ -18,6 +18,8 @@
  * @param object	$context	The context object for the site
  *
  * @return string	A template name
+ *
+ * @throws \Framework\Exception\Forbidden
  */
         public function handle(Context $context)
         {
@@ -58,6 +60,10 @@
                     break;
                 case 'module':
                     $note = R::findOne('note', 'module = ?', [$param]);
+                    if (!$note)
+                    { # This module does not exist
+                        throw new \Framework\Exception\Forbidden('Missing module');
+                    }
                     $context->local()->addval('course', $note->course);
                     $context->local()->addval('module', $param);
 
