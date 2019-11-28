@@ -23,10 +23,9 @@
  */
         public function handle(Context $context)
         {
-            // Get note ID from URL
+            // Get note ID from REST
             $rest = $context->rest();
             $nid = filter_var($rest[0], FILTER_SANITIZE_STRING);
-
             if ($nid == '')
             { # No note given
                 throw new \Framework\Exception\Forbidden('No access');
