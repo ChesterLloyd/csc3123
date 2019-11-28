@@ -25,12 +25,17 @@
         public function handle(Context $context)
         { # Get existing note to page
 
-            // Get note ID from query string
-            $nid = filter_var($_GET['note'], FILTER_SANITIZE_STRING);
+            // Get note ID from REST
+            $rest = $context->rest();
+            $nid = filter_var($rest[0], FILTER_SANITIZE_STRING);
+            if ($nid == '')
+            { # No note given
+                throw new \Framework\Exception\Forbidden('No access');
+            }
 
             $files = R::find('upload', 'note_id = ?', [$nid]);
             foreach ($files as $file)
-            {
+            { # Check if user can access these files
                 if (!$file->canaccess($context->user()))
                 { # current user cannot access the file, should not access notes
                     throw new \Framework\Exception\Forbidden('No access');
