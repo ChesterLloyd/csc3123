@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="{{assets}}/css/index.css">
 {% endblock css %}
 
+{% block pageheader %}
+{% endblock pageheader %}
+
 {% block main %}
     <section class="row">
         <article class="col-md-12">
@@ -35,7 +38,7 @@
                                 <span class="subject-icon cs">
                                     <i class="fas fa-laptop-code"></i>
                                 </span>
-                                <p>Computer<br> Science</p>
+                                <p>Computer<br/> Science</p>
                             </div>
                         </a>
                         <a href="{{base}}/browse/course/Maths/">
@@ -116,3 +119,6 @@
         </article>
     </section>
 {% endblock main %}
+
+{% block pagefooter %}
+{% endblock pagefooter %}

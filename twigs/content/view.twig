@@ -2,7 +2,6 @@
 
 {% extends '@content/page.twig' %}
 
-{% import '@util/formmacro.twig' as f %}
 {% import '@util/modalmacro.twig' as m %}
 
 {% block title %}
@@ -15,16 +14,7 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{assets}}/css/main.css">
-    <link rel="stylesheet" href="{{assets}}/css/index.css">
 {% endblock css %}
-
-{% block scripts %}
-{# <script src=""></script> for any other JS files you need #}
-{% endblock scripts %}
-
-{% block setup %}
-{# Any javascript you need that is NOT run on load goes in this block. NB you don't need <script></script> tags  here #}
-{% endblock setup %}
 
 {% block onload %}
     {% if favourite is same as("1") %}
@@ -37,9 +27,9 @@
         }).done(function(data){
             $('#addFavourite').hide();
             $('#unFavourite').show();
-            bootbox.alert('<h3>Success</h3><br>'+data);
+            bootbox.alert('<h3>Success</h3><br/>'+data);
         }).fail(function(jqXHR, textStatus, errorThrown){
-            bootbox.alert('<h3>Error</h3><br>'+jqXHR.responseText);
+            bootbox.alert('<h3>Error</h3><br/>'+jqXHR.responseText);
         });
     });
     $('#unFavourite').click(function(){
@@ -47,9 +37,9 @@
         }).done(function(data){
             $('#addFavourite').show();
             $('#unFavourite').hide();
-            bootbox.alert('<h3>Success</h3><br>'+data);
+            bootbox.alert('<h3>Success</h3><br/>'+data);
         }).fail(function(jqXHR, textStatus, errorThrown){
-            bootbox.alert('<h3>Error</h3><br>'+jqXHR.responseText);
+            bootbox.alert('<h3>Error</h3><br/>'+jqXHR.responseText);
         });
     });
     $('#ratingError').hide();
@@ -61,9 +51,9 @@
             }).done(function(data){
                 $("#invokeAddReview").html('Modify Review');
                 $('#ratingError').hide();
-                bootbox.alert('<h3>Success</h3><br>'+data);
+                bootbox.alert('<h3>Success</h3><br/>'+data);
             }).fail(function(jqXHR, textStatus, errorThrown){
-                bootbox.alert('<h3>Error</h3><br>'+jqXHR.responseText);
+                bootbox.alert('<h3>Error</h3><br/>'+jqXHR.responseText);
             });
         } else {
             $('#ratingError').show();
@@ -88,15 +78,18 @@
                     $.post('{{base}}/ajax/delete/'+nid+'/', {
                     }).done(function(data){
                         $('#n-'+nid).hide();
-                        bootbox.alert('<h3>Success</h3><br>'+data);
+                        bootbox.alert('<h3>Success</h3><br/>'+data);
                     }).fail(function(jqXHR, textStatus, errorThrown){
-                        bootbox.alert('<h3>Error Deleting Note</h3><br>'+jqXHR.responseText);
+                        bootbox.alert('<h3>Error Deleting Note</h3><br/>'+jqXHR.responseText);
                     });
                 }
             }
         });
     });
 {% endblock onload %}
+
+{% block pageheader %}
+{% endblock pageheader %}
 
 {% block main %}
     <section class="row">
@@ -129,7 +122,7 @@
                             <p>
                                 {{note.description}}
                             </p>
-                            <br>
+                            <br/>
                             <h2>Author's Comments</h2>
                             <p>
                                 {{note.comment}}
@@ -240,3 +233,6 @@
     </div>
     {{m.close({action: 'Save', id: 'addReview'})}}
 {% endblock main %}
+
+{% block pagefooter %}
+{% endblock pagefooter %}

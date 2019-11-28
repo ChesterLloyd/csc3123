@@ -1,7 +1,5 @@
 {% extends '@content/page.twig' %}
 
-{% import '@util/formmacro.twig' as f %}
-
 {% block title %}
     Upload note
 {% endblock title %}
@@ -12,7 +10,6 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{assets}}/css/main.css">
-    <link rel="stylesheet" href="{{assets}}/css/index.css">
 {% endblock css %}
 
 {% block pageheader %}
@@ -59,7 +56,7 @@
                         </div>
                         <div class="form-group">
                             <small id="ftext" class="form-text text-muted">
-                                Upload any files required for these notes.<br>
+                                Upload any files required for these notes.<br/>
                                 Supported file formats (PDF,TXT,DOC,PPT,XLS,archives,image files).
                             </small>
                             <input type="file" id="f0" name="uploads[]" class="form-control-file" required="required" multiple

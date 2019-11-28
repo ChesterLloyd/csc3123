@@ -12,7 +12,6 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{assets}}/css/main.css">
-    <link rel="stylesheet" href="{{assets}}/css/index.css">
 {% endblock css %}
 
 {% block onload %}
@@ -78,13 +77,12 @@
                         </div>
                         <div class="form-group">
                             <small id="ftext" class="form-text text-muted">
-                                Upload any additional files required for these notes.<br>
+                                Upload any additional files required for these notes.<br/>
                                 Supported file formats (PDF,TXT,DOC,PPT,XLS,archives,image files).
                             </small>
                             <input type="file" id="f0" name="uploads[]" class="form-control-file" multiple
                             accept=".pdf,.txt,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.tar.gz,.7z,.zip,image/*"/>
                         </div>
-
                         <br/>
                         <br/>
                         <h2>Files</h2>
@@ -106,7 +104,8 @@
                             {% endfor %}
                         </table>
                         <p>
-                            To remove files, click on the bin icons to select them, then click "Save Changes".<br>
+                            To remove files, click on the bin icons to select them, then click "Save Changes".
+                            <br/>
                             <b>Note:</b> There must be at least 1 file in these notes. You can upload new ones whilst removing existing ones.
                         </p>
                         <br/>

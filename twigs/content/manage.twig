@@ -20,20 +20,10 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{assets}}/css/main.css">
-    <link rel="stylesheet" href="{{assets}}/css/index.css">
 {% endblock css %}
 
-{% block scripts %}
-{# <script src=""></script> for any other JS files you need #}
-{% endblock scripts %}
-
-{% block setup %}
-{# Any javascript you need that is NOT run on load goes in this block. NB you don't need <script></script> tags  here #}
-{% endblock setup %}
-
-{% block onload %}
-{# Any javascript you need that MUST run on load goes in this block. NB you don't need <script></script> tags  here #}
-{% endblock onload %}
+{% block pageheader %}
+{% endblock pageheader %}
 
 {% block main %}
     <section class="row">
@@ -77,7 +67,7 @@
                                 </div>
                             </div>
                         </div>
-                        <br>
+                        <br/>
                         <button class="btn btn-success" type="submit">Save</button>
                     </form>
                 </div>
@@ -85,3 +75,6 @@
         </article>
     </section>
 {% endblock main %}
+
+{% block pagefooter %}
+{% endblock pagefooter %}

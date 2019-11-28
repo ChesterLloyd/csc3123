@@ -12,7 +12,6 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{assets}}/css/main.css">
-    <link rel="stylesheet" href="{{assets}}/css/index.css">
 {% endblock css %}
 
 {% block scripts %}
@@ -22,6 +21,9 @@
 {% block onload %}
     $('#cform').parsley()
 {% endblock onload %}
+
+{% block pageheader %}
+{% endblock pageheader %}
 
 {% block main %}
     <section class="row">
@@ -53,7 +55,7 @@
                         <div class="form-group">
                             <label for="ln" class="control-label">Link to notes</label>
                             <small id="ln" class="form-text text-muted">
-                                Does this message involve a set of notes?<br>
+                                Does this message involve a set of notes?<br/>
                                 If so, please provide the link below.
                             </small>
                             <input type="text" id="ln" name="link" placeholder="Link (Optional)" class="form-control"/>
@@ -65,3 +67,6 @@
         </article>
     </section>
 {% endblock main %}
+
+{% block pagefooter %}
+{% endblock pagefooter %}

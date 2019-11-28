@@ -1,8 +1,5 @@
 {% extends '@content/page.twig' %}
 
-{% import '@util/formmacro.twig' as f %}
-{% import '@util/modalmacro.twig' as m %}
-
 {% block title %}
     {% if page is same as('course') %}
         Browse - {{course}}
@@ -17,8 +14,10 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{assets}}/css/main.css">
-    <link rel="stylesheet" href="{{assets}}/css/index.css">
 {% endblock css %}
+
+{% block pageheader %}
+{% endblock pageheader %}
 
 {% block main %}
     <section class="row">
@@ -127,3 +126,6 @@
         </article>
     </section>
 {% endblock main %}
+
+{% block pagefooter %}
+{% endblock pagefooter %}
