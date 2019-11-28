@@ -23,7 +23,7 @@
         {
             // Get note ID from REST
             $rest = $context->rest();
-            if ($rest[0] == '' || $rest[1] == '')
+            if ((sizeof($rest) < 2) || ($rest[0] == '') || ($rest[1] == ''))
             { # No page or parameter passed
                 throw new \Framework\Exception\Forbidden('No access');
             }
