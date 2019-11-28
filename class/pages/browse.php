@@ -23,10 +23,14 @@
         {
             // Get note ID from REST
             $rest = $context->rest();
+            if ($rest[0] == '' || $rest[1] == '')
+            { # No page or parameter passed
+                throw new \Framework\Exception\Forbidden('No access');
+            }
             $page = filter_var($rest[0], FILTER_SANITIZE_STRING);
             $param = filter_var($rest[1], FILTER_SANITIZE_STRING);
-            if ($page == '' || $param == '')
-            { # No page or parameter passed
+            if ($page == 'course' || $page == 'module')
+            { # Invalid page parameter
                 throw new \Framework\Exception\Forbidden('No access');
             }
 
