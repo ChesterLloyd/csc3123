@@ -21,6 +21,12 @@
  */
         public function handle(Context $context)
         {
+            $fd = $context->formdata();
+            if (($param = $fd->post('search', '')) !== '')
+            { # there is a search
+                header('Location: search/'.$param);
+            }
+
             $user = $context->user();
             $uid = $user->id;
             $context->local()->addval('user', $user);
@@ -42,7 +48,7 @@
             $notes = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
                 GROUP BY N.id ORDER BY added DESC');
             $context->local()->addval('notes', $context->canAccessFiles($notes));
-            
+
             return '@content/notes.twig';
         }
     }
