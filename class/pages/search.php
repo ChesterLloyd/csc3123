@@ -24,8 +24,8 @@
             $fd = $context->formdata();
             if (($param = $fd->post('search', '')) !== '')
             { # there is a search, use this param instead
-                $param = '%'.$param.'%';
                 $context->local()->addval('param', $param);
+                $param = '%'.$param.'%';
             }
 
             $user = $context->user();
