@@ -24,7 +24,7 @@
             $fd = $context->formdata();
             if (($param = $fd->post('search', '')) !== '')
             { # there is a search
-                header('Location: search/'.$param);
+                header('Location: '.$context->local()->base().'/search/'.$param);
             }
 
             $user = $context->user();
