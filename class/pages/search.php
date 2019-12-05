@@ -25,16 +25,8 @@
             if (($param = $fd->post('search', '')) !== '')
             { # there is a search, use this param instead
                 $param = '%'.$param.'%';
+                $context->local()->addval('param', $param);
             }
-
-            // Get search parameter from REST
-            $rest = $context->rest();
-            if (sizeof($rest) != 1)
-            { # No page or parameter passed
-                throw new \Framework\Exception\Forbidden('No access');
-            }
-            // $param = filter_var('%'.$rest[0].'%', FILTER_SANITIZE_STRING);
-
 
             $user = $context->user();
             $uid = $user->id;
