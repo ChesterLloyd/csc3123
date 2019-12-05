@@ -6,6 +6,7 @@
 
      use \Support\Context as Context;
      use \Config\Config as Config;
+     use \R as R;
 /**
  * Support /search/
  */
