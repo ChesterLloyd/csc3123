@@ -29,6 +29,12 @@
             }
             $param = filter_var('%'.$rest[0].'%', FILTER_SANITIZE_STRING);
 
+            $fd = $context->formdata();
+            if (($param = $fd->post('search', '')) !== '')
+            { # there is a search, use this param instead
+                $param = '%'.$param.'%';
+            }
+
             $user = $context->user();
             $uid = $user->id;
             $context->local()->addval('user', $user);
