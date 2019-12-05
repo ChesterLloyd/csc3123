@@ -21,12 +21,6 @@
  */
         public function handle(Context $context)
         {
-            $fd = $context->formdata();
-            if (($param = $fd->post('search', '')) !== '')
-            { # there is a search
-                header('Location: '.$context->local()->base().'/search/'.$param);
-            }
-
             $user = $context->user();
             $uid = $user->id;
             $context->local()->addval('user', $user);

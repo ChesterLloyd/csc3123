@@ -21,19 +21,20 @@
  */
         public function handle(Context $context)
         {
+            $fd = $context->formdata();
+            if (($param = $fd->post('search', '')) !== '')
+            { # there is a search, use this param instead
+                $param = '%'.$param.'%';
+            }
+
             // Get search parameter from REST
             $rest = $context->rest();
             if (sizeof($rest) != 1)
             { # No page or parameter passed
                 throw new \Framework\Exception\Forbidden('No access');
             }
-            $param = filter_var('%'.$rest[0].'%', FILTER_SANITIZE_STRING);
+            // $param = filter_var('%'.$rest[0].'%', FILTER_SANITIZE_STRING);
 
-            $fd = $context->formdata();
-            if (($param = $fd->post('search', '')) !== '')
-            { # there is a search, use this param instead
-                $param = '%'.$param.'%';
-            }
 
             $user = $context->user();
             $uid = $user->id;
