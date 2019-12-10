@@ -102,6 +102,24 @@ div.file {
 }
 
 
+/* Download Badges */
+i.download-badge {
+    position: absolute;
+    right: 20;
+    top: 22px;
+    font-size: 23pt;
+}
+i.fa-certificate.download-badge {
+    color: #654d45;
+}
+i.fa-award.download-badge {
+    color: #808080;
+}
+i.fa-trophy.download-badge {
+    color: #ffaa2c;
+}
+
+
 /* Table styles */
 table {
     width: 100%;
