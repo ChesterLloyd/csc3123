@@ -1,0 +1,19 @@
+@media (max-width: 773px) {
+    div.round-box-heading {
+        height: auto;
+    }
+    div.round-box-heading > div.left {
+        float:none;
+    }
+    div.round-box-heading > div.right {
+        float: none;
+        margin-top: 0px;
+    }
+    div.round-box-heading > div.right > p {
+        text-align: left;
+        padding-left: 30px;
+    }
+    div.round-box-body {
+        padding-top: 10px;
+    }
+}

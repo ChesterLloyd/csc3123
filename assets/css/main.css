@@ -43,6 +43,18 @@ div.round-box-heading > div > h1 {
     font-size: 2rem;
     font-weight: 400;
 }
+div.round-box-heading > div.left {
+    float: left;
+}
+div.round-box-heading > div.right {
+    float: right;
+    margin-top: 15px;
+    margin-right: 30px;
+}
+div.round-box-heading > div.right > p {
+    margin-bottom: 5px;
+    text-align: right;
+}
 div.round-box-body {
     padding: 30px 30px 10px 30px;
     font-size: 1rem;

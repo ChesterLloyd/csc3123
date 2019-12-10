@@ -28,6 +28,7 @@
 
             // Get last uploaded note date
             $recent = R::getCell('SELECT max(upload) FROM note WHERE user_id = ?', [$uid]);
+            $recent = date('l, jS M y', strtotime($recent));
             $context->local()->addval('recent', $recent);
 
             // Get user's recently uploaded files
