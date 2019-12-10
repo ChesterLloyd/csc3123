@@ -29,7 +29,7 @@
  */
         public function uploaded() : string
         {
-            return date('l, jS M n', strtotime($this->bean->upload));
+            return date('l, jS M y', strtotime($this->bean->upload));
         }
     }
 ?>
