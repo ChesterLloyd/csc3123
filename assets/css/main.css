@@ -107,6 +107,9 @@ div.file {
 
 
 /* Download Badges */
+.card-title {
+    margin-right: 30px;
+}
 i.download-badge {
     position: absolute;
     right: 20px;
