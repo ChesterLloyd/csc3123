@@ -27,7 +27,7 @@
  *
  * @return string
  */
-        public function upload() : string
+        public function uploaded() : string
         {
             return date('l, jS M n', strtotime($this->bean->upload));
         }
