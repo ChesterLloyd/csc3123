@@ -105,7 +105,7 @@ div.file {
 /* Download Badges */
 i.download-badge {
     position: absolute;
-    right: 20;
+    right: 20px;
     top: 22px;
     font-size: 23pt;
 }
