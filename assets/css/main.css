@@ -109,13 +109,13 @@ i.download-badge {
     top: 22px;
     font-size: 23pt;
 }
-i.fa-certificate.download-badge {
+i.bronze.download-badge {
     color: #654d45;
 }
-i.fa-award.download-badge {
+i.silver.download-badge {
     color: #808080;
 }
-i.fa-trophy.download-badge {
+i.gold.download-badge {
     color: #ffaa2c;
 }
 
