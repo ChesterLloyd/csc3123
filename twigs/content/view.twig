@@ -14,6 +14,7 @@
 
 {% block css %}
     <link rel="stylesheet" href="{{assets}}/css/main.css">
+    <link rel="stylesheet" href="{{assets}}/css/view.css">
 {% endblock css %}
 
 {% block onload %}
@@ -96,11 +97,13 @@
         <article class="col-md-12">
             <div class="round-box">
                 <div class="round-box-heading">
-                    <div class="right">
-                        <p>{{note.upload}}</p>
-                        <p>By: {{author.login}}</p>
+                    <div class="left">
+                        <h1>{{note.name}}</h1>
                     </div>
-                    <h1>{{note.name}}</h1>
+                    <div class="right">
+                        <p id="upload">{{note.uploaded}}</p>
+                        <p id="author">By: {{author.login}}</p>
+                    </div>
                 </div>
                 <div class="round-box-body">
                     <div class="row">

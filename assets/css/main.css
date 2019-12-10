@@ -34,17 +34,9 @@ div.round-box {
 div.round-box-heading {
     height: 60px;
 }
-div.round-box-heading > div.right {
-    float: right;
-    margin-top:15px;
-    margin-right: 30px;
-}
-div.round-box-heading > div.right > p {
-    margin-bottom: 5px;
-    text-align: right;
-}
 div.round-box-heading > h1,
-div.round-box-heading > h2 {
+div.round-box-heading > h2,
+div.round-box-heading > div > h1 {
     color: #424242;
     padding: 20px 30px;
     margin: 0;
@@ -142,16 +134,4 @@ i.edit-note {
 }
 i.delete-note {
     color: #ef5350;
-}
-
-/* Rating styles */
-div.stars {
-    text-align: center;
-    margin-bottom: 40px;
-}
-span.fa-star {
-    font-size: 30px;
-}
-span.fa-star.checked {
-    color: orange;
 }
