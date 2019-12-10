@@ -21,5 +21,15 @@
         {
             return $this->bean->name;
         }
+
+/**
+ * Return the note's upload date in a nice format
+ *
+ * @return string
+ */
+        public function upload() : string
+        {
+            return date('l, jS M n', strtotime($this->bean->upload));
+        }
     }
 ?>
