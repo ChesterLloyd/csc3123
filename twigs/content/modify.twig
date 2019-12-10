@@ -97,9 +97,9 @@
                             {% for file in files %}
                                 <tr>
                                     <td><i class="fas fa-{{file.icon}}"></i></td>
-                                    <td><a href="{{base}}/download/file/{{file.id}}" target="_blank">{{file.filename}}</a></td>
+                                    <td><a href="{{base}}/download/file/{{file.getID}}" target="_blank">{{file.filename}}</a></td>
                                     <td>{{file.size}}</td>
-                                    <td><i class="fas fa-trash delete-file" id="deleteIcon{{file.id}}" data-file="{{file.id}}"></i></td>
+                                    <td><i class="fas fa-trash delete-file" id="deleteIcon{{file.getID}}" data-file="{{file.getID}}"></i></td>
                                 </tr>
                             {% endfor %}
                         </table>

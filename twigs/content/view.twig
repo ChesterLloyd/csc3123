@@ -23,7 +23,7 @@
         $('#unFavourite').hide();
     {% endif %}
     $('#addFavourite').click(function(){
-        $.post('{{base}}/ajax/addFavourite/{{note.id}}/',{
+        $.post('{{base}}/ajax/addFavourite/{{note.getID}}/',{
         }).done(function(data){
             $('#addFavourite').hide();
             $('#unFavourite').show();
@@ -33,7 +33,7 @@
         });
     });
     $('#unFavourite').click(function(){
-        $.post('{{base}}/ajax/removeFavourite/{{note.id}}/',{
+        $.post('{{base}}/ajax/removeFavourite/{{note.getID}}/',{
         }).done(function(data){
             $('#addFavourite').show();
             $('#unFavourite').hide();
@@ -47,7 +47,7 @@
         var rating = $('#ra :selected').val();
         if (rating > 0){
             $('#modalReview').modal('hide');
-            $.post('{{base}}/ajax/addReview/{{note.id}}/'+rating+'/',{
+            $.post('{{base}}/ajax/addReview/{{note.getID}}/'+rating+'/',{
             }).done(function(data){
                 $("#invokeAddReview").html('Modify Review');
                 $('#ratingError').hide();
@@ -149,7 +149,7 @@
                                 {% for key, file in files %}
                                     <tr>
                                         <td><i class="fas fa-{{file.icon}}"></i></td>
-                                        <td><a href="{{base}}/download/file/{{file.id}}" target="_blank">{{file.filename}}</a></td>
+                                        <td><a href="{{base}}/download/file/{{file.getID}}" target="_blank">{{file.filename}}</a></td>
                                         <td>{{file.size}}</td>
                                     </tr>
                                 {% endfor %}
@@ -192,7 +192,7 @@
                             </table>
                         </div>
                     </div>
-                    {% if not user.id is same as(author.id) %}
+                    {% if not user.getID is same as(author.getID) %}
                         <button id="invokeAddReview" class="btn btn-primary" data-toggle="modal" data-target="#modalReview" type="button">
                         {% if review is same as(0) %}
                             Add Review
@@ -203,9 +203,9 @@
                     {% endif %}
                     <a href="#" class="btn btn-danger" id="unFavourite">Unfavourite</a>
                     <a href="#" class="btn btn-success" id="addFavourite">Add Favourite</a>
-                    {% if user.id is same as(author.id) %}
-                        <a href="{{base}}/modify/{{note.id}}/" class="btn btn-warning">Modify Note</a>
-                        <button class="btn btn-danger delete-note" data-note="{{note.id}}" type="button">Delete</button>
+                    {% if user.getID is same as(author.getID) %}
+                        <a href="{{base}}/modify/{{note.getID}}/" class="btn btn-warning">Modify Note</a>
+                        <button class="btn btn-danger delete-note" data-note="{{note.getID}}" type="button">Delete</button>
                     {% endif %}
                 </div>
             </div>

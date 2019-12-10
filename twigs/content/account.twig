@@ -94,7 +94,7 @@
                                                     <h5 class="card-title">{{upload.note.name}}</h5>
                                                     <p class="card-text"><b>{{upload.note.module}}</b> - {{upload.note.description}}</p>
                                                     <p class="card-text"><small class="text-muted">Uploaded {{upload.note.upload}}</small></p>
-                                                    <a href="{{base}}/view/{{upload.note_id}}/" class="btn btn-primary">View</a>
+                                                    <a href="{{base}}/view/{{upload.note.getID}}/" class="btn btn-primary">View</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -130,7 +130,7 @@
                                                     <h5 class="card-title">{{upload.note.name}}</h5>
                                                     <p class="card-text"><b>{{upload.note.module}}</b> - {{upload.note.description}}</p>
                                                     <p class="card-text"><small class="text-muted">Uploaded {{upload.note.upload}}</small></p>
-                                                    <a href="{{base}}/view/{{upload.note_id}}/" class="btn btn-primary">View</a>
+                                                    <a href="{{base}}/view/{{upload.note.getID}}/" class="btn btn-primary">View</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -161,15 +161,15 @@
                                 <th>Actions</th>
                             </tr>
                             {% for upload in notes %}
-                                <tr id="n-{{upload.note_id}}">
-                                    <td><a href="{{base}}/view/{{upload.note_id}}/">{{upload.note.name}}</a></td>
+                                <tr id="n-{{upload.note.getID}}">
+                                    <td><a href="{{base}}/view/{{upload.note.getID}}/">{{upload.note.name}}</a></td>
                                     <td>{{upload.note.course}}</td>
                                     <td>{{upload.note.module}}</td>
                                     <td>{{upload.note.upload}}</td>
                                     <td>{% if upload.note.privacy is same as('0') %}Private{% endif %}</td>
                                     <td>
-                                        <a href="{{base}}/modify/{{upload.note_id}}/"><i class="fas fa-edit edit-note"></i></a>
-                                        <i class="fas fa-trash delete-note" data-note="{{upload.note_id}}"></i>
+                                        <a href="{{base}}/modify/{{upload.note.getID}}/"><i class="fas fa-edit edit-note"></i></a>
+                                        <i class="fas fa-trash delete-note" data-note="{{upload.note.getID}}"></i>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -202,14 +202,14 @@
                                 </tr>
                                 {% for upload in all %}
                                     <tr>
-                                        <td><a href="{{base}}/view/{{upload.note_id}}/">{{upload.note.name}}</a></td>
+                                        <td><a href="{{base}}/view/{{upload.note.getID}}/">{{upload.note.name}}</a></td>
                                         <td>{{upload.note.course}}</td>
                                         <td>{{upload.note.module}}</td>
                                         <td>{{upload.note.upload}}</td>
                                         <td>{% if upload.note.privacy is same as('0') %}Private{% endif %}</td>
                                         <td>{{upload.owner.login}}</td>
                                         <td>
-                                            <a href="{{base}}/modify/{{upload.note_id}}/"><i class="fas fa-edit edit-note"></i></a>
+                                            <a href="{{base}}/modify/{{upload.note.getID}}/"><i class="fas fa-edit edit-note"></i></a>
                                             <a href="#"><i class="fas fa-trash delete-note"></i></a>
                                         </td>
                                     </tr>
