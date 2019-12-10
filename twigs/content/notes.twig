@@ -39,7 +39,7 @@
                     <h2>Find Notes</h2>
                 </div>
                 <div class="round-box-body">
-                    {{f.startform({method: 'post', action: 'search', id: 'search'})}}
+                    {{f.startform({method: 'post', action: '{{base}}/search/', id: 'search'})}}
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" name="search" id="search" aria-label="Search" aria-describedby="searchHelp" placeholder="Search for notes&hellip;"  aria-describedby="basic-addon2">
                             <div class="input-group-append">
