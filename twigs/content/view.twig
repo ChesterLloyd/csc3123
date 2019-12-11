@@ -91,7 +91,7 @@
         var fid = $(this).data('file');
         $.post('{{base}}/ajax/download/'+fid+'/',{
         }).done(function(data){
-            window.location('{{base}}/getfile/file/'+fid+'/');
+            window.location.href='{{base}}/getfile/file/'+fid+'/';
         }).fail(function(jqXHR, textStatus, errorThrown){
             bootbox.alert('<h3>Error</h3><br/>'+jqXHR.responseText);
         });
