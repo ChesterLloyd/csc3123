@@ -206,7 +206,7 @@
         public function download(Context $context) : void
         { # Get data from rest
             $rest = $context->rest();
-            if (count($rest) == 2 && $rest[0] == 'getfile')
+            if (count($rest) == 2 && $rest[0] == 'download')
             { # this is access by upload ID
                 $file = R::load('upload', $rest[1]);
                 if ($file->getID() != 0)
@@ -214,12 +214,6 @@
                     $note = R::load('note', $file->note()->getID());
                     $note->downloads = ($note->downloads + 1);
                     R::store($note);
-                    echo "File download started.";
-
-                    // Make a new instance of Getfile and call it
-                    $getfile = new \Framework\Pages\Getfile;
-                    // URL to download files becomes: getfile/file/upload id
-                    $getfile->handle($context);
                 }
                 else
                 {
