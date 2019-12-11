@@ -31,6 +31,15 @@
         }
         $('#de').val(output);
     });
+    $('.download-note').click(function(){
+        var fid = $(this).data('file');
+        $.post('{{base}}/getfile/file/'+fid+'/',{
+        }).done(function(data){
+            bootbox.alert('<h3>File Download</h3><br/>'+data);
+        }).fail(function(jqXHR, textStatus, errorThrown){
+            bootbox.alert('<h3>File Download</h3><br/>'+jqXHR.responseText);
+        });
+    });
 {% endblock onload %}
 
 {% block pageheader %}
@@ -97,7 +106,7 @@
                             {% for file in files %}
                                 <tr>
                                     <td><i class="fas fa-{{file.icon}}"></i></td>
-                                    <td><a href="{{base}}/getfile/file/{{file.getID}}/" target="_blank">{{file.filename}}</a></td>
+                                    <td><a href="#" class="download-file" data-file="{{file.getID}}">{{file.filename}}</a></td>
                                     <td>{{file.size}}</td>
                                     <td><i class="fas fa-trash delete-file" id="deleteIcon{{file.getID}}" data-file="{{file.getID}}"></i></td>
                                 </tr>

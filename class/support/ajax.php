@@ -197,6 +197,41 @@
             }
         }
 /**
+ * Downlaods a note and update the update counter
+ *
+ * @param \Support\Context	$context	The context object for the site
+ *
+ * @return void
+ */
+        public function download(Context $context) : void
+        { # Get data from rest
+            $rest = $context->rest();
+            if (count($rest) == 2 && $rest[0] == 'file')
+            { # this is access by upload ID
+                $file = R::load('upload', $rest[1]);
+                if ($file->getID() != 0)
+                {
+                    $note = R::load('note', $file->note()->getID());
+                    $note->downloads = ($note->downloads + 1);
+                    R::store($note);
+                    echo "File download started.";
+
+                    // Make a new instance of Getfile and call it
+                    $getfile = new \Framework\Pages\Getfile;
+                    // URL to download files becomes: getfile/file/upload id
+                    $getfile->handle($context);
+                }
+                else
+                {
+                    echo "Error accessing the note.";
+                }
+            }
+            else
+            {
+                echo "Error downloading this file.";
+            }
+        }
+/**
  * If you are using the pagination or search hinting features of the framework then you need to
  * add some appropriate vaues into these arrays.
  *
@@ -248,7 +283,7 @@
         public function handle(Context $context) : void
         {
             //$this->operation(['yourop', ...], [TRUE, [['ContextName', 'RoleName'],...]]);
-            $this->operation(['addFavourite', 'removeFavourite', 'addReview', 'delete'], [TRUE, [['Site', 'Student'], ['Site', 'Teacher']]]);
+            $this->operation(['addFavourite', 'removeFavourite', 'addReview', 'delete', 'download'], [TRUE, [['Site', 'Student'], ['Site', 'Teacher']]]);
             // TRUE if login needed, then an array of roles required in form [['context name', 'role name']...] (can be empty)
             $this->pageOrHint(self::$allowPaging, self::$allowHints);
             $this->beanAccess(self::$allowBean, self::$allowToggle, self::$allowTable, self::$audit);
