@@ -87,7 +87,7 @@
             }
         });
     });
-    $('.download-note').click(function(){
+    $('.download-file').click(function(){
         var fid = $(this).data('file');
         $.post('{{base}}/getfile/file/'+fid+'/',{
         }).done(function(data){
