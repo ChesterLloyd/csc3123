@@ -7,7 +7,7 @@
  */
     namespace Model;
 /**
- * A class implementing a RedBean model for Page beans
+ * A class implementing a RedBean model for Note beans
  */
     class Note extends \RedBeanPHP\SimpleModel
     {

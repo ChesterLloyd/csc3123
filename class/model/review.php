@@ -7,13 +7,13 @@
  */
     namespace Model;
 /**
- * A class implementing a RedBean model for Page beans
+ * A class implementing a RedBean model for Review beans
  */
     class Review extends \RedBeanPHP\SimpleModel
     {
 
 /**
- * Return the note's name
+ * Return the rating (1 to 5) of a review
  *
  * @return int
  */
