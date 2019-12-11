@@ -89,7 +89,7 @@
     });
     $('.download-file').click(function(){
         var fid = $(this).data('file');
-        $.post('{{base}}/getfile/file/'+fid+'/',{
+        $.post('{{base}}/ajax/download/'+fid+'/',{
         }).done(function(data){
             bootbox.alert('<h3>File Download</h3><br/>'+data);
         }).fail(function(jqXHR, textStatus, errorThrown){
