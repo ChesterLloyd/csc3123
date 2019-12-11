@@ -28,10 +28,6 @@
                 $param = '%'.$param.'%';
             }
 
-            $user = $context->user();
-            $uid = $user->id;
-            $context->local()->addval('user', $user);
-
             // Get 6 top notes
             $notes = R::findAll('upload', 'JOIN note N ON N.id = upload.note_id
                 WHERE N.name LIKE ? OR N.course LIKE ? OR N.module LIKE ?
