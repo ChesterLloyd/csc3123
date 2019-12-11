@@ -206,7 +206,7 @@
         public function download(Context $context) : void
         { # Get data from rest
             $rest = $context->rest();
-            if (count($rest) == 2 && $rest[0] == 'download')
+            if (count($rest) == 2 && $rest[0] == 'getfile')
             { # this is access by upload ID
                 $file = R::load('upload', $rest[1]);
                 if ($file->getID() != 0)
