@@ -1,4 +1,8 @@
-@media (max-width: 991px) {
+/*------------------------------------*\
+  #VIEW-NOTE
+\*------------------------------------*/
+
+ @media (max-width: 991px) {
     div.round-box-heading {
         height: auto;
     }
@@ -24,7 +28,6 @@
         padding-top: 10px;
     }
 }
-
 @media (max-width: 579px) {
     p#upload, p#author {
         float: none;
@@ -32,7 +35,13 @@
 }
 
 
-/* Rating styles */
+
+
+
+/*------------------------------------*\
+  #RATINGS
+\*------------------------------------*/
+
 div.stars {
     text-align: center;
     margin-bottom: 40px;

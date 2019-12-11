@@ -1,15 +1,26 @@
+/*------------------------------------*\
+  #GLOBAL-STYLES
+\*------------------------------------*/
 body {
     background-color: #EEEEEE;
     font-family: 'Noto Sans', sans-serif;
 }
 
-/* Space between navbar and content */
+/**
+ * Space between navbar and content
+ */
 div.container {
     margin-top: 30px;
 }
 
 
-/* Jumbotron */
+
+
+
+/*------------------------------------*\
+  #JUMBOTRON
+\*------------------------------------*/
+
 div.jumbotron {
     color: #FFFFFF;
     background-color: #4BAEA0;
@@ -19,13 +30,25 @@ div.jumbotron > h1 {
 }
 
 
-/* Breadcrumb */
+
+
+
+/*------------------------------------*\
+  #BREADCRUMBS
+\*------------------------------------*/
+
 ol.breadcrumb {
     margin-bottom: 30px;
 }
 
 
-/* White boxes */
+
+
+
+/*------------------------------------*\
+  #WHITE-BOXES
+\*------------------------------------*/
+
 div.round-box {
     background-color: #ffffff;
     margin-bottom: 2.143rem;
@@ -40,7 +63,7 @@ div.round-box-heading > div > h1 {
     color: #424242;
     padding: 20px 30px;
     margin: 0;
-    font-size: 2rem;
+    font-size:   2rem;
     font-weight: 400;
 }
 div.round-box-heading > div.left {
@@ -48,7 +71,7 @@ div.round-box-heading > div.left {
 }
 div.round-box-heading > div.right {
     float: right;
-    margin-top: 15px;
+    margin-top:   15px;
     margin-right: 30px;
 }
 div.round-box-heading > div.right > p {
@@ -57,12 +80,18 @@ div.round-box-heading > div.right > p {
 }
 div.round-box-body {
     padding: 30px 30px 10px 30px;
-    font-size: 1rem;
+    font-size:   1rem;
     font-weight: 500;
 }
 
 
-/* Note box links */
+
+
+
+/*------------------------------------*\
+  #NOTE-BOXES
+\*------------------------------------*/
+
 div.note-icon {
     text-align: center;
 }
@@ -106,14 +135,20 @@ div.file {
 }
 
 
-/* Download Badges */
+
+
+
+/*------------------------------------*\
+  #DOWNLOAD-BADGES
+\*------------------------------------*/
+
 .card-title {
     margin-right: 30px;
 }
 i.download-badge {
     position: absolute;
     right: 20px;
-    top: 22px;
+    top:   22px;
     font-size: 23pt;
 }
 i.bronze.download-badge {
@@ -127,7 +162,13 @@ i.gold.download-badge {
 }
 
 
-/* Table styles */
+
+
+
+/*------------------------------------*\
+  #TABLES
+\*------------------------------------*/
+
 table {
     width: 100%;
     margin-bottom: 20px;
@@ -135,11 +176,12 @@ table {
 table.stats > tbody > tr > th {
     width: 300px;
 }
-/* Hover table icons */
 table > tbody > tr > td > i {
     cursor: pointer;
 }
-/* privacy */
+/**
+ * For the privacy column
+ */
 table.notes > tbody > tr > td:nth-child(5) {
     color: #f44336;
 }
