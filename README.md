@@ -1,24 +1,22 @@
-# The Framework Version 2
+# RESTful Note Sharing Website
 
-A PHP Development Framework
+This was a coursework task as part of the CSC3123 Computer Science module that teaches server-side development with PHP. The task was to build a lecture note sharing website following a set of requirements
 
-This version uses more features of PHP than the previous versions, so
-as to provide examplars of how they can be used as the Framework is
-used in a module teaching server-side development with PHP.
+  
+## Requirements:  
+* Follow a set of style rules  
+* Learn and use the provide framework (linked below)  
 
-http://catless.ncl.ac.uk/framework/ has details of installation and usage.
+  ### Server Side Technologies
+    * PHP  
+    * Twig  
+    * Redbean  
 
-## Vagrant
+  ### Client Side Technologies
+    * HTML5  
+    * jQuery  
+    * Bootstrap  
+    
 
-To use Vagrant for The Framework, you can do so with the following commands:
-
-```shell
-vagrant up
-vagrant ssh
-```
-
-The default MySQL root password is root, you should change this. Remember this for
-when you are setting up The Framework.
-
-The Vagrant VM is ready for use at http://192.168.33.10/ of
-your local machine.
+  
+The framework can be found at http://catless.ncl.ac.uk/framework/
